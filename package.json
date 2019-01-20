@@ -7,6 +7,7 @@
 		"build:common": "ng build common",
 		"build:ide": "ng build ide --prod",
 		"build:public": "ng build public --prod",
+		"deploy-man": "npm run deploy && npm run git:clean",
 		"deploy": "npm run switch && npm run versions && npm run build && npm run deploy:all",
 		"deploy:all": "concurrently \"npm:deploy:common\" \"npm:deploy:public\" \"npm:deploy:ide\"",
 		"deploy:common": "npm publish ./dist/common --access public",
