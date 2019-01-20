@@ -1,6 +1,6 @@
 {
 	"name": "@napkin-ide/forge",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"scripts": {
 		"build": "npm run build:all",
 		"build:all": "npm run build:common && concurrently \"npm:build:public\" \"npm:build:ide\"",
@@ -11,8 +11,8 @@
 		"deploy:all": "concurrently \"npm:deploy:common\" \"npm:deploy:public\" \"npm:deploy:ide\"",
 		"deploy:common": "npm publish ./dist/common --access public",
 		"deploy:ide": "npm publish ./dist/ide --access public",
-    "deploy:public": "npm publish ./dist/public --access public",
-    "git:clean": "git add . && git commit -a -m \"Changes during manual deploy\"",
+		"deploy:public": "npm publish ./dist/public --access public",
+		"git:clean": "git add . && git commit -a -m \"Changes during manual deploy\"",
 		"switch": "npm run switch:all",
 		"switch:all": "concurrently \"npm:switch:public\" \"npm:switch:ide\"",
 		"switch:common": "lcu daf Switch --project=common --env=prod",
