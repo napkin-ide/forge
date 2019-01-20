@@ -14,7 +14,7 @@
     "deploy:public": "npm publish ./dist/public --access public",
     "git:clean": "git add . && git commit -a -m \"Changes during manual deploy\"",
 		"switch": "npm run switch:all",
-		"switch:all": "concurrently \"npm:switch:common\" \"npm:switch:public\" \"npm:switch:ide\"",
+		"switch:all": "concurrently \"npm:switch:public\" \"npm:switch:ide\"",
 		"switch:common": "lcu daf Switch --project=common --env=prod",
 		"switch:ide": "lcu daf Switch --project=ide --env=prod",
 		"switch:public": "lcu daf Switch --project=public --env=prod",
