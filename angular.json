@@ -62,7 +62,7 @@
 							"projects/public/src/assets",
 							{
 								"glob": "package.json",
-								"input": "./",
+								"input": "./projects/public",
 								"output": "/"
 							}
 						],
@@ -198,7 +198,7 @@
 							"projects/ide/src/assets",
 							{
 								"glob": "package.json",
-								"input": "./",
+								"input": "./projects/ide",
 								"output": "/"
 							}
 						],
