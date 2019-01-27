@@ -19,10 +19,10 @@
       "dom"
     ],
     "paths": {
-      "common": [
+      "@napkin-ide/common": [
         "dist/common"
       ],
-      "common/*": [
+      "@napkin-ide/common/*": [
         "dist/common/*"
       ]
     }
