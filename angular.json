@@ -7,7 +7,7 @@
 			"root": "projects/common",
 			"sourceRoot": "projects/common/src",
 			"projectType": "library",
-			"prefix": "lib",
+			"prefix": "nide",
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-ng-packagr:build",
@@ -42,7 +42,7 @@
 			"root": "projects/public/",
 			"sourceRoot": "projects/public/src",
 			"projectType": "application",
-			"prefix": "lib",
+			"prefix": "nide",
 			"schematics": {
 				"@schematics/angular:component": {
 					"styleext": "scss"
@@ -178,7 +178,7 @@
 			"root": "projects/ide/",
 			"sourceRoot": "projects/ide/src",
 			"projectType": "application",
-			"prefix": "lib",
+			"prefix": "nide",
 			"schematics": {
 				"@schematics/angular:component": {
 					"styleext": "scss"
