@@ -11,6 +11,7 @@
 // export * from './lib/controls/status-bar/status-bar.module';
 // export * from './lib/controls/status-bar/status-bar.component';
 export * from './lib/core/ide/activity';
+export * from './lib/core/ide/side-bar';
 export * from './lib/core/ide/state';
 export * from './lib/core/ide/state-change';
 export * from './lib/core/ide/state-change-types';

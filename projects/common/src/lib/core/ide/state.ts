@@ -6,8 +6,6 @@ export class IdeState {
 
   public CurrentActivity: IdeActivity;
 
-  public CurrentSideBarSection: IdeSideBarSection;
-
   public SideBar: IdeSideBar;
 
   public StatusChanges: string[];
