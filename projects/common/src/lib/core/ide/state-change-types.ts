@@ -1,4 +1,6 @@
 export enum IdeStateChangeTypes {
   Reset,
-  Activity
+  Activity,
+  SideBar,
+  Status
 }

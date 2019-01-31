@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IdeStateService } from '../../svc/ide-state.service';
+import { filter } from 'rxjs/operators';
+import { IdeStateChangeTypes } from '@napkin-ide/common';
 
 @Component({
   selector: 'nide-status-bar',
@@ -6,10 +9,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./status-bar.component.scss']
 })
 export class StatusBarComponent implements OnInit {
+  //  Fields
+  protected statusProcessing: any;
 
-  constructor() { }
+  //  Properties
+  public Status: string;
 
-  ngOnInit() {
+  //  Constructors
+  constructor(protected ideStateSvc: IdeStateService) {
+    this.Status = '';
   }
 
+  //  Life Cycle
+  public ngOnInit() {
+    this.ideStateSvc.StateChange.pipe(
+      filter(sc => sc.Types.some(t => t === IdeStateChangeTypes.Activity ||  t === IdeStateChangeTypes.Reset))
+    ).subscribe((stateChange) => {
+      this.EnsureStatusProcessing();
+    });
+  }
+
+  //  API Methods
+  public EnsureStatusProcessing() {
+    this.Status = this.ideStateSvc.RemoveNextStatusChange();
+
+    if (this.Status) {
+      this.statusProcessing = setTimeout(() => {
+        this.EnsureStatusProcessing();
+      }, 2250);
+    } else {
+      clearTimeout(this.statusProcessing);
+
+      this.statusProcessing = null;
+    }
+  }
 }

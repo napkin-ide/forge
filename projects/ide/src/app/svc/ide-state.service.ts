@@ -25,7 +25,8 @@ export class IdeStateService extends DAFService {
         IconSet: null,
         Title: 'Infrastructure'
       }],
-      CurrentActivity: null
+      CurrentActivity: null,
+      StatusChanges: []
     };
 
     this.stateChange = new BehaviorSubject<IdeStateChange>({
@@ -34,11 +35,34 @@ export class IdeStateService extends DAFService {
     });
 
     this.StateChange = this.stateChange.asObservable();
-
   }
 
   //  API Methods
+  public AddStatusChange(status: string) {
+    this.state.StatusChanges.push(status);
+
+    this.sendState(IdeStateChangeTypes.Status);
+  }
+
+  public RemoveNextStatusChange() {
+    if (this.state.StatusChanges.length <= 0) {
+      return '';
+    }
+
+    const status = this.state.StatusChanges.shift();
+
+    this.sendState(IdeStateChangeTypes.Status);
+
+    return status;
+  }
+
   public SetCurrentActivity(activity: IdeActivity) {
+    this.state.CurrentActivity = activity;
+
+    this.sendState(IdeStateChangeTypes.Activity);
+  }
+
+  public SetCurrentSideBarSectionf(activity: IdeActivity) {
     this.state.CurrentActivity = activity;
 
     this.sendState(IdeStateChangeTypes.Activity);

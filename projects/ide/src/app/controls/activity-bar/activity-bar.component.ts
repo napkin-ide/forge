@@ -26,6 +26,8 @@ export class ActivityBarComponent implements OnInit {
       this.Activities = stateChange.State.Activities;
 
       this.CurrentActivity = stateChange.State.CurrentActivity;
+
+      this.ideStateSvc.AddStatusChange('Activities Loaded...');
     });
   }
 
