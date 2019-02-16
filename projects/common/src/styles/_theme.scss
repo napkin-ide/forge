@@ -239,3 +239,15 @@ $nide-theme: mat-light-theme($nide-app-primary, $nide-app-accent, $nide-app-warn
     border-spacing: 0;
   }
 }
+
+@mixin defaults() {
+  @include reset();
+
+  .mat-spinner {
+    margin: auto;
+  }
+
+  .mat-full-width {
+    width: 100%;
+  }
+}

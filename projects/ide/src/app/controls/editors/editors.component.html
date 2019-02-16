@@ -1,11 +1,7 @@
 <mat-grid-list class="fit-grid grid-start" cols="1" rowHeight="fit">
   <mat-grid-tile>
     <mat-tab-group>
-        <mat-tab label="Solutions - Applications - Overview">
-          ...
-        </mat-tab>
-
-        <mat-tab label="Solutions - Flux - Manage">
+        <mat-tab [label]="editor.Title" *ngFor="let editor of Editors">
           ...
         </mat-tab>
     </mat-tab-group>

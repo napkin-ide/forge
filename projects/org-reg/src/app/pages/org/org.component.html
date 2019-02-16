@@ -1,0 +1,59 @@
+<div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
+  <div fxFlex="30%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="1" class="details">
+    <div class="inner">
+      <div *ngIf="State == 'New'">
+        <h1 class="mat-display-2">Welcome, Let's Get Started</h1>
+
+        <h2 class="mat-headline">Your organization serves as the backbone for organizing the solutions you build...</h2>
+      </div>
+
+      <div *ngIf="State == 'Host'">
+        <h1 class="mat-display-2">Create Organization Host</h1>
+
+        <h2 class="mat-headline">If you have your own organization domain, follow that flow to validate domain ownership.</h2>
+
+        <h2 class="mat-headline">If you would like to use a shared domain, please create an unused .</h2>
+      </div>
+
+      <div *ngIf="State == 'Provisioning'">
+        <h1 class="mat-display-2">Thank You</h1>
+
+        <h2 class="mat-headline">Great things are on the way.</h2>
+      </div>
+    </div>
+  </div>
+
+  <div fxFlex="70%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
+    <div class="inner">
+      <form *ngIf="State == 'New'" [formGroup]="NewForm" (ngSubmit)="State = 'Host'">
+        <h1 class="mat-display-3">Create New Organization</h1>
+
+        <mat-form-field class="mat-full-width">
+          <input matInput placeholder="Organization Name" formControlName="name" required />
+        </mat-form-field>
+
+        <mat-form-field class="mat-full-width">
+          <textarea matInput placeholder="Description" formControlName="desc" required></textarea>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!NewForm.valid">Create Organization</button>
+      </form>
+
+      <form *ngIf="State == 'Host'" [formGroup]="HostForm" (ngSubmit)="State = 'Provisioning'">
+        <h1 class="mat-display-3">Establish Organization Host</h1>
+
+        <mat-form-field class="mat-full-width">
+          <input matInput placeholder="Host Address" formControlName="host" required />
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!HostForm.valid">Setup Host</button>
+      </form>
+
+      <div *ngIf="State == 'Provisioning'">
+        <h1 class="mat-display-3">Creating Your Organization Forge</h1>
+
+        <mat-spinner></mat-spinner>
+      </div>
+    </div>
+  </div>
+</div>

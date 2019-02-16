@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IdentityOptions } from '@lcu/identity';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
 import { MatSidenavModule, MatGridListModule } from '@angular/material';
 import { ActivityBarModule } from './controls/activity-bar/activity-bar.module';
 import { EditorsModule } from './controls/editors/editors.module';
@@ -22,7 +21,6 @@ import { IdeStateService } from './svc/ide-state.service';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,

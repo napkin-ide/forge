@@ -8,11 +8,23 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
 
-        <mat-list>
+        <mat-nav-list>
           <mat-list-item *ngFor="let action of section.Actions">
             <a matLine>{{action.Title}}</a>
+
+            <button mat-icon-button>
+                <mat-icon>chevron_right</mat-icon>
+            </button>
           </mat-list-item>
-        </mat-list>
+
+          <mat-list-item>
+              <a matLine>{{section.FindNewText}}</a>
+
+              <button mat-icon-button>
+                  <mat-icon>add</mat-icon>
+              </button>
+            </mat-list-item>
+        </mat-nav-list>
       </mat-expansion-panel>
     </mat-accordion>
   </mat-grid-tile>

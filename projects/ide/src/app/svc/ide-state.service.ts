@@ -26,13 +26,38 @@ export class IdeStateService extends DAFService {
         Title: 'Infrastructure'
       }],
       CurrentActivity: null,
+      CurrentEditor: null,
+      CurrentPanel: null,
+      Editors: [{
+        Title: 'Solutions - Applications (Overview)',
+        Editor: '',
+        Toolkit: ''
+      }, {
+        Title: 'Solutions - Flux (Documentation)',
+        Editor: '',
+        Toolkit: ''
+      }],
+      Panels: [{
+        Title: 'Output',
+        Editor: '',
+        Toolkit: ''
+      }, {
+        Title: 'Flux Modules',
+        Editor: '',
+        Toolkit: ''
+      }],
       SideBar: {
         Sections: [{
           Actions: [{
             Action: '',
             Group: '',
             Title: 'Applications'
+          }, {
+            Action: '',
+            Group: '',
+            Title: 'Package Sources'
           }],
+          FindNewText: 'Find More Solutions',
           Title: 'Solutions'
         },
         {
@@ -41,6 +66,7 @@ export class IdeStateService extends DAFService {
             Group: '',
             Title: 'Service & Maintenance'
           }],
+          FindNewText: 'Find New Partners',
           Title: 'Partners'
         }],
         Title: 'Infrastructure'

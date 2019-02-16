@@ -1,4 +1,4 @@
-import { MatExpansionModule, MatGridListModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule } from '@angular/material';
+import { MatExpansionModule, MatGridListModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule, MatIconModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SideBarComponent } from './side-bar.component';
@@ -13,6 +13,7 @@ import { SideBarComponent } from './side-bar.component';
     MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
+    MatIconModule,
     MatInputModule,
     MatListModule,
   ],

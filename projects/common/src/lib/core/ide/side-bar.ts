@@ -1,4 +1,6 @@
 export class IdeSideBar {
+  public CurrentSection?: IdeSideBarSection;
+
   public Sections: IdeSideBarSection[];
 
   public Title: string;
@@ -6,6 +8,10 @@ export class IdeSideBar {
 
 export class IdeSideBarSection {
   public Actions: IdeSideBarAction[];
+
+  public CurrentAction?: IdeSideBarAction;
+
+  public FindNewText: string;
 
   public Title: string;
 }
