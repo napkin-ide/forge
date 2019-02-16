@@ -1,58 +1,149 @@
 <div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
   <div fxFlex="30%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="1" class="details">
     <div class="inner">
-      <div *ngIf="State == 'New'">
-        <h1 class="mat-display-2">Welcome, Let's Get Started</h1>
+      <div *ngIf="State.Step == 'New'">
+        <h1 class="mat-display-1">Welcome, Let's Get Started</h1>
 
         <h2 class="mat-headline">Your organization serves as the backbone for organizing the solutions you build...</h2>
       </div>
 
-      <div *ngIf="State == 'Host'">
-        <h1 class="mat-display-2">Create Organization Host</h1>
+      <div *ngIf="State.Step == 'Host'">
+        <h1 class="mat-display-1">Create Organization Host</h1>
 
-        <h2 class="mat-headline">If you have your own organization domain, follow that flow to validate domain ownership.</h2>
+        <ng-container *ngIf="State.HostFlow == null">
+          <h2 class="mat-headline">If you have your own organization domain, follow that flow to validate domain ownership.</h2>
 
-        <h2 class="mat-headline">If you would like to use a shared domain, please create an unused .</h2>
+          <h2 class="mat-headline">If you would like to use a shared domain, please follow that flow to secure your unused domain.</h2>
+        </ng-container>
+
+        <ng-container *ngIf="State.HostFlow == 'shared'">
+          <h2 class="mat-headline">Select the root domain for your shared site.</h2>
+
+          <h2 class="mat-headline">
+            Choose the desired subdomain for your shared site, and click confirm to verify it is available and secure it.
+          </h2>
+        </ng-container>
+
+        <ng-container *ngIf="State.HostFlow == 'private'">
+          <h2 class="mat-headline">
+            Enter the full domain that you would like to use for your site. Something like:
+          </h2>
+
+          <h2 class="mat-headline">
+            www.my-domain.com
+          </h2>
+
+          <h2 class="mat-headline">
+            Then you will need to deploy the following file to the root of your domain and confirm the host.
+          </h2>
+
+          <a mat-stroked-button color="accent">Download Validation File</a>
+        </ng-container>
       </div>
 
-      <div *ngIf="State == 'Provisioning'">
+      <div *ngIf="State.Step == 'Provisioning'">
         <h1 class="mat-display-2">Thank You</h1>
 
-        <h2 class="mat-headline">Great things are on the way.</h2>
+        <h2 class="mat-headline">{{ State.Provisioning }}</h2>
       </div>
     </div>
   </div>
 
   <div fxFlex="70%" fxFlex.lt-md="100%" fxFlexOrder.lt-md="0" class="content">
     <div class="inner">
-      <form *ngIf="State == 'New'" [formGroup]="NewForm" (ngSubmit)="State = 'Host'">
-        <h1 class="mat-display-3">Create New Organization</h1>
+      <div>
+        <div *ngIf="!State.Loading">
+          <form *ngIf="State.Step == 'New'" [formGroup]="NewForm" (ngSubmit)="CreateOrg()">
+            <h1 class="mat-display-3">Create New Organization</h1>
 
-        <mat-form-field class="mat-full-width">
-          <input matInput placeholder="Organization Name" formControlName="name" required />
-        </mat-form-field>
+            <mat-form-field class="mat-full-width">
+              <input matInput placeholder="Organization Name" formControlName="name" required />
+            </mat-form-field>
 
-        <mat-form-field class="mat-full-width">
-          <textarea matInput placeholder="Description" formControlName="desc" required></textarea>
-        </mat-form-field>
+            <mat-form-field class="mat-full-width">
+              <textarea matInput placeholder="Description" formControlName="desc" required></textarea>
+            </mat-form-field>
 
-        <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!NewForm.valid">Create Organization</button>
-      </form>
+            <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!NewForm.valid">Create Organization</button>
+          </form>
 
-      <form *ngIf="State == 'Host'" [formGroup]="HostForm" (ngSubmit)="State = 'Provisioning'">
-        <h1 class="mat-display-3">Establish Organization Host</h1>
+          <form *ngIf="State.Step == 'Host'" [formGroup]="HostForm" (ngSubmit)="SecureHost()">
+            <h1 class="mat-display-3">Establish {{ State.OrganizationName }} Host</h1>
 
-        <mat-form-field class="mat-full-width">
-          <input matInput placeholder="Host Address" formControlName="host" required />
-        </mat-form-field>
+            <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="!State.HostFlow">
+              <div fxFlex="50%" fxFlex.lt-md="100%">
+                <mat-card>
+                  <h2 class="mat-headline">Use a Fathym Domain</h2>
 
-        <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!HostForm.valid">Setup Host</button>
-      </form>
+                  <p class="mat-subtitle">
+                    Don't have your own domain? Or just want to get started quickly? This is the route for you.
+                  </p>
 
-      <div *ngIf="State == 'Provisioning'">
-        <h1 class="mat-display-3">Creating Your Organization Forge</h1>
+                  <p class="mat-subtitle">
+                    You'll be able to add your own domain later on, click below to get started.
+                  </p>
 
-        <mat-spinner></mat-spinner>
+                  <a mat-raised-button color="accent" (click)="SetHostFlow('shared')">Use Fathym Domain</a>
+                </mat-card>
+              </div>
+
+              <div fxFlex="50%" fxFlex.lt-md="100%">
+                <mat-card>
+                  <h2 class="mat-headline">Bring Your Own Domain</h2>
+
+                  <p class="mat-subtitle">
+                    Ready to get started forging your own domain? We'll walk you through getting started here.
+                  </p>
+
+                  <p class="mat-subtitle">
+                    You'll be able to add more domains later on, so click below to get started
+                  </p>
+
+                  <a mat-raised-button color="primary" (click)="SetHostFlow('private')">Use Custom Domain</a>
+                </mat-card>
+              </div>
+            </div>
+
+            <ng-container *ngIf="State.HostFlow">
+              <mat-form-field class="mat-full-width" *ngIf="State.HostFlow == 'shared'">
+                <mat-select placeholder="Root Domain" formControlName="root">
+                  <mat-option value="fathym-int.com">fathym-int.com</mat-option>
+                  <mat-option value="lowcodeunit.com">lowcodeunit.com</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <ng-container *ngIf="HostForm.controls['root'].value || State.HostFlow == 'private'">
+                <mat-form-field class="mat-full-width">
+                  <input matInput placeholder="Host Address" formControlName="host" required />
+
+                  <span matSuffix *ngIf="State.HostFlow == 'shared'">.{{ HostForm.controls['root'].value }}</span>
+                </mat-form-field>
+
+                <div *ngIf="State.HostApprovalMessage">
+                  <h2>{{ State.HostApprovalMessage }}</h2>
+                </div>
+
+                <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!HostForm.valid">
+                  Setup Host
+                </button>
+              </ng-container>
+
+              <div>
+                <a mat-button (click)="SetHostFlow(null)"><mat-icon>cancel</mat-icon> Back To Host Options</a>
+              </div>
+            </ng-container>
+          </form>
+
+          <div *ngIf="State.Step == 'Provisioning'">
+            <h1 class="mat-display-3">Creating Your {{ State.OrganizationName }} Forge</h1>
+
+            <h2 class="mat-headline">{{ State.Host }}</h2>
+          </div>
+        </div>
+
+        <div *ngIf="State.Loading || State.Step == 'Provisioning'">
+          <mat-spinner></mat-spinner>
+        </div>
       </div>
     </div>
   </div>

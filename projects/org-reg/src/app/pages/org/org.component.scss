@@ -61,8 +61,12 @@
             display: block;
           }
 
-          .mat-checkbox {
-            display: none;
+          .mat-card {
+            margin: 2rem;
+
+            .mat-subtitle {
+              margin: 1rem;
+            }
           }
 
           .mat-raised-button {

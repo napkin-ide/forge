@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IdentityOptions } from '@lcu/identity';
 import { HttpClientModule } from '@angular/common/http';
+import { OrgRegStateManagerContext } from './core/org-reg-state-manager.context';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule
   ],
   providers: [
+    OrgRegStateManagerContext
   ],
   bootstrap: [AppComponent]
 })
