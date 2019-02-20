@@ -3,6 +3,8 @@ import { StateManagerContext, StateAction } from '@napkin-ide/common';
 import { Observable } from 'rxjs';
 
 export class OrgRegStateManagerContext extends StateManagerContext<OrgRegState> {
+  //  Properties
+
   //  Constructors
   constructor() {
     super();
@@ -38,49 +40,21 @@ export class OrgRegStateManagerContext extends StateManagerContext<OrgRegState> 
   }
 
   //  Helpers
-  protected defaultValue(): OrgRegState {
-    return (this.state = {
-      Step: 'New'
-    });
+  protected defaultValue() {
+    return <OrgRegState>{ Loading: true };
   }
 
-  protected executeAction(action: StateAction) {
-    //  Temp... To be moved to server
-    return Observable.create(obs => {
-      this.state.Loading = true;
+  protected loadHubUrl() {
+    return '/state';
+    // return 'http://www.lowcodeunit.com/state';
+    // return 'http://localhost:52235/state';
+  }
 
-      obs.next(this.state);
+  protected loadStateKey() {
+    return 'test';
+  }
 
-      setTimeout(() => {
-        switch (action.Type) {
-          case 'create-org':
-            this.state.OrganizationName = action.Arguments.Name;
-
-            this.state.OrganizationDescription = action.Arguments.Description;
-
-            this.state.Step = 'Host';
-            break;
-
-          case 'secure-host':
-            this.state.Host = action.Arguments.Host;
-
-            this.state.Provisioning =
-              'Sit back and relax while we provision your new organization forge. This will configure things to run at the above domain.';
-
-            this.state.Step = 'Provisioning';
-            break;
-
-          case 'set-host-flow':
-            this.state.HostFlow = action.Arguments.HostFlow;
-            break;
-        }
-
-        this.state.Loading = false;
-
-        obs.next(this.state);
-
-        obs.complete();
-      }, 750);
-    });
+  protected loadStateName() {
+    return 'org-reg';
   }
 }

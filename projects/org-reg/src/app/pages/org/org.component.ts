@@ -41,10 +41,14 @@ export class OrgComponent implements OnInit {
 
   //  API methods
   public CreateOrg() {
+    this.State.Loading = true;
+
     this.orgRegState.CreateOrg(this.NewForm.controls['name'].value, this.NewForm.controls['desc'].value);
   }
 
   public SecureHost() {
+    this.State.Loading = true;
+
     if (this.State.HostFlow === 'private') {
       this.orgRegState.SecureHost(this.HostForm.controls['host'].value);
     } else if (this.State.HostFlow === 'shared') {
@@ -53,6 +57,8 @@ export class OrgComponent implements OnInit {
   }
 
   public SetHostFlow(flow: string) {
+    this.State.Loading = true;
+
     this.orgRegState.SetHostFlow(flow);
   }
 
