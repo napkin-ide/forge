@@ -18,4 +18,3 @@ export * from './lib/core/ide/state';
 export * from './lib/core/ide/state-change';
 export * from './lib/core/ide/state-change-types';
 export * from './lib/core/solution.model';
-export * from './lib/state/state-manager.context';
