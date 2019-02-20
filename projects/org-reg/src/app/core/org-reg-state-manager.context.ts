@@ -1,6 +1,10 @@
 import { OrgRegState } from './org-reg.state';
 import { StateManagerContext } from '@lcu-ide/common';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class OrgRegStateManagerContext extends StateManagerContext<OrgRegState> {
   //  Properties
 
