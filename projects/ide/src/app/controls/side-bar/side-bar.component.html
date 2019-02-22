@@ -1,3 +1,31 @@
-<mat-grid-list class="fit-grid grid-start" cols="1" rowHeight="fit">
-  <mat-grid-tile>Side Bar</mat-grid-tile>
-</mat-grid-list> 
+<mat-grid-list class="fit-grid grid-start side-bar-grid" cols="1" rowHeight="fit">
+  <mat-grid-tile>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let section of SideBar?.Sections">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{section.Title}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-nav-list>
+          <mat-list-item *ngFor="let action of section.Actions">
+            <a matLine>{{action.Title}}</a>
+
+            <button mat-icon-button>
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+          </mat-list-item>
+
+          <mat-list-item>
+              <a matLine>{{section.FindNewText}}</a>
+
+              <button mat-icon-button>
+                  <mat-icon>add</mat-icon>
+              </button>
+            </mat-list-item>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-grid-tile>
+</mat-grid-list>

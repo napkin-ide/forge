@@ -1,6 +1,6 @@
 import { Injectable, Injector } from "@angular/core";
 import { DAFService } from '@lcu/api';
-import { IdeActivity, IdeStateChange, IdeState, IdeStateChangeTypes } from '@napkin-ide/common';
+import { IdeActivity, IdeStateChange, IdeState, IdeStateChangeTypes, IdeSideBarSection } from '@napkin-ide/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -26,6 +26,51 @@ export class IdeStateService extends DAFService {
         Title: 'Infrastructure'
       }],
       CurrentActivity: null,
+      CurrentEditor: null,
+      CurrentPanel: null,
+      Editors: [{
+        Title: 'Solutions - Applications (Overview)',
+        Editor: '',
+        Toolkit: ''
+      }, {
+        Title: 'Solutions - Flux (Documentation)',
+        Editor: '',
+        Toolkit: ''
+      }],
+      Panels: [{
+        Title: 'Output',
+        Editor: '',
+        Toolkit: ''
+      }, {
+        Title: 'Flux Modules',
+        Editor: '',
+        Toolkit: ''
+      }],
+      SideBar: {
+        Sections: [{
+          Actions: [{
+            Action: '',
+            Group: '',
+            Title: 'Applications'
+          }, {
+            Action: '',
+            Group: '',
+            Title: 'Package Sources'
+          }],
+          FindNewText: 'Find More Solutions',
+          Title: 'Solutions'
+        },
+        {
+          Actions: [{
+            Action: '',
+            Group: '',
+            Title: 'Service & Maintenance'
+          }],
+          FindNewText: 'Find New Partners',
+          Title: 'Partners'
+        }],
+        Title: 'Infrastructure'
+      },
       StatusChanges: []
     };
 
@@ -35,6 +80,11 @@ export class IdeStateService extends DAFService {
     });
 
     this.StateChange = this.stateChange.asObservable();
+
+    //  Why wasn't Reset getting sent to all subscribers??  Just the first??  This should not be necessary
+    setTimeout(() => {
+      this.sendState(IdeStateChangeTypes.Reset);
+    }, 0);
   }
 
   //  API Methods
@@ -57,12 +107,6 @@ export class IdeStateService extends DAFService {
   }
 
   public SetCurrentActivity(activity: IdeActivity) {
-    this.state.CurrentActivity = activity;
-
-    this.sendState(IdeStateChangeTypes.Activity);
-  }
-
-  public SetCurrentSideBarSectionf(activity: IdeActivity) {
     this.state.CurrentActivity = activity;
 
     this.sendState(IdeStateChangeTypes.Activity);

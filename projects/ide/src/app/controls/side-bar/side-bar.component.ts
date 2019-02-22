@@ -10,10 +10,8 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./side-bar.component.scss']
 })
 export class SideBarComponent implements OnInit {
-  //  Properties
+  // Properties
   public SideBar: IdeSideBar;
-
-  public CurrentSection: IdeSideBarSection;
 
   //  Constructors
   constructor(protected ideStateSvc: IdeStateService) {
@@ -22,18 +20,13 @@ export class SideBarComponent implements OnInit {
   //  Life Cycle
   public ngOnInit() {
     this.ideStateSvc.StateChange.pipe(
-      filter(sc => sc.Types.some(t => t === IdeStateChangeTypes.Activity ||  t === IdeStateChangeTypes.Reset))
+      filter(sc => sc.Types.some(t => t === IdeStateChangeTypes.SideBar ||  t === IdeStateChangeTypes.Reset))
     ).subscribe((stateChange) => {
       this.SideBar = stateChange.State.SideBar;
 
-      this.CurrentSection = stateChange.State.CurrentSideBarSection;
-
-      this.ideStateSvc.AddStatusChange('Activities Loaded...');
+      this.ideStateSvc.AddStatusChange('Side Bar Loaded...');
     });
   }
 
   //  API Methods
-  public SelectSideBarSection(section: IdeSideBarSection) {
-    this.ideStateSvc.SetCurrentActivity(section);
-  }
 }

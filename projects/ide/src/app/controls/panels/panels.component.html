@@ -1,4 +1,9 @@
 <mat-grid-list class="fit-grid grid-start" cols="1" rowHeight="fit">
-  <mat-grid-tile>Panels</mat-grid-tile>
-</mat-grid-list> 
-  
+  <mat-grid-tile>
+    <mat-tab-group>
+        <mat-tab [label]="panel.Title" *ngFor="let panel of Panels">
+          ...
+        </mat-tab>
+    </mat-tab-group>
+  </mat-grid-tile>
+</mat-grid-list>

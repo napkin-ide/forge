@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IdentityOptions } from '@lcu/identity';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -14,7 +13,6 @@ import { HttpModule } from '@angular/http';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule
