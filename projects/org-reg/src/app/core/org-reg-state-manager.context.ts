@@ -54,7 +54,7 @@ export class OrgRegStateManagerContext extends StateManagerContext<OrgRegState> 
   }
 
   protected loadStateKey() {
-    return 'test';
+    return 'init';
   }
 
   protected loadStateName() {
