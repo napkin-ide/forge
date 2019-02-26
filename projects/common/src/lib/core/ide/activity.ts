@@ -3,5 +3,7 @@ export class IdeActivity {
 
   public IconSet: string;
 
+  public Lookup: string;
+
   public Title: string;
 }

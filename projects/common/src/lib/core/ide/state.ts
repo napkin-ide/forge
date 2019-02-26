@@ -14,6 +14,8 @@ export class IdeState {
 
   public Editors: IdeEditor[];
 
+  public Loading: boolean;
+
   public Panels: IdePanel[];
 
   public SideBar: IdeSideBar;

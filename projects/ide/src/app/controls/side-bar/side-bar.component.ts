@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IdeSideBar, IdeSideBarSection } from 'projects/common/src/lib/core/ide/side-bar';
 import { IdeStateService } from '../../svc/ide-state.service';
-import { IdeStateChangeTypes } from '@napkin-ide/common';
+import { IdeStateChangeTypes, IdeStateStateManagerContext } from '@napkin-ide/common';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -11,20 +11,22 @@ import { filter } from 'rxjs/operators';
 })
 export class SideBarComponent implements OnInit {
   // Properties
+  public Loading: boolean;
+
   public SideBar: IdeSideBar;
 
   //  Constructors
-  constructor(protected ideStateSvc: IdeStateService) {
+  constructor(protected ideState: IdeStateStateManagerContext) {
   }
 
   //  Life Cycle
   public ngOnInit() {
-    this.ideStateSvc.StateChange.pipe(
-      filter(sc => sc.Types.some(t => t === IdeStateChangeTypes.SideBar ||  t === IdeStateChangeTypes.Reset))
-    ).subscribe((stateChange) => {
-      this.SideBar = stateChange.State.SideBar;
+    this.ideState.Context.subscribe((ideState) => {
+      this.SideBar = ideState.SideBar;
 
-      this.ideStateSvc.AddStatusChange('Side Bar Loaded...');
+      this.Loading = ideState.Loading;
+
+      // this.ideState.AddStatusChange('Side Bar Loaded...');
     });
   }
 
