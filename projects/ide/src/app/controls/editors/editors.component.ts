@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IdeEditor, IdeStateChangeTypes } from '@napkin-ide/common';
-import { IdeStateService } from '../../svc/ide-state.service';
+import { IdeEditor, IdeStateChangeTypes, IdeStateStateManagerContext } from '@napkin-ide/common';
 import { filter } from 'rxjs/operators';
+import { LazyElementConfig } from '@lowcodeunit/lazy-element';
 
 @Component({
   selector: 'nide-editors',
@@ -14,22 +14,47 @@ export class EditorsComponent implements OnInit {
 
   public Editors: IdeEditor[];
 
+  public Config: LazyElementConfig;
+
+  public Context: any = null;
+
+  public Loading: boolean;
+
   //  Constructors
-  constructor(protected ideStateSvc: IdeStateService) {
-  }
+  constructor(protected ideState: IdeStateStateManagerContext) {}
 
   //  Life Cycle
   public ngOnInit() {
-    this.ideStateSvc.StateChange.pipe(
-      filter(sc => sc.Types.some(t => t === IdeStateChangeTypes.Editor ||  t === IdeStateChangeTypes.Reset))
-    ).subscribe((stateChange) => {
-      this.Editors = stateChange.State.Editors;
+    this.ideState.Context.subscribe(ideState => {
+      this.Editors = ideState.Editors;
 
-      this.CurrentEditor = stateChange.State.CurrentEditor;
+      this.CurrentEditor = ideState.CurrentEditor;
 
-      this.ideStateSvc.AddStatusChange('Editors Loaded...');
+      if (this.CurrentEditor) {
+        this.Config = {
+          Assets: [this.CurrentEditor.Toolkit],
+          ElementName: this.CurrentEditor.Editor
+        };
+      }
+
+      this.Loading = ideState.Loading;
+
+      // this.ideState.AddStatusChange('Editors Loaded...');
     });
   }
 
   //  API Methods
+  public Remove(editor: IdeEditor, event: MouseEvent) {
+    this.Loading = true;
+
+    this.ideState.RemoveEditor(editor.Lookup);
+
+    return event.stopImmediatePropagation();
+  }
+
+  public Select(editor: IdeEditor) {
+    this.Loading = true;
+
+    this.ideState.SelectEditor(editor.Lookup);
+  }
 }

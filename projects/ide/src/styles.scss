@@ -119,6 +119,20 @@
         }
       }
 
+      .side-bar {
+        width: 60px;
+        background-color: mat-color($primary, 500);
+
+        .side-bar-action {
+          margin: 0 auto;
+          display: block;
+
+          &.active {
+            background-color: transparentize($color: mat-color($primary, 300), $amount: 0.6);
+          }
+        }
+      }
+
       .ide-content {
         height: 100%;
 

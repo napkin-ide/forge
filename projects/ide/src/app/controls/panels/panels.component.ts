@@ -16,6 +16,8 @@ export class PanelsComponent implements OnInit {
 
   public Panels: IdePanel[];
 
+  public ShowPanels: boolean;
+
   //  Constructors
   constructor(protected ideState: IdeStateStateManagerContext) {
   }
@@ -26,6 +28,8 @@ export class PanelsComponent implements OnInit {
       this.Panels = ideState.Panels;
 
       this.CurrentPanel = ideState.CurrentPanel;
+
+      this.ShowPanels = ideState.ShowPanels;
 
       this.Loading = ideState.Loading;
 

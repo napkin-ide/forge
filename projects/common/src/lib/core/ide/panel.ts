@@ -1,7 +1,5 @@
 export class IdePanel {
-  public Editor: string;
-
-  public Lookup: string;
+  public Panel: string;
 
   public Title: string;
 

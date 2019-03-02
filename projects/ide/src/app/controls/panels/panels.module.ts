@@ -1,4 +1,4 @@
-import { MatGridListModule, MatTabsModule } from '@angular/material';
+import { MatGridListModule, MatTabsModule, MatButtonModule, MatIconModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PanelsComponent } from './panels.component';
@@ -9,6 +9,8 @@ import { PanelsComponent } from './panels.component';
   ],
   imports: [
     CommonModule,
+    MatButtonModule,
+    MatIconModule,
     MatGridListModule,
     MatTabsModule,
   ],

@@ -1,31 +1,41 @@
 <mat-grid-list class="fit-grid grid-start side-bar-grid" cols="1" rowHeight="fit">
   <mat-grid-tile>
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let section of SideBar?.Sections">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{section.Title}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+    <div class="overflowed">
+      <mat-progress-bar mode="indeterminate" *ngIf="Loading"></mat-progress-bar>
 
-        <mat-nav-list>
-          <mat-list-item *ngFor="let action of section.Actions">
-            <a matLine>{{action.Title}}</a>
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="section.IsActive" *ngFor="let section of SideBarSections">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ section.Title }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
 
-            <button mat-icon-button>
-                <mat-icon>chevron_right</mat-icon>
-            </button>
-          </mat-list-item>
+          <mat-nav-list>
+            <ng-container *ngFor="let action of SideBar?.Actions">
+              <mat-list-item (click)="SelectSideBarAction(action)"
+                *ngIf="action.Section == section.Title"
+                class="side-bar-action"
+                [class.active]="action.Group == SideBar.CurrentAction?.Group && action.Action == SideBar.CurrentAction?.Action"
+              >
+                <a matLine>{{ action.Title }}</a>
 
-          <mat-list-item>
-              <a matLine>{{section.FindNewText}}</a>
+                <button mat-icon-button>
+                  <mat-icon>chevron_right</mat-icon>
+                </button>
+              </mat-list-item>
+            </ng-container>
+
+            <mat-list-item>
+              <a matLine>Find More {{ section.Title }}</a>
 
               <button mat-icon-button>
-                  <mat-icon>add</mat-icon>
+                <mat-icon>add</mat-icon>
               </button>
             </mat-list-item>
-        </mat-nav-list>
-      </mat-expansion-panel>
-    </mat-accordion>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
   </mat-grid-tile>
 </mat-grid-list>

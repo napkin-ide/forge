@@ -10,7 +10,7 @@
           [matTooltip]="activity.Title"
           matTooltipPosition="after"
           (click)="SelectActivity(activity)"
-          [class.active]="activity == CurrentActivity"
+          [class.active]="activity.Lookup == CurrentActivity?.Lookup"
         >
           <mat-icon *ngIf="activity.IconSet" [fontSet]="activity.IconSet" [fontIcon]="activity.Icon"></mat-icon>
 
