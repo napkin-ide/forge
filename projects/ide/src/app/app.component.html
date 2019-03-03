@@ -14,7 +14,7 @@
           <nide-side-bar></nide-side-bar>
         </mat-drawer>
 
-        <mat-drawer-content>
+        <mat-drawer-content [class.hide-panels]="!ShowPanels">
           <mat-grid-list class="fit-grid" cols="1" rowHeight="fit">
             <mat-grid-tile class="ide-editors" rowspan="2">
               <nide-editors></nide-editors>

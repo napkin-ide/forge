@@ -13,7 +13,7 @@ export class SideBarComponent implements OnInit {
 
   public SideBar: IdeSideBar;
 
-  public SideBarSections: { Title: string; IsActive: boolean }[];
+  public SideBarSections: string[];
 
   //  Constructors
   constructor(protected ideState: IdeStateStateManagerContext) {}
@@ -27,17 +27,10 @@ export class SideBarComponent implements OnInit {
 
       if (this.SideBar && this.SideBar.Actions) {
         const sections = this.SideBar.Actions.map(a => {
-          return {
-            Title: a.Section,
-            IsActive:
-              this.SideBar.CurrentAction &&
-              this.SideBar.Actions.filter(a2 => a2.Section === a.Section).some(
-                a2 => a2.Group === this.SideBar.CurrentAction.Group && a2.Action === this.SideBar.CurrentAction.Action
-              )
-          };
-        });
+          return a.Section;
+        }).filter((a, i, self) => self.indexOf(a) === i);
 
-        this.SideBarSections = Array.from(new Set(sections));
+        this.SideBarSections = sections;
       }
 
       // this.ideState.AddStatusChange('Side Bar Loaded...');
@@ -45,6 +38,13 @@ export class SideBarComponent implements OnInit {
   }
 
   //  API Methods
+  public IsSectionActive(section: string) {
+    return this.SideBar.CurrentAction &&
+      this.SideBar.Actions.filter(a2 => a2.Section === section).some(
+        a2 => a2.Group === this.SideBar.CurrentAction.Group && a2.Action === this.SideBar.CurrentAction.Action
+      );
+  }
+
   public SelectSideBarAction(action: IdeSideBarAction) {
     this.Loading = true;
 

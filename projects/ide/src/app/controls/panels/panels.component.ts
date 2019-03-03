@@ -19,12 +19,11 @@ export class PanelsComponent implements OnInit {
   public ShowPanels: boolean;
 
   //  Constructors
-  constructor(protected ideState: IdeStateStateManagerContext) {
-  }
+  constructor(protected ideState: IdeStateStateManagerContext) {}
 
   //  Life Cycle
   public ngOnInit() {
-    this.ideState.Context.subscribe((ideState) => {
+    this.ideState.Context.subscribe(ideState => {
       this.Panels = ideState.Panels;
 
       this.CurrentPanel = ideState.CurrentPanel;
@@ -38,4 +37,9 @@ export class PanelsComponent implements OnInit {
   }
 
   //  API Methods
+  public ToggleShowPanels() {
+    this.Loading = true;
+
+    this.ideState.ToggleShowPanels();
+  }
 }

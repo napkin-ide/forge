@@ -149,6 +149,17 @@
         .ide-panels {
           background-color: mat-color($primary, 700);
         }
+
+        .hide-panels {
+          .ide-editors {
+            height: calc(100% - 49px) !important;
+          }
+
+          .ide-panels {
+            top: calc(100% - 49px) !important;
+            height: 49px !important;
+          }
+        }
       }
     }
   }

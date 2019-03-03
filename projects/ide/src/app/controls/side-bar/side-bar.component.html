@@ -4,17 +4,18 @@
       <mat-progress-bar mode="indeterminate" *ngIf="Loading"></mat-progress-bar>
 
       <mat-accordion>
-        <mat-expansion-panel [expanded]="section.IsActive" *ngFor="let section of SideBarSections">
+        <mat-expansion-panel [expanded]="IsSectionActive(section)" *ngFor="let section of SideBarSections">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ section.Title }}
+              {{ section }}
             </mat-panel-title>
           </mat-expansion-panel-header>
 
           <mat-nav-list>
             <ng-container *ngFor="let action of SideBar?.Actions">
-              <mat-list-item (click)="SelectSideBarAction(action)"
-                *ngIf="action.Section == section.Title"
+              <mat-list-item
+                (click)="SelectSideBarAction(action)"
+                *ngIf="action.Section == section"
                 class="side-bar-action"
                 [class.active]="action.Group == SideBar.CurrentAction?.Group && action.Action == SideBar.CurrentAction?.Action"
               >
@@ -27,7 +28,7 @@
             </ng-container>
 
             <mat-list-item>
-              <a matLine>Find More {{ section.Title }}</a>
+              <a matLine>Find More {{ section }}</a>
 
               <button mat-icon-button>
                 <mat-icon>add</mat-icon>

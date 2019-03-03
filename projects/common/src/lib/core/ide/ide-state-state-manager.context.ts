@@ -51,6 +51,13 @@ export class IdeStateStateManagerContext extends StateManagerContext<IdeState> {
     });
   }
 
+  public ToggleShowPanels() {
+    this.Execute({
+      Arguments: {},
+      Type: 'toggle-show-panels'
+    });
+  }
+
   //  Helpers
   protected defaultValue() {
     return <IdeState>{ Loading: true };

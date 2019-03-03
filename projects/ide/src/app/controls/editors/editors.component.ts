@@ -44,6 +44,10 @@ export class EditorsComponent implements OnInit {
   }
 
   //  API Methods
+  public CurrentEditorIndex() {
+    return this.Editors ? this.Editors.findIndex(e => e.Lookup === this.CurrentEditor.Lookup) : -1;
+  }
+
   public Remove(editor: IdeEditor, event: MouseEvent) {
     this.Loading = true;
 

@@ -14,16 +14,16 @@ import { SideBarModule } from './controls/side-bar/side-bar.module';
 import { StatusBarModule } from './controls/status-bar/status-bar.module';
 import { IdeStateService } from './svc/ide-state.service';
 import { IdeStateStateManagerContext } from '@napkin-ide/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { LCUServiceSettings } from '@lcu-ide/common';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     ActivityBarModule,
     EditorsModule,
     IdeBarModule,
@@ -31,14 +31,14 @@ import { LCUServiceSettings } from '@lcu-ide/common';
     SideBarModule,
     StatusBarModule,
     MatGridListModule,
-    MatSidenavModule,
+    MatSidenavModule
   ],
   providers: [
     {
       provide: LCUServiceSettings,
       useValue: <LCUServiceSettings>{
-        // APIRoot: `http://localhost:52235`,
-        APIRoot: `http://www.lowcodeunit.com`,
+        APIRoot: `http://localhost:52235`
+        // APIRoot: `http://www.lowcodeunit.com`,
         // APIRoot: `http://5280.lowcodeunit.com`,
         // APIRoot: ``,
       }
@@ -48,4 +48,4 @@ import { LCUServiceSettings } from '@lcu-ide/common';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

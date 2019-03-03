@@ -3,7 +3,7 @@
     <div class="overflowed">
       <mat-progress-bar mode="indeterminate" *ngIf="Loading"></mat-progress-bar>
 
-      <mat-tab-group>
+      <mat-tab-group [selectedIndex]="CurrentEditorIndex()">
         <mat-tab *ngFor="let editor of Editors">
           <ng-template mat-tab-label>
             <div (click)="Select(editor)">
