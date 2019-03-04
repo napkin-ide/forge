@@ -26,7 +26,7 @@
 		"version:ide": "npm version patch --prefix projects/ide",
 		"version:public": "npm version patch --prefix projects/public",
 		"ng": "ng",
-		"start": "ng serve",AX
+		"start": "ng serve",
 		"test": "ng test",
 		"lint": "ng lint",
 		"e2e": "ng e2e",
