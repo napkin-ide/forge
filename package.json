@@ -6,7 +6,7 @@
 		"build:all": "npm run build:common && concurrently \"npm:build:public\" \"npm:build:ide\"",
 		"build:common": "ng build common",
 		"build:ide": "ng build ide --prod",
-		"build:public": "ng build public --prod",
+		"build:public": "ng build public",
 		"deploy-man": "npm run deploy && npm run git:clean",
 		"deploy": "npm run switch && npm run versions && npm run build && npm run deploy:all",
 		"deploy:all": "concurrently \"npm:deploy:common\" \"npm:deploy:public\" \"npm:deploy:ide\" \"npm:deploy:org-reg\"",
@@ -26,7 +26,7 @@
 		"version:ide": "npm version patch --prefix projects/ide",
 		"version:public": "npm version patch --prefix projects/public",
 		"ng": "ng",
-		"start": "ng serve",
+		"start": "ng serve",AX
 		"test": "ng test",
 		"lint": "ng lint",
 		"e2e": "ng e2e",
