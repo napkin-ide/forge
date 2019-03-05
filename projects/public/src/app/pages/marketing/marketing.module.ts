@@ -5,10 +5,7 @@ import { MarketingRoutingModule } from './marketing-routing.module';
 
 @NgModule({
   declarations: [OverviewComponent],
-  imports: [
-    CommonModule,
-    MarketingRoutingModule
-  ],
+  imports: [CommonModule, MarketingRoutingModule],
   exports: [OverviewComponent]
 })
-export class MarketingModule { }
+export class MarketingModule {}

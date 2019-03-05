@@ -4,11 +4,11 @@ import { IdentityComponent } from './identity/identity.component';
 
 const routes: Routes = [
   {
-    path: "home",
-    loadChildren: "./marketing/marketing.module#MarketingModule"
+    path: 'home',
+    loadChildren: './marketing/marketing.module#MarketingModule'
   },
   {
-    path: "",
+    path: '',
     component: IdentityComponent
   }
 ];
@@ -17,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PagesRoutingModule { }
+export class PagesRoutingModule {}

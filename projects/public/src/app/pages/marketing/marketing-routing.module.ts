@@ -4,7 +4,7 @@ import { OverviewComponent } from './overview/overview.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: OverviewComponent
   }
 ];
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MarketingRoutingModule { }
+export class MarketingRoutingModule {}
