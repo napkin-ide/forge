@@ -15,7 +15,7 @@ import { StatusBarModule } from './controls/status-bar/status-bar.module';
 import { IdeStateService } from './svc/ide-state.service';
 import { IdeStateStateManagerContext } from '@napkin-ide/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { LCUServiceSettings } from '@lcu-ide/common';
+import { LCUServiceSettings, RealTimeService } from '@lcu-ide/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +34,7 @@ import { LCUServiceSettings } from '@lcu-ide/common';
     MatSidenavModule
   ],
   providers: [
+    RealTimeService,
     {
       provide: LCUServiceSettings,
       useValue: <LCUServiceSettings>{

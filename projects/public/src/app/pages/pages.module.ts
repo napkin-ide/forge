@@ -8,7 +8,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 
 @NgModule({
   declarations: [IdentityComponent],
-  imports: [CommonModule, LcuIdentityModule, PagesRoutingModule, FlexLayoutModule, MatButtonModule],
+  imports: [CommonModule, PagesRoutingModule, LcuIdentityModule, FlexLayoutModule, MatButtonModule],
   exports: [IdentityComponent]
 })
 export class PagesModule {}
