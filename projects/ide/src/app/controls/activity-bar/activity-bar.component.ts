@@ -15,6 +15,8 @@ export class ActivityBarComponent implements OnInit {
 
   public Loading: boolean;
 
+  public SettingsPath: string;
+
   //  Constructors
   constructor(protected ideState: IdeStateStateManagerContext) {
   }
@@ -27,6 +29,8 @@ export class ActivityBarComponent implements OnInit {
       this.CurrentActivity = ideState.CurrentActivity;
 
       this.Loading = ideState.Loading;
+
+      this.SettingsPath = ideState.SettingsPath;
 
       // this.ideState.AddStatusChange('Activities Loaded...');
     });

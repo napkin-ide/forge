@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { OrgRegStateManagerContext } from './core/org-reg-state-manager.context';
+import { IdeSettingsStateManagerContext } from './core/ide-settings-state-manager.context';
 import { RealTimeService, LCUServiceSettings } from '@lcu-ide/common';
 
 @NgModule({
@@ -22,7 +22,7 @@ import { RealTimeService, LCUServiceSettings } from '@lcu-ide/common';
         // APIRoot: ``,
       }
     },
-    OrgRegStateManagerContext
+    IdeSettingsStateManagerContext
   ],
   bootstrap: [AppComponent]
 })

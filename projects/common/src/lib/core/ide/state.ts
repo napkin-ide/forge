@@ -18,6 +18,8 @@ export class IdeState {
 
   public Panels: IdePanel[];
 
+  public SettingsPath: string;
+
   public ShowPanels: boolean;
 
   public SideBar: IdeSideBar;

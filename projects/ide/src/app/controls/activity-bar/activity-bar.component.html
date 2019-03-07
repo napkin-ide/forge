@@ -1,6 +1,6 @@
 <mat-grid-list class="fit-grid grid-start" cols="1" rowHeight="fit">
   <mat-grid-tile>
-    <div class="overflowed">
+    <div class="overflowed activities">
       <mat-progress-bar mode="indeterminate" *ngIf="Loading"></mat-progress-bar>
 
       <ng-container *ngFor="let activity of Activities">
@@ -18,5 +18,9 @@
         </a>
       </ng-container>
     </div>
+
+    <a class="activity-action settings" mat-icon-button matTooltip="Settings" matTooltipPosition="after" [href]="SettingsPath" target="_blank" *ngIf="SettingsPath">
+      <mat-icon>settings</mat-icon>
+    </a>
   </mat-grid-tile>
 </mat-grid-list>

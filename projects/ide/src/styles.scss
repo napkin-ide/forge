@@ -78,6 +78,10 @@
       width: calc(100% + 3px);
       overflow: auto;
       overflow-x: hidden;
+
+      &.activities {
+        height: calc(100% - 60px);
+      }
     }
 
     .ide-container {
@@ -94,6 +98,11 @@
         .activity-action {
           margin: 0 auto;
           display: block;
+
+          &.settings {
+            position: absolute;
+            bottom: 0;
+          }
 
           &.mat-icon-button {
             width: 60px;
