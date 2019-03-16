@@ -28,7 +28,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public get MainLoading(): boolean {
-    return this.State.Loading && (!this.State.Activities || this.State.Activities.length === 0);
+    return this.State.Loading && (!this.State.Arch || !this.State.Arch.LCUs || this.State.Arch.LCUs.length === 0);
   }
 
   public NewActivityForm: FormGroup;

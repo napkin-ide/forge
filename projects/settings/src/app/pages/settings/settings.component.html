@@ -2,7 +2,7 @@
   <h2 class="mat-display-2">Enterprise Forge Settings</h2>
 
   <mat-tab-group mat-stretch-tabs *ngIf="!MainLoading">
-    <mat-tab label="Setup" *ngIf="State.Arch?.LCUs?.length > 0">
+    <mat-tab label="Setup" *ngIf="State.Arch?.LCUs?.length > 0 && LCUGroups?.length > 0">
       <div class="spread">
         <mat-accordion>
           <mat-expansion-panel [expanded]="ExpandActivityBar">
@@ -197,7 +197,9 @@
 
                             <mat-form-field *ngIf="sectionAction.Group">
                               <mat-select placeholder="Action" [(ngModel)]="sectionAction.Action">
-                                <mat-option [value]="action" *ngFor="let action of State.LCUSolutionOptions[sectionAction.Group]">{{ action }}</mat-option>
+                                <mat-option [value]="action" *ngFor="let action of State.LCUSolutionOptions[sectionAction.Group]">{{
+                                  action
+                                }}</mat-option>
                               </mat-select>
                             </mat-form-field>
 
@@ -239,7 +241,9 @@
 
                             <mat-form-field *ngIf="newSecActGroup.value">
                               <mat-select placeholder="Action" formControlName="action">
-                                <mat-option [value]="action" *ngFor="let action of State.LCUSolutionOptions[newSecActGroup.value]">{{ action }}</mat-option>
+                                <mat-option [value]="action" *ngFor="let action of State.LCUSolutionOptions[newSecActGroup.value]">{{
+                                  action
+                                }}</mat-option>
                               </mat-select>
                             </mat-form-field>
                           </div>
