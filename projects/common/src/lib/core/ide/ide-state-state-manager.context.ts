@@ -32,11 +32,12 @@ export class IdeStateStateManagerContext extends StateManagerContext<IdeState> {
     });
   }
 
-  public SelectSideBarAction(action: string, group: string) {
+  public SelectSideBarAction(action: string, group: string, section: string) {
     this.Execute({
       Arguments: {
         Action: action,
-        Group: group
+        Group: group,
+        Section: section
       },
       Type: 'select-side-bar-action'
     });

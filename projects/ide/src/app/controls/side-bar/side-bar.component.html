@@ -14,7 +14,7 @@
           <mat-nav-list>
             <ng-container *ngFor="let action of SideBar?.Actions">
               <mat-list-item
-                (click)="SelectSideBarAction(action)"
+                (click)="SelectSideBarAction(section, action)"
                 *ngIf="action.Section == section"
                 class="side-bar-action"
                 [class.active]="action.Group == SideBar.CurrentAction?.Group && action.Action == SideBar.CurrentAction?.Action"

@@ -45,9 +45,9 @@ export class SideBarComponent implements OnInit {
       );
   }
 
-  public SelectSideBarAction(action: IdeSideBarAction) {
+  public SelectSideBarAction(section: string, action: IdeSideBarAction) {
     this.Loading = true;
 
-    this.ideState.SelectSideBarAction(action.Action, action.Group);
+    this.ideState.SelectSideBarAction(action.Action, action.Group, section);
   }
 }

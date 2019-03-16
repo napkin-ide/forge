@@ -8,7 +8,11 @@ import {
   MatInputModule,
   MatCardModule,
   MatIconModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTabsModule,
+  MatExpansionModule,
+  MatListModule,
+  MatProgressBarModule
 } from '@angular/material';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -22,13 +26,17 @@ import { SettingsComponent } from './settings/settings.component';
     ReactiveFormsModule,
     PagesRoutingModule,
     FlexLayoutModule,
+    MatExpansionModule,
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
+    MatProgressBarModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
   ],
   exports: [SettingsComponent]
 })
