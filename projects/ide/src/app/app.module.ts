@@ -16,6 +16,7 @@ import { IdeStateService } from './svc/ide-state.service';
 import { IdeStateStateManagerContext } from '@napkin-ide/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LCUServiceSettings, RealTimeService } from '@lcu-ide/common';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,10 +39,11 @@ import { LCUServiceSettings, RealTimeService } from '@lcu-ide/common';
     {
       provide: LCUServiceSettings,
       useValue: <LCUServiceSettings>{
-        APIRoot: `http://localhost:52235`
-        // APIRoot: `http://www.lowcodeunit.com`,
-        // APIRoot: `http://5280.lowcodeunit.com`,
-        // APIRoot: ``,
+        APIRoot: environment.production ? `` :
+         `http://localhost:52235`
+        // `http://www.lowcodeunit.com`,
+        // `http://5280.lowcodeunit.com`,
+        // ``,
       }
     },
     IdeStateService,

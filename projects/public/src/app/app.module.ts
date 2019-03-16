@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RealTimeService, LCUServiceSettings } from '@lcu-ide/common';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,10 +16,11 @@ import { RealTimeService, LCUServiceSettings } from '@lcu-ide/common';
     {
       provide: LCUServiceSettings,
       useValue: <LCUServiceSettings>{
-        APIRoot: `http://localhost:52235`
-        // APIRoot: `http://www.lowcodeunit.com`,
-        // APIRoot: `http://5280.lowcodeunit.com`,
-        // APIRoot: ``,
+        APIRoot: environment.production ? `` :
+         `http://localhost:52235`
+        // `http://www.lowcodeunit.com`,
+        // `http://5280.lowcodeunit.com`,
+        // ``,
       }
     },
   ],
