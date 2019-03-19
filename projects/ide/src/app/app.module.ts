@@ -15,12 +15,13 @@ import { StatusBarModule } from './controls/status-bar/status-bar.module';
 import { IdeStateService } from './svc/ide-state.service';
 import { IdeStateStateManagerContext } from '@napkin-ide/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { LCUServiceSettings, RealTimeService } from '@lcu-ide/common';
 import { environment } from '../environments/environment';
+import { FathymSharedModule } from '@lcu-ide/common';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    FathymSharedModule.forRoot(environment),
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -34,21 +35,7 @@ import { environment } from '../environments/environment';
     MatGridListModule,
     MatSidenavModule
   ],
-  providers: [
-    RealTimeService,
-    {
-      provide: LCUServiceSettings,
-      useValue: <LCUServiceSettings>{
-        APIRoot: environment.production ? `` :
-         `http://localhost:52235`
-        // `http://www.lowcodeunit.com`,
-        // `http://5280.lowcodeunit.com`,
-        // ``,
-      }
-    },
-    IdeStateService,
-    IdeStateStateManagerContext
-  ],
+  providers: [IdeStateService, IdeStateStateManagerContext],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
