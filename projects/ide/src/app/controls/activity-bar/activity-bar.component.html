@@ -19,7 +19,7 @@
       </ng-container>
     </div>
 
-    <a class="activity-action settings" mat-icon-button matTooltip="Settings" matTooltipPosition="after" [href]="SettingsPath" target="_blank" *ngIf="SettingsPath">
+    <a class="activity-action settings" mat-icon-button matTooltip="Settings" matTooltipPosition="after" (click)="OpenSettings()" *ngIf="SettingsPath">
       <mat-icon>settings</mat-icon>
     </a>
   </mat-grid-tile>

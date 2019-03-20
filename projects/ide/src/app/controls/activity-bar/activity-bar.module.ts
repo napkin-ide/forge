@@ -1,11 +1,28 @@
-import { MatGridListModule, MatButtonModule, MatIconModule, MatTooltipModule, MatProgressBarModule } from '@angular/material';
+import {
+  MatGridListModule,
+  MatButtonModule,
+  MatIconModule,
+  MatTooltipModule,
+  MatProgressBarModule,
+  MatDialogModule
+} from '@angular/material';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivityBarComponent } from './activity-bar.component';
+  import { ExternalDialogModule } from '@napkin-ide/common';
+  import { ActivityBarComponent } from './activity-bar.component';
 
 @NgModule({
   declarations: [ActivityBarComponent],
-  imports: [CommonModule, MatButtonModule, MatGridListModule, MatIconModule, MatProgressBarModule, MatTooltipModule],
+  imports: [
+    CommonModule,
+    ExternalDialogModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatIconModule,
+    MatDialogModule,
+    MatProgressBarModule,
+    MatTooltipModule
+  ],
   exports: [ActivityBarComponent]
 })
 export class ActivityBarModule {}

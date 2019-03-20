@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
-import { IdeActivity, IdeStateChangeTypes, IdeStateStateManagerContext } from '@napkin-ide/common';
+import { IdeActivity, ExternalDialogComponent, IdeStateStateManagerContext } from '@napkin-ide/common';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'nide-activity-bar',
@@ -18,7 +19,7 @@ export class ActivityBarComponent implements OnInit {
   public SettingsPath: string;
 
   //  Constructors
-  constructor(protected ideState: IdeStateStateManagerContext) {
+  constructor(protected ideState: IdeStateStateManagerContext, protected dialog: MatDialog) {
   }
 
   //  Life Cycle
@@ -37,6 +38,19 @@ export class ActivityBarComponent implements OnInit {
   }
 
   //  API Methods
+  public OpenSettings(): void {
+    const dialogRef = this.dialog.open(ExternalDialogComponent, {
+      width: '90%',
+      data: { ExternalPath: this.SettingsPath }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.Loading = true;
+
+      this.ideState.$Refresh();
+    });
+  }
+
   public SelectActivity(activity: IdeActivity) {
     this.Loading = true;
 
