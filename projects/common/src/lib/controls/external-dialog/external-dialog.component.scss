@@ -1,6 +1,4 @@
 :host {
-  position: relative;
-
   iframe {
     width: 100%;
     height: 600px;
@@ -11,4 +9,8 @@
     top: 0;
     right: 0;
   }
+}
+
+.mat-dialog-container {
+  position: relative;
 }
