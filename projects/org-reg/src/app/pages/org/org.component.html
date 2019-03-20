@@ -137,7 +137,7 @@
           <div *ngIf="State.Step == 'Provisioning'">
             <h1 class="mat-display-3">Creating Your {{ State.OrganizationName }} Forge</h1>
 
-            <h2 class="mat-headline">{{ State.Host }}</h2>
+            <a mat-button [href]="'http://' + State.Host" class="mat-headline">{{ State.Host }}</a>
           </div>
         </div>
 
