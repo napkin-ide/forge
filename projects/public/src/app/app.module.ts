@@ -6,12 +6,17 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { FathymSharedModule } from '@lcu-ide/common';
+import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [FathymSharedModule.forRoot(environment), BrowserModule, BrowserAnimationsModule, HttpClientModule, AppRoutingModule],
-  providers: [],
+  imports: [FathymSharedModule.forRoot(), BrowserModule, BrowserAnimationsModule, HttpClientModule, AppRoutingModule],
+  providers: [
+    {
+      provide: LCUServiceSettings,
+      useValue: FathymSharedModule.DefaultServiceSettings(environment)
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

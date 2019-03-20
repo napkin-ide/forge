@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { IdentityOptions } from '@lcu/identity';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSidenavModule, MatGridListModule } from '@angular/material';
 import { ActivityBarModule } from './controls/activity-bar/activity-bar.module';
 import { EditorsModule } from './controls/editors/editors.module';
@@ -16,12 +16,12 @@ import { IdeStateService } from './svc/ide-state.service';
 import { IdeStateStateManagerContext } from '@napkin-ide/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { environment } from '../environments/environment';
-import { FathymSharedModule } from '@lcu-ide/common';
+import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    FathymSharedModule.forRoot(environment),
+    FathymSharedModule.forRoot(),
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -35,7 +35,14 @@ import { FathymSharedModule } from '@lcu-ide/common';
     MatGridListModule,
     MatSidenavModule
   ],
-  providers: [IdeStateService, IdeStateStateManagerContext],
+  providers: [
+    IdeStateService,
+    IdeStateStateManagerContext,
+    {
+      provide: LCUServiceSettings,
+      useValue: FathymSharedModule.DefaultServiceSettings(environment)
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
