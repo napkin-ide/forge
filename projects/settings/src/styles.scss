@@ -31,6 +31,13 @@
     height: auto !important;
   }
 
+  .mat-tab-header {
+    z-index: 500;
+    position: sticky;
+    top: 0;
+    background-color: mat-color($primary, 300);
+  }
+
   .spread {
     margin: 2rem;
   }
