@@ -254,6 +254,14 @@ $nide-theme: mat-light-theme($nide-app-primary, $nide-app-accent, $nide-app-warn
     width: 100%;
   }
 
+  .spread {
+    margin: 2rem;
+  }
+
+  .spread-thin {
+    margin: 1rem;
+  }
+
   .overlay {
     position: sticky;
 
