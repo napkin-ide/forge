@@ -240,7 +240,10 @@ $nide-theme: mat-light-theme($nide-app-primary, $nide-app-accent, $nide-app-warn
   }
 }
 
-@mixin defaults() {
+@mixin defaults($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
   @include reset();
 
   .mat-spinner {
@@ -249,5 +252,17 @@ $nide-theme: mat-light-theme($nide-app-primary, $nide-app-accent, $nide-app-warn
 
   .mat-full-width {
     width: 100%;
+  }
+
+  .overlay {
+    position: sticky;
+
+    &.top {
+      top: 0;
+    }
+
+    &.bottom {
+      bottom: 0;
+    }
   }
 }
