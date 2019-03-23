@@ -263,7 +263,7 @@ $nide-theme: mat-light-theme($nide-app-primary, $nide-app-accent, $nide-app-warn
   }
 
   .overlay {
-    position: sticky;
+    position: sticky !important;
 
     &.top {
       top: 0;
