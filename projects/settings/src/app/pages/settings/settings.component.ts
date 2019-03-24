@@ -106,7 +106,7 @@ export class SettingsComponent implements OnInit {
   public AddSideBarSection() {
     this.State.Loading = true;
 
-    this.ideSettingsState.AddSideBarSection(this.State.SideBarEditActivity, this.NewSideBarSectionForm.controls.name.value);
+    this.ideSettingsState.AddSideBarSection(this.NewSideBarSectionForm.controls.name.value);
   }
 
   public DeleteActivity(activity: IdeActivity) {
@@ -137,7 +137,7 @@ export class SettingsComponent implements OnInit {
     if (confirm(`Are you sure you want to delete ${section}?`)) {
       this.State.Loading = true;
 
-      this.ideSettingsState.DeleteSideBarSection(this.State.SideBarEditActivity, section);
+      this.ideSettingsState.DeleteSideBarSection(section);
     }
   }
 

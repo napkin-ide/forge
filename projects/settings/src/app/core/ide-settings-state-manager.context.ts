@@ -15,10 +15,9 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
   }
 
   //  API Methods
-  public AddSideBarSection(activityLookup: string, section: string) {
+  public AddSideBarSection(section: string) {
     this.Execute({
       Arguments: {
-        Activity: activityLookup,
         Section: section
       },
       Type: 'add-side-bar-section'
@@ -53,10 +52,9 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
     });
   }
 
-  public DeleteSideBarSection(activityLookup: string, section: string) {
+  public DeleteSideBarSection(section: string) {
     this.Execute({
       Arguments: {
-        Activity: activityLookup,
         Section: section
       },
       Type: 'delete-side-bar-section'
