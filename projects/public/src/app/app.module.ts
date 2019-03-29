@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
+import { ForgePublicStateManagerContext } from './core/forge-public-state-manager.context';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +16,8 @@ import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
     {
       provide: LCUServiceSettings,
       useValue: FathymSharedModule.DefaultServiceSettings(environment)
-    }
+    },
+    ForgePublicStateManagerContext
   ],
   bootstrap: [AppComponent]
 })

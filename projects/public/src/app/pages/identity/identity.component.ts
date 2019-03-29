@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { state, style } from '@angular/animations';
+import { ForgePublicStateManagerContext } from '../../core/forge-public-state-manager.context';
+import { ForgePublicState } from '../../core/forge-public.state';
+import { RegisterModel } from '@lcu-ide/lcu-identity-common';
 
 @Component({
   selector: 'lib-identity',
@@ -11,17 +14,24 @@ export class IdentityComponent implements OnInit {
   //  Fields
 
   //  Properties
-  public State: string;
+  public State: ForgePublicState;
 
   //  Constructors
-  constructor() {
-    this.State = 'SignUp';
-  }
+  constructor(protected state: ForgePublicStateManagerContext) {}
 
   //  Life Cycle
-  ngOnInit() {}
+  ngOnInit() {
+    this.state.Context.subscribe(state => {
+      this.State = state;
+    });
+  }
 
   //  API methods
+  public Register(reg: RegisterModel) {
+    this.State.Loading = true;
+
+    this.state.Register(reg.Username, reg.Password);
+  }
 
   //  Helpers
 }

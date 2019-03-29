@@ -30,7 +30,7 @@
       <div *ngIf="State == 'SignUp'">
         <h1 class="mat-display-3">Sign Up for Fathym</h1>
 
-        <lcu-register></lcu-register>
+        <lcu-register (register)="Register($event)"></lcu-register>
       </div>
     </div>
   </div>
