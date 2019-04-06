@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { state, style } from '@angular/animations';
 import { ForgePublicStateManagerContext } from '../../core/forge-public-state-manager.context';
-import { ForgePublicState } from '../../core/forge-public.state';
+import { ForgePublicState, ForgePublicStepTypes } from '../../core/forge-public.state';
 import { RegisterModel } from '@lcu-ide/lcu-identity-common';
 
 @Component({
@@ -15,6 +15,8 @@ export class IdentityComponent implements OnInit {
 
   //  Properties
   public State: ForgePublicState;
+
+  public StepTypes = ForgePublicStepTypes;
 
   //  Constructors
   constructor(protected state: ForgePublicStateManagerContext) {}
