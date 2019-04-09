@@ -16,6 +16,8 @@ export class IdentityComponent implements OnInit {
   //  Properties
   public State: ForgePublicState;
 
+  public StepTypes = ForgePublicStepTypes;
+
   //  Constructors
   constructor(protected state: ForgePublicStateManagerContext) {}
 

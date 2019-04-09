@@ -33,6 +33,8 @@ export class ActivityBarComponent implements OnInit {
 
       this.SettingsPath = ideState.SettingsPath;
 
+      console.log(ideState);
+
       // this.ideState.AddStatusChange('Activities Loaded...');
     });
   }
