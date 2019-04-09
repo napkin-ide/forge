@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { state, style } from '@angular/animations';
 import { ForgePublicStateManagerContext } from '../../core/forge-public-state-manager.context';
-import { ForgePublicState } from '../../core/forge-public.state';
+import { ForgePublicState, ForgePublicStepTypes } from '../../core/forge-public.state';
 import { RegisterModel } from '@lcu-ide/lcu-identity-common';
 
 @Component({
@@ -31,6 +31,12 @@ export class IdentityComponent implements OnInit {
     this.State.Loading = true;
 
     this.state.Register(reg.Username, reg.Password);
+  }
+
+  public SetStep(stepType: ForgePublicStepTypes) {
+    this.State.Loading = true;
+
+    this.state.SetStep(stepType);
   }
 
   //  Helpers
