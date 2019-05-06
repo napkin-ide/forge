@@ -39,5 +39,11 @@ export class IdentityComponent implements OnInit {
     //  TODO: Integrate with oidc client of some sort
   }
 
+  public SetStep(stepType: ForgePublicStepTypes) {
+    this.State.Loading = true;
+
+    this.state.SetStep(stepType);
+  }
+
   //  Helpers
 }

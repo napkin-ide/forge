@@ -24,6 +24,15 @@ export class ForgePublicStateManagerContext extends StateManagerContext<ForgePub
     });
   }
 
+  public SetStep(stepType: ForgePublicStepTypes) {
+    this.Execute({
+      Arguments: {
+        StepType: stepType
+      },
+      Type: 'set-step'
+    });
+  }
+
   //  Helpers
   protected defaultValue() {
     return <ForgePublicState>{ Loading: true, Step: ForgePublicStepTypes.SignIn };
