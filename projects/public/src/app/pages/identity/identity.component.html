@@ -24,7 +24,7 @@
       <div *ngIf="State.Step == StepTypes.SignIn">
         <h1 class="mat-display-3">Sign In to Fathym</h1>
 
-        <lcu-sign-in></lcu-sign-in>
+        <lcu-sign-in (sign-in)="SignIn($event)"></lcu-sign-in>
       </div>
 
       <div *ngIf="State.Step == StepTypes.Register">

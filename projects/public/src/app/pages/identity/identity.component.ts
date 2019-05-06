@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { state, style } from '@angular/animations';
 import { ForgePublicStateManagerContext } from '../../core/forge-public-state-manager.context';
 import { ForgePublicState, ForgePublicStepTypes } from '../../core/forge-public.state';
-import { RegisterModel } from '@lcu-ide/lcu-identity-common';
+import { RegisterModel, SignInModel } from '@lcu-ide/lcu-identity-common';
 
 @Component({
   selector: 'lib-identity',
@@ -33,6 +33,10 @@ export class IdentityComponent implements OnInit {
     this.State.Loading = true;
 
     this.state.Register(reg.Username, reg.Password);
+  }
+
+  public SignIn(signIn: SignInModel) {
+    //  TODO: Integrate with oidc client of some sort
   }
 
   //  Helpers
