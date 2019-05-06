@@ -54,6 +54,7 @@
 		"@lowcodeunit/lazy-element": "0.0.8",
 		"core-js": "^2.5.4",
 		"dot-object": "^1.7.1",
+		"google-libphonenumber": "^3.2.2",
 		"hammerjs": "^2.0.8",
 		"rxjs": "~6.4.0",
 		"tslib": "^1.9.0",
