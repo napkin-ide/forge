@@ -47,9 +47,9 @@
 		"@angular/platform-browser": "~7.2.7",
 		"@angular/platform-browser-dynamic": "~7.2.7",
 		"@angular/router": "~7.2.7",
-		"@aspnet/signalr": "^1.1.2",
-		"@lcu-ide/common": "^0.1.109-form-validations",
-		"@lcu-ide/lcu-identity-common": "^0.1.14-register-sign-in",
+		"@aspnet/signalr": "^1.1.4",
+		"@lcu-ide/common": "^0.1.115-form-validations",
+		"@lcu-ide/lcu-identity-common": "^0.1.44-register-sign-in",
 		"@lowcodeunit-devkit/ng-lcu": "0.0.167",
 		"@lowcodeunit/lazy-element": "0.0.8",
 		"core-js": "^2.5.4",
@@ -83,7 +83,6 @@
 		"protractor": "~5.4.0",
 		"ts-node": "~7.0.0",
 		"tsickle": ">=0.34.0",
-		"tslib": "^1.9.0",
 		"tslint": "~5.11.0",
 		"typescript": "~3.2.2"
 	}
