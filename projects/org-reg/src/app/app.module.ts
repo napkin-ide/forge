@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+//import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +11,7 @@ import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [FathymSharedModule.forRoot(), BrowserModule, HttpClientModule, AppRoutingModule, BrowserAnimationsModule],
+  imports: [FathymSharedModule.forRoot(), BrowserAnimationsModule, HttpClientModule, AppRoutingModule],
   providers: [
     OrgRegStateManagerContext,
     {
