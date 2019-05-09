@@ -43,6 +43,6 @@ export class ForgePublicStateManagerContext extends StateManagerContext<ForgePub
   }
 
   protected loadStateName() {
-    return 'lcu-identity';
+    return 'forge-public';
   }
 }
