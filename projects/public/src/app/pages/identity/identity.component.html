@@ -1,4 +1,6 @@
-<div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
+{{State|json}}
+
+<div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity" *ngIf="State">
   <div fxFlex="30%" fxFlex.lt-sm="100%" fxFlexOrder.lt-sm="1" class="details">
     <div class="inner">
       <div *ngIf="State.Step === StepTypes['Register']">

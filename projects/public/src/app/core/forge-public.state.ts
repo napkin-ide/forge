@@ -5,7 +5,7 @@ export class ForgePublicState {
 }
 
 export enum ForgePublicStepTypes {
-  SignIn,
-  Register,
-  ForgotPassword
+  SignIn = 'SignIn',
+  Register = 'Register',
+  ForgotPassword = 'ForgotPassword'
 }
