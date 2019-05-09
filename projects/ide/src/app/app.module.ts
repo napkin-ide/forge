@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -22,7 +22,6 @@ import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
   declarations: [AppComponent],
   imports: [
     FathymSharedModule.forRoot(),
-    BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     FlexLayoutModule,

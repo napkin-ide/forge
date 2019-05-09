@@ -41,7 +41,7 @@ export class IdentityComponent implements OnInit {
 
   public SetStep(stepType: ForgePublicStepTypes) {
     this.State.Loading = true;
-
+    
     this.state.SetStep(stepType);
   }
 
