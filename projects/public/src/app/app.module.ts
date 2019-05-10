@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,7 +11,7 @@ import { ForgePublicStateManagerContext } from './core/forge-public-state-manage
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [FathymSharedModule.forRoot(), BrowserModule, BrowserAnimationsModule, HttpClientModule, AppRoutingModule],
+  imports: [FathymSharedModule.forRoot(), BrowserAnimationsModule, HttpClientModule, AppRoutingModule],
   providers: [
     {
       provide: LCUServiceSettings,
