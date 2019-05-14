@@ -14,4 +14,6 @@ export class OrgRegState {
   public Provisioning?: string;
 
   public Step: 'New' | 'Host' | 'Provisioning';
+
+  public Subdomain: string;
 }
