@@ -14,15 +14,22 @@ export class IdentityComponent implements OnInit {
   //  Fields
 
   //  Properties
+  public ReconnectionMessage: string;
+
   public State: ForgePublicState;
 
   public StepTypes = ForgePublicStepTypes;
 
   //  Constructors
-  constructor(protected state: ForgePublicStateManagerContext) {}
+  constructor(protected state: ForgePublicStateManagerContext) { }
 
   //  Life Cycle
   ngOnInit() {
+
+    this.state.ReconnectionAttempt.subscribe((val: boolean) => {
+      this.connectionError(val);
+    });
+
     this.state.Context.subscribe(state => {
       this.State = state;
     });
@@ -46,4 +53,8 @@ export class IdentityComponent implements OnInit {
   }
 
   //  Helpers
+  protected connectionError(val: boolean): void {
+    const connectMessage: string = 'Connection attempt, ';
+    this.ReconnectionMessage = (val) ? connectMessage + 'reconnecting' : connectMessage + 'disconnected';
+  }
 }
