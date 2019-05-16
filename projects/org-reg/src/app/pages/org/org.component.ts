@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { OrgRegState } from '../../core/org-reg.state';
 import { OrgRegStateManagerContext } from '../../core/org-reg-state-manager.context';
@@ -17,7 +17,13 @@ export class OrgComponent implements OnInit {
 
   public NewForm: FormGroup;
 
+  public HostValid: boolean;
+
   public State: OrgRegState;
+
+  public StateLoading: boolean;
+
+  public Subdomain: string;
 
   //  Constructors
   constructor(protected formBldr: FormBuilder, protected orgRegState: OrgRegStateManagerContext) {
@@ -30,6 +36,8 @@ export class OrgComponent implements OnInit {
       name: ['', Validators.required],
       desc: ['', Validators.required]
     });
+
+    this.HostValid = false;
   }
 
   //  Life Cycle
@@ -38,6 +46,26 @@ export class OrgComponent implements OnInit {
       this.State = state;
     });
   }
+
+  public onChanges() {
+    this.HostValid = false;
+
+    if (!this.StateLoading)
+      this.State.HostApprovalMessage = '';
+    
+    var host = this.HostForm.controls['host'].value;
+
+    if (this.State.HostFlow == 'private' && host && host.split('.').length >= 3) {
+      this.HostValid = true;
+      this.Subdomain = host.split('.')[0];
+    }
+    else if (this.State.HostFlow == 'shared' && host && host.length > 0) {
+      this.HostValid = true;
+    }
+
+    this.StateLoading = false;
+  }
+  
 
   //  API methods
   public CreateOrg() {
@@ -48,8 +76,9 @@ export class OrgComponent implements OnInit {
 
   public SecureHost() {
     this.State.Loading = true;
+    this.StateLoading = true;
 
-    if (this.State.HostFlow === 'private') {
+    if (this.State.HostFlow === 'private') {      
       this.orgRegState.SecureHost(this.HostForm.controls['host'].value);
     } else if (this.State.HostFlow === 'shared') {
       this.orgRegState.SecureHost(`${this.HostForm.controls['host'].value}.${this.HostForm.controls['root'].value}`);
@@ -57,6 +86,8 @@ export class OrgComponent implements OnInit {
   }
 
   public SetHostFlow(flow: string) {
+    this.HostForm.reset();
+
     this.State.Loading = true;
 
     this.orgRegState.SetHostFlow(flow);
