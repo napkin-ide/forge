@@ -8,11 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { IdeSettingsStateManagerContext } from './core/ide-settings-state-manager.context';
 import { environment } from '../environments/environment';
 import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [FathymSharedModule.forRoot(), HttpClientModule, AppRoutingModule, BrowserAnimationsModule, CommonModule],
+  imports: [FathymSharedModule.forRoot(), HttpClientModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [
     IdeSettingsStateManagerContext,
     {
