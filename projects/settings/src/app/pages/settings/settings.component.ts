@@ -27,6 +27,9 @@ export class SettingsComponent implements OnInit {
     return Object.keys(this.State.LCUSolutionOptions);
   }
 
+  public get MainLoading(): boolean {
+    return this.State.Loading && (!this.State.Arch || !this.State.Arch.LCUs || this.State.Arch.LCUs.length === 0);
+  }
 
   public NewActivityForm: FormGroup;
 
@@ -230,10 +233,6 @@ export class SettingsComponent implements OnInit {
 
       this.ideSettingsState.SaveLCU({ ...lcu, PackageVersion: 'latest' });
     }
-  }
-
-  public MainLoading(): boolean {
-    return this.State.Loading && (!this.State.Arch || !this.State.Arch.LCUs || this.State.Arch.LCUs.length === 0);
   }
 
   //  Helpers
