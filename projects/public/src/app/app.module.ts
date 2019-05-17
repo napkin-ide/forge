@@ -1,38 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IdentityOptions } from '@lcu/identity';
 import { HttpClientModule } from '@angular/common/http';
+import { environment } from '../environments/environment';
+import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
+import { ForgePublicStateManagerContext } from './core/forge-public-state-manager.context';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule
-  ],
+  declarations: [AppComponent],
+  imports: [FathymSharedModule.forRoot(), BrowserAnimationsModule, HttpClientModule, AppRoutingModule],
   providers: [
     {
-      provide: IdentityOptions,
-      useValue: <IdentityOptions>{
-        ConfirmPasswordRecoveryURL: `/daf-identity/recover/confirm`,
-        IsAuthenticatedURL: `/daf-identity/authenticated`,
-        IsRegisteredPasswordQueryParamName: `password`,
-        IsRegisteredUserQueryParamName: `email`,
-        IsRegisteredURL: `/daf-identity/registered`,
-        RecoverPasswordURL: `/daf-identity/recover/init`,
-        RegisterURL: `/daf-identity/register`,
-        SignInURL: `/daf-identity/signin`,
-        SignOutURL: `/daf-identity/signout`
-      }
+      provide: LCUServiceSettings,
+      useValue: FathymSharedModule.DefaultServiceSettings(environment)
     },
+    ForgePublicStateManagerContext
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

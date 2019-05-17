@@ -10,8 +10,11 @@
 // export * from './lib/controls/side-bar/side-bar.component';
 // export * from './lib/controls/status-bar/status-bar.module';
 // export * from './lib/controls/status-bar/status-bar.component';
+export * from './lib/controls/external-dialog/external-dialog.component';
+export * from './lib/controls/external-dialog/external-dialog.module';
 export * from './lib/core/ide/activity';
 export * from './lib/core/ide/editor';
+export * from './lib/core/ide/ide-state-state-manager.context';
 export * from './lib/core/ide/panel';
 export * from './lib/core/ide/side-bar';
 export * from './lib/core/ide/state';

@@ -1,6 +1,6 @@
-import { Injectable, Injector } from "@angular/core";
-import { DAFService } from '@lcu/api';
-import { IdeActivity, IdeStateChange, IdeState, IdeStateChangeTypes, IdeSideBarSection } from '@napkin-ide/common';
+import { Injectable, Injector } from '@angular/core';
+import { DAFService } from '@lcu-ide/common';
+import { IdeActivity, IdeStateChange, IdeState, IdeStateChangeTypes } from '@napkin-ide/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -19,60 +19,66 @@ export class IdeStateService extends DAFService {
   constructor(injector: Injector) {
     super(injector);
 
-    this.state = {
-      Activities: [{
-        Icon: 'cloud',
-        IconSet: null,
-        Title: 'Infrastructure'
-      }],
-      CurrentActivity: null,
-      CurrentEditor: null,
-      CurrentPanel: null,
-      Editors: [{
-        Title: 'Solutions - Applications (Overview)',
-        Editor: '',
-        Toolkit: ''
-      }, {
-        Title: 'Solutions - Flux (Documentation)',
-        Editor: '',
-        Toolkit: ''
-      }],
-      Panels: [{
-        Title: 'Output',
-        Editor: '',
-        Toolkit: ''
-      }, {
-        Title: 'Flux Modules',
-        Editor: '',
-        Toolkit: ''
-      }],
-      SideBar: {
-        Sections: [{
-          Actions: [{
-            Action: '',
-            Group: '',
-            Title: 'Applications'
-          }, {
-            Action: '',
-            Group: '',
-            Title: 'Package Sources'
-          }],
-          FindNewText: 'Find More Solutions',
-          Title: 'Solutions'
-        },
-        {
-          Actions: [{
-            Action: '',
-            Group: '',
-            Title: 'Service & Maintenance'
-          }],
-          FindNewText: 'Find New Partners',
-          Title: 'Partners'
-        }],
-        Title: 'Infrastructure'
-      },
-      StatusChanges: []
-    };
+    // this.state = <IdeState>{
+    //   Loading: false,
+    //   Activities: [{
+    //     Icon: 'cloud',
+    //     IconSet: null,
+    //     Lookup: 'lcu-infrastructure',
+    //     Title: 'Infrastructure'
+    //   }],
+    //   CurrentActivity: null,
+    //   CurrentEditor: null,
+    //   CurrentPanel: null,
+    //   Editors: [{
+    //     Title: 'Solutions - Applications (Overview)',
+    //     Editor: '',
+    //     Lookup: 'lcu-infrastructure',
+    //     Toolkit: ''
+    //   }, {
+    //     Title: 'Solutions - Flux (Documentation)',
+    //     Editor: '',
+    //     Lookup: 'lcu-infrastructure',
+    //     Toolkit: ''
+    //   }],
+    //   Panels: [{
+    //     Title: 'Output',
+    //     Editor: '',
+    //     Lookup: 'lcu-infrastructure',
+    //     Toolkit: ''
+    //   }, {
+    //     Title: 'Flux Modules',
+    //     Lookup: 'lcu-infrastructure',
+    //     Editor: '',
+    //     Toolkit: ''
+    //   }],
+    // SideBar: {
+    //   Sections: [{
+    //     Actions: [{
+    //       Action: '',
+    //       Group: '',
+    //       Title: 'Applications'
+    //     }, {
+    //       Action: '',
+    //       Group: '',
+    //       Title: 'Package Sources'
+    //     }],
+    //     FindNewText: 'Find More Solutions',
+    //     Title: 'Solutions'
+    //   },
+    //   {
+    //     Actions: [{
+    //       Action: '',
+    //       Group: '',
+    //       Title: 'Service & Maintenance'
+    //     }],
+    //     FindNewText: 'Find New Partners',
+    //     Title: 'Partners'
+    //   }],
+    //   Title: 'Infrastructure'
+    //},
+    // StatusChanges: []
+    // };
 
     this.stateChange = new BehaviorSubject<IdeStateChange>({
       Types: [IdeStateChangeTypes.Reset],

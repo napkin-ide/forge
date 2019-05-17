@@ -1,11 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+// import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IdentityOptions } from '@lcu/identity';
-import { HttpClientModule } from '@angular/common/http';
+// import { IdentityOptions } from '@lcu/identity';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSidenavModule, MatGridListModule } from '@angular/material';
 import { ActivityBarModule } from './controls/activity-bar/activity-bar.module';
 import { EditorsModule } from './controls/editors/editors.module';
@@ -14,16 +13,18 @@ import { PanelsModule } from './controls/panels/panels.module';
 import { SideBarModule } from './controls/side-bar/side-bar.module';
 import { StatusBarModule } from './controls/status-bar/status-bar.module';
 import { IdeStateService } from './svc/ide-state.service';
+import { IdeStateStateManagerContext } from '@napkin-ide/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { environment } from '../environments/environment';
+import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    FathymSharedModule.forRoot(),
     HttpClientModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     ActivityBarModule,
     EditorsModule,
     IdeBarModule,
@@ -31,25 +32,16 @@ import { IdeStateService } from './svc/ide-state.service';
     SideBarModule,
     StatusBarModule,
     MatGridListModule,
-    MatSidenavModule,
+    MatSidenavModule
   ],
   providers: [
+    IdeStateService,
+    IdeStateStateManagerContext,
     {
-      provide: IdentityOptions,
-      useValue: <IdentityOptions>{
-        ConfirmPasswordRecoveryURL: `/daf-identity/recover/confirm`,
-        IsAuthenticatedURL: `/daf-identity/authenticated`,
-        IsRegisteredPasswordQueryParamName: `password`,
-        IsRegisteredUserQueryParamName: `email`,
-        IsRegisteredURL: `/daf-identity/registered`,
-        RecoverPasswordURL: `/daf-identity/recover/init`,
-        RegisterURL: `/daf-identity/register`,
-        SignInURL: `/daf-identity/signin`,
-        SignOutURL: `/daf-identity/signout`
-      }
-    },
-    IdeStateService
+      provide: LCUServiceSettings,
+      useValue: FathymSharedModule.DefaultServiceSettings(environment)
+    }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

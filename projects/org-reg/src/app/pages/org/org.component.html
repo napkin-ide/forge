@@ -33,11 +33,9 @@
             www.my-domain.com
           </h2>
 
-          <h2 class="mat-headline">
-            Then you will need to deploy the following file to the root of your domain and confirm the host.
+          <h2 *ngIf="HostValid" class="mat-headline">
+            Then you will need to add a CNAME record for your domain provider.  The record should have '{{ Subdomain }}' point to 'lcu-prd.azurewebsites.net'
           </h2>
-
-          <a mat-stroked-button color="accent">Download Validation File</a>
         </ng-container>
       </div>
 
@@ -114,7 +112,7 @@
 
               <ng-container *ngIf="HostForm.controls['root'].value || State.HostFlow == 'private'">
                 <mat-form-field class="mat-full-width">
-                  <input matInput placeholder="Host Address" formControlName="host" required />
+                  <input matInput placeholder="Host Address" [(ngModel)]='name' (ngModelChange)="onChanges()" formControlName="host" required />
 
                   <span matSuffix *ngIf="State.HostFlow == 'shared'">.{{ HostForm.controls['root'].value }}</span>
                 </mat-form-field>
@@ -123,7 +121,7 @@
                   <h2>{{ State.HostApprovalMessage }}</h2>
                 </div>
 
-                <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!HostForm.valid">
+                <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!HostForm.valid || !HostValid">
                   Setup Host
                 </button>
               </ng-container>
@@ -137,7 +135,7 @@
           <div *ngIf="State.Step == 'Provisioning'">
             <h1 class="mat-display-3">Creating Your {{ State.OrganizationName }} Forge</h1>
 
-            <h2 class="mat-headline">{{ State.Host }}</h2>
+            <a mat-button [href]="'http://' + State.Host" class="mat-headline">{{ State.Host }}</a>
           </div>
         </div>
 

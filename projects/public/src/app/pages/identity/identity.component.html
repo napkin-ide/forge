@@ -1,37 +1,39 @@
-<div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity">
+<div fxLayout="row wrap" fxLayoutAlign="center stretch" class="identity" *ngIf="State">
   <div fxFlex="30%" fxFlex.lt-sm="100%" fxFlexOrder.lt-sm="1" class="details">
     <div class="inner">
-      <div *ngIf="State == 'SignUp'">
+      <div *ngIf="State.Step === StepTypes['Register']">
         <h1 class="mat-display-3">Welcome Back</h1>
 
         <h2 class="mat-headline">Manage your Data Applications, use the link below to sign in with your personal information.</h2>
 
-        <a mat-stroked-button color="accent" class="mat-button-lg" (click)="State = 'SignIn'">Sign In</a>
+        <a mat-stroked-button color="accent" class="mat-button-lg" (click)="SetStep('SignIn')">Sign In</a>
       </div>
 
-      <div *ngIf="State == 'SignIn'">
+      <div *ngIf="State.Step === StepTypes['SignIn']">
         <h1 class="mat-display-3">Sign Up to Fathym</h1>
 
         <h2 class="mat-headline">Use your personal information to sign up.</h2>
 
-        <a mat-stroked-button color="accent" class="mat-button-lg" (click)="State = 'SignUp'">Sign Up</a>
+        <a mat-stroked-button color="accent" class="mat-button-lg" (click)="SetStep('Register')">Sign Up</a>
       </div>
     </div>
   </div>
 
   <div fxFlex="70%" fxFlex.lt-sm="100%" fxFlexOrder.lt-sm="0" class="content">
-    <div class="inner">
-      <div *ngIf="State == 'SignIn'">
+    <div class="inner" fxLayout="column">
+      <div *ngIf="State.Step === StepTypes['SignIn']">
         <h1 class="mat-display-3">Sign In to Fathym</h1>
 
-        <f-sign-in></f-sign-in>
+        <lcu-sign-in (sign-in)="SignIn($event)"></lcu-sign-in>
       </div>
 
-      <div *ngIf="State == 'SignUp'">
+      <div *ngIf="State.Step === StepTypes['Register']">
         <h1 class="mat-display-3">Sign Up for Fathym</h1>
 
-        <f-register></f-register>
+        <lcu-register loading="{{State.Loading}}" (register)="Register($event)"></lcu-register>
       </div>
+      
+      <p class="mat-title" color="primary">{{ ReconnectionMessage }}</p>
     </div>
   </div>
 </div>

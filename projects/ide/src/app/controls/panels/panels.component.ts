@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IdePanel, IdeStateChangeTypes } from '@napkin-ide/common';
+import { IdePanel, IdeStateChangeTypes, IdeStateStateManagerContext } from '@napkin-ide/common';
 import { IdeStateService } from '../../svc/ide-state.service';
 import { filter } from 'rxjs/operators';
 
@@ -12,24 +12,34 @@ export class PanelsComponent implements OnInit {
   // Properties
   public CurrentPanel: IdePanel;
 
+  public Loading: boolean;
+
   public Panels: IdePanel[];
 
+  public ShowPanels: boolean;
+
   //  Constructors
-  constructor(protected ideStateSvc: IdeStateService) {
-  }
+  constructor(protected ideState: IdeStateStateManagerContext) {}
 
   //  Life Cycle
   public ngOnInit() {
-    this.ideStateSvc.StateChange.pipe(
-      filter(sc => sc.Types.some(t => t === IdeStateChangeTypes.Panel ||  t === IdeStateChangeTypes.Reset))
-    ).subscribe((stateChange) => {
-      this.Panels = stateChange.State.Panels;
+    this.ideState.Context.subscribe(ideState => {
+      this.Panels = ideState.Panels;
 
-      this.CurrentPanel = stateChange.State.CurrentPanel;
+      this.CurrentPanel = ideState.CurrentPanel;
 
-      this.ideStateSvc.AddStatusChange('Editors Loaded...');
+      this.ShowPanels = ideState.ShowPanels;
+
+      this.Loading = ideState.Loading;
+
+      // this.ideState.AddStatusChange('Editors Loaded...');
     });
   }
 
   //  API Methods
+  public ToggleShowPanels() {
+    this.Loading = true;
+
+    this.ideState.ToggleShowPanels();
+  }
 }

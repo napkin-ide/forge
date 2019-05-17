@@ -1,26 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
+//import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IdentityOptions } from '@lcu/identity';
 import { HttpClientModule } from '@angular/common/http';
 import { OrgRegStateManagerContext } from './core/org-reg-state-manager.context';
+import { environment } from '../environments/environment';
+import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule
-  ],
+  declarations: [AppComponent],
+  imports: [FathymSharedModule.forRoot(), BrowserAnimationsModule, HttpClientModule, AppRoutingModule],
   providers: [
-    OrgRegStateManagerContext
+    OrgRegStateManagerContext,
+    {
+      provide: LCUServiceSettings,
+      useValue: FathymSharedModule.DefaultServiceSettings(environment)
+    }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

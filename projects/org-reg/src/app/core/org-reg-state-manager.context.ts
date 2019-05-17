@@ -1,6 +1,6 @@
 import { OrgRegState } from './org-reg.state';
 import { StateManagerContext } from '@lcu-ide/common';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,8 @@ export class OrgRegStateManagerContext extends StateManagerContext<OrgRegState> 
   //  Properties
 
   //  Constructors
-  constructor() {
-    super();
+  constructor(protected injector: Injector) {
+    super(injector);
   }
 
   //  API Methods
@@ -47,14 +47,8 @@ export class OrgRegStateManagerContext extends StateManagerContext<OrgRegState> 
     return <OrgRegState>{ Loading: true };
   }
 
-  protected loadHubUrl() {
-    // return '/state';
-    // return 'http://www.lowcodeunit.com/state';
-    return 'http://localhost:52235/state';
-  }
-
   protected loadStateKey() {
-    return 'test';
+    return 'init';
   }
 
   protected loadStateName() {

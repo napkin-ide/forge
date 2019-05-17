@@ -1,4 +1,4 @@
-@import "../../common/src/styles/theme";
+@import '../../common/src/styles/theme';
 
 @include mat-core();
 
@@ -11,7 +11,7 @@
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
-  @include defaults();
+  @include defaults($theme);
 
   html,
   body {
@@ -21,7 +21,7 @@
 
   body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
   }
 
   @include napkin-ide-page($nide-theme);
@@ -78,6 +78,10 @@
       width: calc(100% + 3px);
       overflow: auto;
       overflow-x: hidden;
+
+      &.activities {
+        height: calc(100% - 60px);
+      }
     }
 
     .ide-container {
@@ -94,6 +98,11 @@
         .activity-action {
           margin: 0 auto;
           display: block;
+
+          &.settings {
+            position: absolute;
+            bottom: 0;
+          }
 
           &.mat-icon-button {
             width: 60px;
@@ -119,6 +128,20 @@
         }
       }
 
+      .side-bar {
+        width: 60px;
+        background-color: mat-color($primary, 500);
+
+        .side-bar-action {
+          margin: 0 auto;
+          display: block;
+
+          &.active {
+            background-color: transparentize($color: mat-color($primary, 300), $amount: 0.6);
+          }
+        }
+      }
+
       .ide-content {
         height: 100%;
 
@@ -130,10 +153,25 @@
         .ide-editors {
           border-bottom: solid 1px rgba(255, 255, 255, 0.12);
           background-color: mat-color($primary, 800);
+
+          .overlay {
+            background-color: mat-color($primary, 800);
+          }
         }
 
         .ide-panels {
           background-color: mat-color($primary, 700);
+        }
+
+        .hide-panels {
+          .ide-editors {
+            height: calc(100% - 49px) !important;
+          }
+
+          .ide-panels {
+            top: calc(100% - 49px) !important;
+            height: 49px !important;
+          }
         }
       }
     }

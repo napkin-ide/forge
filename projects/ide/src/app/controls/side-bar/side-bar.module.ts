@@ -1,12 +1,19 @@
-import { MatExpansionModule, MatGridListModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule, MatIconModule } from '@angular/material';
+import {
+  MatExpansionModule,
+  MatGridListModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatListModule,
+  MatIconModule,
+  MatProgressBarModule
+} from '@angular/material';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SideBarComponent } from './side-bar.component';
 
 @NgModule({
-  declarations: [
-    SideBarComponent
-  ],
+  declarations: [SideBarComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -16,9 +23,8 @@ import { SideBarComponent } from './side-bar.component';
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatProgressBarModule,
   ],
-  exports: [
-    SideBarComponent
-  ]
+  exports: [SideBarComponent]
 })
-export class SideBarModule { }
+export class SideBarModule {}

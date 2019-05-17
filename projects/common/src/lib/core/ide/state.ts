@@ -1,5 +1,5 @@
 import { IdeActivity } from './activity';
-import { IdeSideBar, IdeSideBarSection } from './side-bar';
+import { IdeSideBar } from './side-bar';
 import { IdeEditor } from './editor';
 import { IdePanel } from './panel';
 
@@ -14,7 +14,13 @@ export class IdeState {
 
   public Editors: IdeEditor[];
 
+  public Loading: boolean;
+
   public Panels: IdePanel[];
+
+  public SettingsPath: string;
+
+  public ShowPanels: boolean;
 
   public SideBar: IdeSideBar;
 

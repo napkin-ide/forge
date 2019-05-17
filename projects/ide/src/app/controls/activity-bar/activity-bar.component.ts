@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
-import { IdeStateService } from '../../svc/ide-state.service';
-import { IdeActivity, IdeStateChangeTypes } from '@napkin-ide/common';
+import { IdeActivity, ExternalDialogComponent, IdeStateStateManagerContext } from '@napkin-ide/common';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'nide-activity-bar',
@@ -14,25 +14,48 @@ export class ActivityBarComponent implements OnInit {
 
   public CurrentActivity: IdeActivity;
 
+  public Loading: boolean;
+
+  public SettingsPath: string;
+
   //  Constructors
-  constructor(protected ideStateSvc: IdeStateService) {
+  constructor(protected ideState: IdeStateStateManagerContext, protected dialog: MatDialog) {
   }
 
   //  Life Cycle
   public ngOnInit() {
-    this.ideStateSvc.StateChange.pipe(
-      filter(sc => sc.Types.some(t => t === IdeStateChangeTypes.Activity ||  t === IdeStateChangeTypes.Reset))
-    ).subscribe((stateChange) => {
-      this.Activities = stateChange.State.Activities;
+    this.ideState.Context.subscribe((ideState) => {
+      this.Activities = ideState.Activities;
 
-      this.CurrentActivity = stateChange.State.CurrentActivity;
+      this.CurrentActivity = ideState.CurrentActivity;
 
-      this.ideStateSvc.AddStatusChange('Activities Loaded...');
+      this.Loading = ideState.Loading;
+
+      this.SettingsPath = ideState.SettingsPath;
+
+      console.log(ideState);
+
+      // this.ideState.AddStatusChange('Activities Loaded...');
     });
   }
 
   //  API Methods
+  public OpenSettings(): void {
+    const dialogRef = this.dialog.open(ExternalDialogComponent, {
+      width: '90%',
+      data: { ExternalPath: this.SettingsPath }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.Loading = true;
+
+      this.ideState.$Refresh();
+    });
+  }
+
   public SelectActivity(activity: IdeActivity) {
-    this.ideStateSvc.SetCurrentActivity(activity);
+    this.Loading = true;
+
+    this.ideState.SetActivity(activity.Lookup);
   }
 }
