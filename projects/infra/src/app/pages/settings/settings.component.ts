@@ -20,6 +20,8 @@ export class SettingsComponent implements OnInit {
   //  Constructors
   constructor(protected formBldr: FormBuilder, protected infraState: InfrastructureStateManagerContext) {}
 
+  public MainLoading: boolean = false;
+
   //  Life Cycle
   public ngOnInit() {
   }
