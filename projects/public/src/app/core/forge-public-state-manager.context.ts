@@ -1,6 +1,7 @@
+import { state } from '@angular/animations';
 import { ForgePublicState, ForgePublicStepTypes } from './forge-public.state';
 import { StateManagerContext } from '@lcu-ide/common';
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, Output, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,7 @@ export class ForgePublicStateManagerContext extends StateManagerContext<ForgePub
 
   //  Helpers
   protected defaultValue() {
-    return <ForgePublicState>{ Loading: true, Step: ForgePublicStepTypes.SignIn };
+    return <ForgePublicState>{ Loading: true, Step: ForgePublicStepTypes.SignIn};
   }
 
   protected loadStateKey() {

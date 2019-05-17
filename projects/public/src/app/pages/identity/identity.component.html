@@ -20,7 +20,7 @@
   </div>
 
   <div fxFlex="70%" fxFlex.lt-sm="100%" fxFlexOrder.lt-sm="0" class="content">
-    <div class="inner">
+    <div class="inner" fxLayout="column">
       <div *ngIf="State.Step === StepTypes['SignIn']">
         <h1 class="mat-display-3">Sign In to Fathym</h1>
 
@@ -32,6 +32,8 @@
 
         <lcu-register error="{{State.Error}}" loading="{{State.Loading}}" (register)="Register($event)"></lcu-register>
       </div>
+      
+      <p class="mat-title" color="primary">{{ ReconnectionMessage }}</p>
     </div>
   </div>
 </div>
