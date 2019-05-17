@@ -21,7 +21,7 @@
 		"deploy:settings": "npm publish ./dist/settings --access public",
 		"git:clean": "git add . && git commit -a -m \"Changes during manual deploy\"",
 		"versions": "npm version patch && npm run version:all",
-		"version:all": "concurrently \"npm:version:common\" \"npm:version:public\" \"npm:version:ide\" \"npm:version:settings\" \"npm:version:org-reg\"",
+		"version:all": "concurrently \"npm:version:common\" \"npm:version:public\" \"npm:version:ide\" \"npm:version:settings\" \"npm:version:infra\" \"npm:version:org-reg\"",
 		"version:common": "npm version patch --prefix projects/common",
 		"version:ide": "npm version patch --prefix projects/ide",
 		"version:public": "npm version patch --prefix projects/public",
