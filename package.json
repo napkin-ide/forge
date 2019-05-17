@@ -1,6 +1,6 @@
 {
 	"name": "@napkin-ide/forge",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"scripts": {
 		"build": "npm run build:all",
 		"build:all": "npm run build:common && concurrently \"npm:build:public\" \"npm:build:ide\" \"npm:build:infra\" \"npm:build:org-reg\" \"npm:build:settings\"",
@@ -26,6 +26,7 @@
 		"version:ide": "npm version patch --prefix projects/ide",
 		"version:public": "npm version patch --prefix projects/public",
 		"version:settings": "npm version patch --prefix projects/settings",
+		"version:infra": "npm version patch --prefix projects/infra",
 		"version:org-reg": "npm version patch --prefix projects/org-reg",
 		"ng": "ng",
 		"start": "ng serve",
