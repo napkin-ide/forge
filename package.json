@@ -26,6 +26,7 @@
 		"version:ide": "npm version patch --prefix projects/ide",
 		"version:public": "npm version patch --prefix projects/public",
 		"version:settings": "npm version patch --prefix projects/settings",
+		"version:infra": "npm version patch --prefix projects/infra",
 		"version:org-reg": "npm version patch --prefix projects/org-reg",
 		"ng": "ng",
 		"start": "ng serve",
