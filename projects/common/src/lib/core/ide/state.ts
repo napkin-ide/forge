@@ -14,11 +14,13 @@ export class IdeState {
 
   public Editors: IdeEditor[];
 
+  public InfrastructureConfigured: boolean;
+
   public Loading: boolean;
 
   public Panels: IdePanel[];
 
-  public SettingsPath: string;
+  public RootActivities: IdeActivity[];
 
   public ShowPanels: boolean;
 

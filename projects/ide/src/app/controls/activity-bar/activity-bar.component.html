@@ -1,6 +1,6 @@
 <mat-grid-list class="fit-grid grid-start" cols="1" rowHeight="fit">
   <mat-grid-tile>
-    <div class="overflowed activities">
+    <div class="overflowed activities" *ngIf="InfraConfigured">
       <mat-progress-bar mode="indeterminate" *ngIf="Loading"></mat-progress-bar>
 
       <ng-container *ngFor="let activity of Activities">
@@ -19,8 +19,18 @@
       </ng-container>
     </div>
 
-    <a class="activity-action settings" mat-icon-button matTooltip="Settings" matTooltipPosition="after" (click)="OpenSettings()" *ngIf="SettingsPath">
-      <mat-icon>settings</mat-icon>
-    </a>
+    <div class="activity-settings" *ngFor="let activity of RootActivities">
+      <a
+        class="activity-action"
+        mat-icon-button
+        [matTooltip]="activity.Title"
+        matTooltipPosition="after"
+        (click)="OpenRootActivity(activity)"
+      >
+        <mat-icon *ngIf="activity.IconSet" [fontSet]="activity.IconSet" [fontIcon]="activity.Icon"></mat-icon>
+
+        <mat-icon *ngIf="!activity.IconSet">{{ activity.Icon }}</mat-icon>
+      </a>
+    </div>
   </mat-grid-tile>
 </mat-grid-list>
