@@ -95,14 +95,15 @@
         width: 60px;
         background-color: mat-color($primary, 500);
 
+        .activity-settings {
+          position: absolute;
+          bottom: 0;
+        }
+
         .activity-action {
           margin: 0 auto;
           display: block;
 
-          &.settings {
-            position: absolute;
-            bottom: 0;
-          }
 
           &.mat-icon-button {
             width: 60px;

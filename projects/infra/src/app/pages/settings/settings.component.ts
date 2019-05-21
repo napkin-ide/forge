@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IdeActivity } from '@napkin-ide/common';
-import { MatSelectChange, MatListOption } from '@angular/material';
-import { InfrastructureState } from '../../state/infra.state';
-import { InfrastructureStateManagerContext } from '../../state/infra-state-manager.context';
+import { ForgeInfrastructureState, ForgeInfrastructureSetupStepTypes } from '../../state/infra.state';
+import { ForgeInfrastructureStateManagerContext } from '../../state/infra-state-manager.context';
 
 @Component({
   selector: 'lcu-settings',
@@ -15,16 +13,45 @@ export class SettingsComponent implements OnInit {
   //  Fields
 
   //  Properties
-  public State: InfrastructureState;
+  public get GitHubOAuthURL(): string {
+    return `/.github/oauth?redirectUrl=${window.location.href}`;
+  }
+  public Settings: any;
+
+  public SetupStepTypes = ForgeInfrastructureSetupStepTypes;
+
+  public State: ForgeInfrastructureState;
+
+  public UseDefaultSettings: boolean;
 
   //  Constructors
-  constructor(protected formBldr: FormBuilder, protected infraState: InfrastructureStateManagerContext) {}
+  constructor(protected formBldr: FormBuilder, protected infraState: ForgeInfrastructureStateManagerContext) {
+    this.Settings = {};
+
+    this.UseDefaultSettings = true;
+  }
 
   //  Life Cycle
   public ngOnInit() {
+    this.infraState.Context.subscribe(state => {
+      this.State = state;
+    });
   }
 
   //  API methods
+  public GetStartedWithAzure() {
+    this.State.Loading = true;
+
+    this.UseDefaultSettings = true;
+
+    this.infraState.SetSetupStep(this.SetupStepTypes.Azure);
+  }
+
+  public Configure() {
+    this.State.Loading = true;
+
+    this.infraState.ConfigureInfrastructure(this.SetupStepTypes.Azure.toString(), this.UseDefaultSettings, this.Settings);
+  }
 
   //  Helpers
 }

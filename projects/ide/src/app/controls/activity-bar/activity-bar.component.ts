@@ -14,24 +14,27 @@ export class ActivityBarComponent implements OnInit {
 
   public CurrentActivity: IdeActivity;
 
+  public InfraConfigured: boolean;
+
   public Loading: boolean;
 
-  public SettingsPath: string;
+  public RootActivities: IdeActivity[];
 
   //  Constructors
-  constructor(protected ideState: IdeStateStateManagerContext, protected dialog: MatDialog) {
-  }
+  constructor(protected ideState: IdeStateStateManagerContext, protected dialog: MatDialog) {}
 
   //  Life Cycle
   public ngOnInit() {
-    this.ideState.Context.subscribe((ideState) => {
+    this.ideState.Context.subscribe(ideState => {
       this.Activities = ideState.Activities;
 
       this.CurrentActivity = ideState.CurrentActivity;
 
+      this.InfraConfigured = ideState.InfrastructureConfigured;
+
       this.Loading = ideState.Loading;
 
-      this.SettingsPath = ideState.SettingsPath;
+      this.RootActivities = ideState.RootActivities;
 
       console.log(ideState);
 
@@ -40,10 +43,10 @@ export class ActivityBarComponent implements OnInit {
   }
 
   //  API Methods
-  public OpenSettings(): void {
+  public OpenRootActivity(act: IdeActivity): void {
     const dialogRef = this.dialog.open(ExternalDialogComponent, {
       width: '90%',
-      data: { ExternalPath: this.SettingsPath }
+      data: { ExternalPath: act.Lookup }
     });
 
     dialogRef.afterClosed().subscribe(result => {

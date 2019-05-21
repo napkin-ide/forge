@@ -1,11 +1,11 @@
-import { InfrastructureState } from './infra.state';
+import { ForgeInfrastructureState, ForgeInfrastructureSetupStepTypes } from './infra.state';
 import { StateManagerContext } from '@lcu-ide/common';
 import { Injectable, Injector } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class InfrastructureStateManagerContext extends StateManagerContext<InfrastructureState> {
+export class ForgeInfrastructureStateManagerContext extends StateManagerContext<ForgeInfrastructureState> {
   //  Properties
 
   //  Constructors
@@ -14,18 +14,29 @@ export class InfrastructureStateManagerContext extends StateManagerContext<Infra
   }
 
   //  API Methods
-  public AddSideBarSection(section: string) {
+  public ConfigureInfrastructure(infraType: string, useDefaultSettings: boolean, settings: any) {
     this.Execute({
       Arguments: {
-        Section: section
+        InfrastructureType: infraType,
+        Settings: settings,
+        UseDefaultSettings: useDefaultSettings
       },
-      Type: 'add-side-bar-section'
+      Type: 'configure-infra'
+    });
+  }
+
+  public SetSetupStep(step: ForgeInfrastructureSetupStepTypes) {
+    this.Execute({
+      Arguments: {
+        Step: step
+      },
+      Type: 'set-setup-step'
     });
   }
 
   //  Helpers
   protected defaultValue() {
-    return <InfrastructureState>{ Loading: true };
+    return <ForgeInfrastructureState>{ Loading: true };
   }
 
   protected loadStateKey() {

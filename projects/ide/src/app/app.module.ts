@@ -16,7 +16,7 @@ import { IdeStateService } from './svc/ide-state.service';
 import { IdeStateStateManagerContext } from '@napkin-ide/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { environment } from '../environments/environment';
-import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
+import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu-ide/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,8 +31,7 @@ import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
     PanelsModule,
     SideBarModule,
     StatusBarModule,
-    MatGridListModule,
-    MatSidenavModule
+    MaterialModule
   ],
   providers: [
     IdeStateService,
