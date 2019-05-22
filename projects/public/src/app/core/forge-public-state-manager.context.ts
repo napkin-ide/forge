@@ -1,6 +1,6 @@
 import { state } from '@angular/animations';
 import { ForgePublicState, ForgePublicStepTypes } from './forge-public.state';
-import { StateManagerContext } from '@lcu-ide/common';
+import { StateManagerContext, Guid } from '@lcu-ide/common';
 import { Injectable, Injector, Output, EventEmitter } from '@angular/core';
 
 @Injectable({
@@ -40,7 +40,15 @@ export class ForgePublicStateManagerContext extends StateManagerContext<ForgePub
   }
 
   protected loadStateKey() {
-    return 'init';
+    let sk = localStorage.getItem('forge-public-state-manager');
+
+    if (!sk) {
+      sk = Guid.CreateRaw();
+
+      localStorage.setItem('forge-public-state-manager', sk);
+    }
+
+    return sk;
   }
 
   protected loadStateName() {
