@@ -30,7 +30,13 @@
       <div *ngIf="State.Step === StepTypes['Register']">
         <h1 class="mat-display-3">Sign Up for Fathym</h1>
 
-        <lcu-register loading="{{State.Loading}}" (register)="Register($event)"></lcu-register>
+        <lcu-register 
+          [success]="Registering && State.Success" 
+          error="{{ State.Error }}" 
+          loading="{{ State.Loading }}" 
+          (register)="Register($event)"
+          (already-registered)="SetStep('SignIn')">
+        </lcu-register>
       </div>
       
       <p class="mat-title" color="primary">{{ ReconnectionMessage }}</p>
