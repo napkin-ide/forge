@@ -31,7 +31,8 @@
         <h1 class="mat-display-3">Sign Up for Fathym</h1>
 
         <lcu-register 
-          [success]="Registering && State.Success" 
+          [success]="Registering && State.Success"
+          success-message="Thank you for Registering" 
           error="{{ State.Error }}" 
           loading="{{ State.Loading }}" 
           (register)="Register($event)"
