@@ -44,6 +44,12 @@ export class IdentityComponent implements OnInit {
     });
 
     this.state.Context.subscribe(state => {
+
+      // need to do this for now as success returns true right away
+      if (!this.Registering ) {
+        state['Success'] = false;
+      }
+
       this.State = state;
     });
   }
