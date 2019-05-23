@@ -9,10 +9,16 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { environment } from '../environments/environment';
 import { FathymSharedModule, LCUServiceSettings } from '@lcu-ide/common';
 import { ForgePublicStateManagerContext } from './core/forge-public-state-manager.context';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [FathymSharedModule.forRoot(), BrowserAnimationsModule, HttpClientModule, AppRoutingModule, OAuthModule.forRoot()],
+  imports: [FathymSharedModule.forRoot(),
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    OAuthModule.forRoot(),
+    MatProgressSpinnerModule],
   providers: [
     {
       provide: LCUServiceSettings,
