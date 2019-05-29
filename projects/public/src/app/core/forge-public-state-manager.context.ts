@@ -15,11 +15,12 @@ export class ForgePublicStateManagerContext extends StateManagerContext<ForgePub
   }
 
   //  API Methods
-  public Register(username: string, password: string) {
+  public Register(username: string, password: string, termsAccepted: boolean) {
     this.Execute({
       Arguments: {
         Username: username,
-        Password: password
+        Password: password,
+        TermsAccepted: termsAccepted
       },
       Type: 'register'
     });
@@ -31,6 +32,20 @@ export class ForgePublicStateManagerContext extends StateManagerContext<ForgePub
         StepType: stepType
       },
       Type: 'set-step'
+    });
+  }
+
+  /**
+   * state for agreeing to terms
+   * 
+   * @param val boolean for agreeing to terms
+   */
+  public AgreeToTerms(val: boolean): void {
+    this.Execute({
+      Arguments: {
+        TermsAccepted: val
+      },
+      Type: 'agree-to-terms'
     });
   }
 
