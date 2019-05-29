@@ -14,14 +14,40 @@ export class ForgeInfrastructureStateManagerContext extends StateManagerContext<
   }
 
   //  API Methods
-  public ConfigureInfrastructure(infraType: string, useDefaultSettings: boolean, settings: any) {
+  public CommitInfrastructure() {
+    this.Execute({
+      Arguments: {},
+      Type: 'commit-infrastructure'
+    });
+  }
+
+  public ConfigureInfrastructure(lookup: string, infraType: string, useDefaultSettings: boolean, settings: any) {
     this.Execute({
       Arguments: {
         InfrastructureType: infraType,
+        Lookup: lookup,
         Settings: settings,
         UseDefaultSettings: useDefaultSettings
       },
       Type: 'configure-infra'
+    });
+  }
+
+  public SetSelectedInfraTemplate(template: string) {
+    this.Execute({
+      Arguments: {
+        Template: template
+      },
+      Type: 'set-selected-infrastructure-template'
+    });
+  }
+
+  public SetSelectedOrg(org: string) {
+    this.Execute({
+      Arguments: {
+        Organization: org
+      },
+      Type: 'set-selected-org'
     });
   }
 
