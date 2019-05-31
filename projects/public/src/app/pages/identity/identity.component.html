@@ -36,11 +36,11 @@
 
       <div *ngIf="State.Step === StepTypes['Register']">
         <h1 class="mat-display-3">Sign Up for Fathym</h1>
-
+        <!-- [success]="Registering && State.Success" -->
         <lcu-register 
-          [success]="Registering && State.Success"
+          [success]="SuccessfulRegistration"
           [terms-checked]="TermsChecked"
-          success-message="Thank you for Registering" 
+          [success-message]="SuccessMessage" 
           error="{{ State.Error }}" 
           loading="{{ State.Loading }}" 
           (register)="Register($event)"

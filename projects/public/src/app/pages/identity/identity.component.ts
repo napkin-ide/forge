@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { state, style } from '@angular/animations';
 import { ForgePublicStateManagerContext } from '../../core/forge-public-state-manager.context';
 import { ForgePublicState, ForgePublicStepTypes } from '../../core/forge-public.state';
@@ -31,6 +31,10 @@ export class IdentityComponent implements OnInit {
 
   public StepTypes = ForgePublicStepTypes;
 
+  public SuccessMessage: string;
+
+  public SuccessfulRegistration: boolean;
+
   public TermsConditionsConfig: Array<TermsConditionsModel>;
 
   public TermsTitle: string;
@@ -48,7 +52,7 @@ export class IdentityComponent implements OnInit {
 
   //  Life Cycle
   ngOnInit() {
-
+    this.SuccessMessage = '';
     this.state.ReconnectionAttempt.subscribe((val: boolean) => {
       this.connectionError(val);
     });
@@ -114,8 +118,8 @@ export class IdentityComponent implements OnInit {
       this.agreeToTermsUpdate();
     }
 
-    if (this.State.RedirectURL) {
-      location.href = this.State.RedirectURL;
+    if (this.State.Success === true) {
+     this.successfulRegistration();
     }
   }
 
@@ -127,6 +131,28 @@ export class IdentityComponent implements OnInit {
     setTimeout(() => {
       this.TermsChecked = this.State.AgreeToTerms;
     }, 500);
+  }
+
+  protected successfulRegistration(): void {
+    if (this.State.RedirectURL) {
+        this.redirectOnSuccessfulRegistration();
+    }
+  }
+
+  protected redirectOnSuccessfulRegistration(): void {
+    let counter: number = 5;
+    const interval = setInterval(() => {
+
+      counter--;
+
+      this.SuccessMessage = 'Success. Redirecting in ' + counter;
+
+      if (counter < 0) {
+        location.href = this.State.RedirectURL;
+        this.SuccessfulRegistration = true;
+      }
+
+    }, 1000);
   }
 
   /**
