@@ -40,7 +40,7 @@
         <lcu-register 
           [success]="Registering && State.Success"
           [terms-checked]="TermsChecked"
-          success-message="Thank you for Registering" 
+          [success-message]="SuccessMessage" 
           error="{{ State.Error }}" 
           loading="{{ State.Loading }}" 
           (register)="Register($event)"

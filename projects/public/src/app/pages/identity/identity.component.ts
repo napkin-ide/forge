@@ -31,6 +31,8 @@ export class IdentityComponent implements OnInit {
 
   public StepTypes = ForgePublicStepTypes;
 
+  public SuccessMessage: string;
+
   public TermsConditionsConfig: Array<TermsConditionsModel>;
 
   public TermsTitle: string;
@@ -114,8 +116,8 @@ export class IdentityComponent implements OnInit {
       this.agreeToTermsUpdate();
     }
 
-    if (this.State.RedirectURL) {
-      location.href = this.State.RedirectURL;
+    if (this.State.Success === true) {
+     this.successfulRegistration();
     }
   }
 
@@ -127,6 +129,26 @@ export class IdentityComponent implements OnInit {
     setTimeout(() => {
       this.TermsChecked = this.State.AgreeToTerms;
     }, 500);
+  }
+
+  protected successfulRegistration(): void {
+    if (this.State.RedirectURL) {
+        this.redirectOnSuccessfulRegistration();
+    }
+  }
+
+  protected redirectOnSuccessfulRegistration(): void {
+    let counter: number = 5;
+    const interval = setInterval(() => {
+
+      counter--;
+      this.SuccessMessage = 'Success. Redirecting to account in ' + counter + ' seconds.';
+      if (counter < 0) {
+        location.href = this.State.RedirectURL;
+        return;
+      }
+
+    }, 1000);
   }
 
   /**
