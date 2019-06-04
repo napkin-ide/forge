@@ -21,11 +21,17 @@ export class ForgeInfrastructureStateManagerContext extends StateManagerContext<
     });
   }
 
-  public ConfigureInfrastructure(lookup: string, infraType: string, useDefaultSettings: boolean, settings: any) {
+  public ConfigureDevOps() {
+    this.Execute({
+      Arguments: {},
+      Type: 'configure-dev-ops'
+    });
+  }
+
+  public ConfigureInfrastructure(infraType: string, useDefaultSettings: boolean, settings: any) {
     this.Execute({
       Arguments: {
         InfrastructureType: infraType,
-        Lookup: lookup,
         Settings: settings,
         UseDefaultSettings: useDefaultSettings
       },

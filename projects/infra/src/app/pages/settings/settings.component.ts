@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ForgeInfrastructureState, ForgeInfrastructureSetupStepTypes } from '../../state/infra.state';
 import { ForgeInfrastructureStateManagerContext } from '../../state/infra-state-manager.context';
-import { MatSelectChange } from '@angular/material';
+import { MatSelectChange, MatStepper } from '@angular/material';
 
 @Component({
   selector: 'lcu-settings',
@@ -18,6 +18,10 @@ export class SettingsComponent implements OnInit {
     return `/.devops/oauth?redirectUrl=${window.location.href}`;
   }
 
+  public DataAppSetupFormGroup: FormGroup;
+
+  public DevOpsSetupFormGroup: FormGroup;
+
   public EntInfraFormGroup: FormGroup;
 
   public get GitHubOAuthURL(): string {
@@ -32,6 +36,9 @@ export class SettingsComponent implements OnInit {
 
   public State: ForgeInfrastructureState;
 
+  @ViewChild(MatStepper)
+  public Stepper: MatStepper;
+
   public UseDefaultSettings: boolean;
 
   //  Constructors
@@ -41,25 +48,50 @@ export class SettingsComponent implements OnInit {
 
   //  Life Cycle
   public ngOnInit() {
-    this.EntInfraFormGroup = this.formBldr.group({
-    });
+    this.DataAppSetupFormGroup = this.formBldr.group({});
+
+    this.DevOpsSetupFormGroup = this.formBldr.group({});
+
+    this.EntInfraFormGroup = this.formBldr.group({});
 
     this.InfraConfigFormGroup = this.formBldr.group({
+      azureTenantId: ['', Validators.required],
+      azureSubId: ['', Validators.required],
+      azureAppId: ['', Validators.required],
+      azureAppAuthKey: ['', Validators.required]
     });
 
-    this.InfraSetupFormGroup = this.formBldr.group({
-    });
+    this.InfraSetupFormGroup = this.formBldr.group({});
 
     this.infraState.Context.subscribe(state => {
       this.State = state;
 
-      if (!this.State.EnvSettings) {
-        this.State.EnvSettings = {};
-      }
+      this.stateChanged();
 
       // For Debug
       console.log(this.State);
     });
+  }
+
+  protected stateChanged() {
+    if (!this.State.EnvSettings) {
+      this.State.EnvSettings = {};
+    }
+
+    this.InfraConfigFormGroup.patchValue({
+      azureTenantId: this.State.EnvSettings.AzureTenantID,
+      azureSubId: this.State.EnvSettings.AzureSubID,
+      azureAppId: this.State.EnvSettings.AzureAppID,
+      azureAppAuthKey: this.State.EnvSettings.AzureAppAuthKey
+    });
+
+    this.Stepper.linear = false;
+
+    for (let i = 0; i < this.GetCurrentStepIndex(); i++) {
+      this.Stepper.next();
+    }
+
+    this.Stepper.linear = true;
   }
 
   //  API methods
@@ -75,18 +107,46 @@ export class SettingsComponent implements OnInit {
     this.infraState.CommitInfrastructure();
   }
 
+  public Configure() {
+    this.State.Loading = true;
+
+    this.State.EnvSettings.AzureTenantID = this.InfraConfigFormGroup.controls.azureTenantId.value;
+
+    this.State.EnvSettings.AzureSubID = this.InfraConfigFormGroup.controls.azureSubId.value;
+
+    this.State.EnvSettings.AzureAppID = this.InfraConfigFormGroup.controls.azureAppId.value;
+
+    this.State.EnvSettings.AzureAppAuthKey = this.InfraConfigFormGroup.controls.azureAppAuthKey.value;
+
+    this.infraState.ConfigureInfrastructure(this.SetupStepTypes.Azure.toString(), this.UseDefaultSettings, this.State.EnvSettings);
+  }
+
+  public ConfigureDevOps() {
+    this.State.Loading = true;
+
+    this.infraState.ConfigureDevOps();
+  }
+
+  public GetCurrentStepIndex(): number {
+    if (this.State.ProductionConfigured) {
+      return 3;
+    } else if (this.State.InfrastructureConfigured) {
+      return 2;
+    } else {
+      if (this.State.SetupStep) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+  }
+
   public GetStartedWithAzure() {
     this.State.Loading = true;
 
     this.UseDefaultSettings = true;
 
     this.infraState.SetSetupStep(this.SetupStepTypes.Azure);
-  }
-
-  public Configure() {
-    this.State.Loading = true;
-
-    this.infraState.ConfigureInfrastructure('tst', this.SetupStepTypes.Azure.toString(), this.UseDefaultSettings, this.State.EnvSettings);
   }
 
   public SetInfraTemplate(event: MatSelectChange) {

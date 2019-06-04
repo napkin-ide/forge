@@ -7,6 +7,13 @@
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
 
+  ::ng-deep {
+    .mat-stepper-horizontal,
+    .mat-stepper-vertical {
+      background: transparent !important;
+    }
+  }
+
   :host {
     .side-bar-section {
       text-align: center;

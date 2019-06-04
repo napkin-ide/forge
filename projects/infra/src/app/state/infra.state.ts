@@ -1,4 +1,6 @@
 export class ForgeInfrastructureState {
+  public DevOps?: DevOpsState;
+
   public Environment?: any;
 
   public EnvSettings?: any;
@@ -18,6 +20,10 @@ export class ForgeInfrastructureState {
   public SetupStep?: ForgeInfrastructureSetupStepTypes;
 
   public SourceControlConfigured?: boolean;
+}
+
+export class DevOpsState {
+  public Configured?: boolean;
 }
 
 export class GitHubState {

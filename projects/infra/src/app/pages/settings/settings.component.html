@@ -1,14 +1,23 @@
-<div class="spread">
+<!-- <div class="spread">
   <ng-container *ngIf="!State.Loading">
-    <ng-container *ngIf="!State.InfrastructureConfigured">
-      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="!State.SetupStep">
-        <div fxFlex="70%">
-          <h2 class="mat-display-2">To Get Started, Configure Enterprise Infrastructure</h2>
-        </div>
+    <ng-container *ngIf="State.InfrastructureConfigured">
+    </ng-container>
+  </ng-container>
 
+  <mat-spinner *ngIf="State.Loading"></mat-spinner>
+</div> -->
+
+<mat-horizontal-stepper [linear]="true" [selectedIndex]="GetCurrentStepIndex()">
+  <mat-step [stepControl]="EntInfraFormGroup">
+    <mat-spinner *ngIf="State.Loading"></mat-spinner>
+
+    <form [formGroup]="EntInfraFormGroup">
+      <ng-template matStepLabel>Enterprise Infrastructure</ng-template>
+
+      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="!State.Loading">
         <div fxFlex="40%">
           <mat-card class="spread">
-            <ng-container *ngIf="!State.Loading">
+            <ng-container>
               <h2 class="mat-headline">Use Default Azure Configurations</h2>
 
               <p class="mat-subtitle spread">
@@ -28,7 +37,7 @@
 
         <div fxFlex="40%">
           <mat-card class="spread">
-            <ng-container *ngIf="!State.Loading">
+            <ng-container>
               <h2 class="mat-headline">Use AWS Configurations</h2>
 
               <p class="mat-subtitle spread">
@@ -48,7 +57,7 @@
 
         <div fxFlex="80%">
           <mat-card class="spread">
-            <ng-container *ngIf="!State.Loading">
+            <ng-container>
               <h2 class="mat-headline" jjhhbv>Orchestrate and Expand an Enterprise Infrastructure</h2>
 
               <p class="mat-subtitle spread">
@@ -66,16 +75,16 @@
           </mat-card>
         </div>
       </div>
+    </form>
+  </mat-step>
 
-      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure">
-        <div fxFlex="60%" fxFlex.lt-sm="95%">
-          <div class="spread">
-            <h2 class="mat-display-2">Configure Azure Infrastructure</h2>
+  <mat-step [stepControl]="InfraConfigFormGroup">
+    <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
-            <!-- <mat-slide-toggle [(ngModel)]="UseDefaultSettings">Use Default Azure Settings?</mat-slide-toggle> -->
-          </div>
-        </div>
+    <form [formGroup]="InfraConfigFormGroup">
+      <ng-template matStepLabel>Configure Infrastructure</ng-template>
 
+      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
           <mat-card class="spread" *ngIf="UseDefaultSettings">
             <ng-container>
@@ -135,25 +144,25 @@
                   </div>
 
                   <mat-form-field class="mat-full-width">
-                    <input matInput placeholder="Azure Tenant (Directory) ID" [(ngModel)]="State.EnvSettings['AzureTenantID']" />
+                    <input matInput placeholder="Azure Tenant (Directory) ID" formControlName="azureTenantId" required />
 
                     <mat-hint>....</mat-hint>
                   </mat-form-field>
 
                   <mat-form-field class="mat-full-width">
-                    <input matInput placeholder="Azure Subscription ID" [(ngModel)]="State.EnvSettings['AzureSubID']" />
+                    <input matInput placeholder="Azure Subscription ID" formControlName="azureSubId" required />
 
                     <mat-hint>....</mat-hint>
                   </mat-form-field>
 
                   <mat-form-field class="mat-full-width">
-                    <input matInput placeholder="Azure App ID" [(ngModel)]="State.EnvSettings['AzureAppID']" />
+                    <input matInput placeholder="Azure App ID" formControlName="azureAppId" required />
 
                     <mat-hint>....</mat-hint>
                   </mat-form-field>
 
                   <mat-form-field class="mat-full-width">
-                    <input matInput placeholder="Azure App Auth key" [(ngModel)]="State.EnvSettings['AzureAppAuthKey']" />
+                    <input matInput placeholder="Azure App Auth key" formControlName="azureAppAuthKey" required />
 
                     <mat-hint>....</mat-hint>
                   </mat-form-field>
@@ -175,16 +184,16 @@
           </div>
         </div>
       </div>
-    </ng-container>
+    </form>
+  </mat-step>
 
-    <ng-container *ngIf="State.InfrastructureConfigured">
-      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure">
-        <div fxFlex="60%" fxFlex.lt-sm="95%">
-          <div class="spread">
-            <h2 class="mat-display-2">Setup {{ State.Environment.Name }} Infrastructure</h2>
-          </div>
-        </div>
+  <mat-step [stepControl]="InfraSetupFormGroup">
+    <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
+    <form [formGroup]="InfraSetupFormGroup">
+      <ng-template matStepLabel>Setup Infrastructure</ng-template>
+
+      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.InfrastructureConfigured && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
           <mat-card class="spread">
             <ng-container>
@@ -192,7 +201,11 @@
                 <h4>Template Settings</h4>
 
                 <mat-form-field class="mat-full-width">
-                  <mat-select placeholder="Infrastructure Template" (selectionChange)="SetInfraTemplate($event)" [value]="State.InfraTemplate.SelectedTemplate">
+                  <mat-select
+                    placeholder="Infrastructure Template"
+                    (selectionChange)="SetInfraTemplate($event)"
+                    [value]="State.InfraTemplate.SelectedTemplate"
+                  >
                     <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
                   </mat-select>
 
@@ -203,47 +216,111 @@
           </mat-card>
 
           <div class="spread" *ngIf="State.SourceControlConfigured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()">Commit {{ State.Environment.Name }} Infrastructure</a>
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()">
+              Commit {{ State.Environment.Name }} Infrastructure
+            </a>
           </div>
         </div>
       </div>
-    </ng-container>
-  </ng-container>
+    </form>
+  </mat-step>
 
-  <mat-spinner *ngIf="State.Loading"></mat-spinner>
-</div>
+  <mat-step [stepControl]="DevOpsSetupFormGroup">
+    <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
-<mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="EntInfraFormGroup">
-      <form [formGroup]="EntInfraFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
+    <form [formGroup]="DevOpsSetupFormGroup">
+      <ng-template matStepLabel>Setup Dev Ops</ng-template>
 
-        <mat-form-field>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Next</button>
+      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
+        <div fxFlex="60%" fxFlex.lt-sm="95%">
+          <mat-card class="spread" *ngIf="!State.DevOps.Configured">
+            <ng-container>
+              <div class="spread">
+                <h4>Azure Dev Ops Setup</h4>
+
+                <div class="spread">
+                  <a mat-raised-button class="mat-full-width" color="primary" [href]="AzureDevOpsOAuthURL">
+                    Configure Azure Dev Ops Connection
+                  </a>
+                </div>
+              </div>
+            </ng-container>
+          </mat-card>
+
+          <mat-card class="spread" *ngIf="State.DevOps.Configured">
+            <ng-container>
+              <div class="spread">
+                <h4>Azure Dev Ops Setup Details</h4>
+
+                <mat-list>
+                  <mat-list-item>
+                    <mat-icon matListIcon>settings_system_daydream</mat-icon>
+
+                    <h3 matLine class="mat-headline">Dev Ops Project Setup</h3>
+
+                    <p matLine class="mat-body-2">
+                      We'll create a new Azure Dev Ops project called 'LCU OS' to contain the various integrations related to your site.
+                    </p>
+                  </mat-list-item>
+
+                  <mat-list-item>
+                    <mat-icon matListIcon>build</mat-icon>
+
+                    <h3 matLine class="mat-headline">Infrastructure Build & Release</h3>
+
+                    <p matLine class="mat-body-2">
+                      We'll setup an automatic build and release process that will listen for changes to your infrastructure and deploy them
+                      to azure for you. Changes will never delete resources, in order to aintain the integrity of enterprise data.
+                    </p>
+                  </mat-list-item>
+                </mat-list>
+              </div>
+            </ng-container>
+          </mat-card>
+
+          <div class="spread" *ngIf="State.DevOps.Configured">
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="ConfigureDevOps()">Setup Azure Dev Ops</a>
+          </div>
         </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <mat-form-field>
-          <input matInput placeholder="Address" formControlName="secondCtrl" required>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      You are now done.
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
-    </mat-step>
-  </mat-horizontal-stepper>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="DevOpsSetupFormGroup">
+    <mat-spinner *ngIf="State.Loading"></mat-spinner>
+
+    <form [formGroup]="DevOpsSetupFormGroup">
+      <ng-template matStepLabel>Setup Application</ng-template>
+
+      <!-- <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.InfrastructureConfigured">
+        <div fxFlex="60%" fxFlex.lt-sm="95%">
+          <mat-card class="spread">
+            <ng-container>
+              <div class="spread">
+                <h4>Template Settings</h4>
+
+                <mat-form-field class="mat-full-width">
+                  <mat-select
+                    placeholder="Infrastructure Template"
+                    (selectionChange)="SetInfraTemplate($event)"
+                    [value]="State.InfraTemplate.SelectedTemplate"
+                  >
+                    <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
+                  </mat-select>
+
+                  <mat-hint>Select from the available templates.</mat-hint>
+                </mat-form-field>
+              </div>
+            </ng-container>
+          </mat-card>
+
+          <div class="spread" *ngIf="State.SourceControlConfigured">
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()">
+              Commit {{ State.Environment.Name }} Infrastructure
+            </a>
+          </div>
+        </div>
+      </div> -->
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
