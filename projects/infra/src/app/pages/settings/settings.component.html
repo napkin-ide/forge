@@ -292,35 +292,106 @@
     <form [formGroup]="DevOpsSetupFormGroup">
       <ng-template matStepLabel>Setup Application</ng-template>
 
-      <!-- <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.InfrastructureConfigured">
+      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps.Setup && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
           <mat-card class="spread">
             <ng-container>
               <div class="spread">
-                <h4>Template Settings</h4>
+                <h4>Phew... Now that that crap is done, let's get to building something.</h4>
 
-                <mat-form-field class="mat-full-width">
-                  <mat-select
-                    placeholder="Infrastructure Template"
-                    (selectionChange)="SetInfraTemplate($event)"
-                    [value]="State.InfraTemplate.SelectedTemplate"
-                  >
-                    <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
-                  </mat-select>
+                <p class="mat-body-2">Here is where we are at:</p>
 
-                  <mat-hint>Select from the available templates.</mat-hint>
-                </mat-form-field>
+                <mat-list>
+                  <mat-list-item>
+                    <mat-icon matListIcon>cloud</mat-icon>
+
+                    <h3 matLine class="mat-headline">Enterprise Infrastructure</h3>
+
+                    <p matLine class="mat-body-2">
+                      Yup, we got that...
+                    </p>
+                  </mat-list-item>
+
+                  <mat-list-item>
+                    <mat-icon matListIcon>build</mat-icon>
+
+                    <h3 matLine class="mat-headline">Enterprise Dev Ops</h3>
+
+                    <p matLine class="mat-body-2">
+                      Does a bear shit in the woods?... That means yes, we got that too...
+                    </p>
+                  </mat-list-item>
+                </mat-list>
               </div>
             </ng-container>
           </mat-card>
 
-          <div class="spread" *ngIf="State.SourceControlConfigured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()">
-              Commit {{ State.Environment.Name }} Infrastructure
-            </a>
+          <mat-card class="spread">
+            <div class="spread">
+              <h4>Low Code Unit Application Architectures</h4>
+              <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps.Setup && !State.Loading">
+                <div fxFlex="60%" fxFlex.lt-sm="95%">
+                  <mat-card class="spread">
+                    <ng-container>
+                      <div class="spread">
+                        <h4>Phew... Now that that crap is done, let's get to building something.</h4>
+
+                        <p class="mat-body-2">Here is where we are at:</p>
+
+                        <mat-list>
+                          <mat-list-item>
+                            <mat-icon matListIcon>cloud</mat-icon>
+
+                            <h3 matLine class="mat-headline">Enterprise Infrastructure</h3>
+
+                            <p matLine class="mat-body-2">
+                              Yup, we got that...
+                            </p>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <mat-icon matListIcon>build</mat-icon>
+
+                            <h3 matLine class="mat-headline">Enterprise Dev Ops</h3>
+
+                            <p matLine class="mat-body-2">
+                              Does a bear shit in the woods?... That means yes, we got that too...
+                            </p>
+                          </mat-list-item>
+                        </mat-list>
+                      </div>
+                    </ng-container>
+                  </mat-card>
+
+                  <mat-card class="spread">
+                    <div class="spread">
+                      <h4>Low Code Unit Application Architectures</h4>
+
+                      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps.Setup && !State.Loading">
+                        <div fxFlex="30%" fxFlex.lt-sm="80%">
+                          <h3 class="mat-headline">Simple Angular Seed</h3>
+
+                          <p matLine class="mat-body-2">
+                            Start with a simple angular seed
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-card>
+
+                  <div class="spread" *ngIf="State.DevOps.Configured">
+                    <a mat-raised-button class="mat-full-width" color="accent" (click)="ConfigureDevOps()">Setup Azure Dev Ops</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-card>
+
+          <div class="spread" *ngIf="State.DevOps.Configured">
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="ConfigureDevOps()">Setup Azure Dev Ops</a>
           </div>
         </div>
-      </div> -->
+      </div>
     </form>
   </mat-step>
 </mat-horizontal-stepper>

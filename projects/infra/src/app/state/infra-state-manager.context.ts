@@ -68,7 +68,7 @@ export class ForgeInfrastructureStateManagerContext extends StateManagerContext<
 
   //  Helpers
   protected defaultValue() {
-    return <ForgeInfrastructureState>{ Loading: true };
+    return <ForgeInfrastructureState>{ Loading: true, DevOps: {} };
   }
 
   protected loadStateKey() {

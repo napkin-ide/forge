@@ -87,7 +87,11 @@ export class SettingsComponent implements OnInit {
 
     this.Stepper.linear = false;
 
-    for (let i = 0; i < this.GetCurrentStepIndex(); i++) {
+    this.Stepper.selectedIndex = 0;
+
+    const stepIndex = this.GetCurrentStepIndex();
+
+    for (let i = 0; i < stepIndex; i++) {
       this.Stepper.next();
     }
 
@@ -128,7 +132,9 @@ export class SettingsComponent implements OnInit {
   }
 
   public GetCurrentStepIndex(): number {
-    if (this.State.ProductionConfigured) {
+    if (this.State.DevOps && this.State.DevOps.Setup) {
+      return 4;
+    } else if (this.State.ProductionConfigured) {
       return 3;
     } else if (this.State.InfrastructureConfigured) {
       return 2;

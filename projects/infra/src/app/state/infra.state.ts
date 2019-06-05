@@ -24,6 +24,8 @@ export class ForgeInfrastructureState {
 
 export class DevOpsState {
   public Configured?: boolean;
+
+  public Setup?: boolean;
 }
 
 export class GitHubState {

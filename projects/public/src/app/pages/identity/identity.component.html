@@ -16,6 +16,13 @@
 
         <a mat-stroked-button color="accent" class="mat-button-lg" (click)="SetStep('Register')">Sign Up</a>
       </div>
+
+      <div *ngIf="State.Step === StepTypes['Terms']">
+          <h1 class="mat-display-3">Terms / Conditions</h1>
+  
+          <h2 class="mat-headline">Agree to our terms and conditions</h2>
+  
+        </div>
     </div>
   </div>
 
@@ -29,17 +36,27 @@
 
       <div *ngIf="State.Step === StepTypes['Register']">
         <h1 class="mat-display-3">Sign Up for Fathym</h1>
-
+        <!-- [success]="Registering && State.Success" -->
         <lcu-register 
-          [success]="Registering && State.Success"
-          success-message="Thank you for Registering" 
+          [success]="SuccessfulRegistration"
+          [terms-checked]="TermsChecked"
+          [success-message]="SuccessMessage" 
           error="{{ State.Error }}" 
           loading="{{ State.Loading }}" 
           (register)="Register($event)"
-          (already-registered)="SetStep('SignIn')">
+          (already-registered)="SetStep('SignIn')"
+          (show-terms)="SetStep('Terms')">
         </lcu-register>
       </div>
       
+      <div *ngIf="State.Step === StepTypes['Terms']">
+          <lcu-terms-conditions 
+            [title]=TermsTitle 
+            [sub-title]=TermsSubTitle
+            (agree-to-terms)='AgreeToTerms($event)'
+            [terms-condition-config]='TermsConditionsConfig'>
+          </lcu-terms-conditions>
+      </div>
       <p class="mat-title" color="primary">{{ ReconnectionMessage }}</p>
     </div>
   </div>
