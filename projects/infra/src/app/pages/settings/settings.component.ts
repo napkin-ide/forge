@@ -15,7 +15,7 @@ export class SettingsComponent implements OnInit {
 
   //  Properties
   public get AzureDevOpsOAuthURL(): string {
-    return `/.devops/oauth?redirectUrl=${window.location.href}`;
+    return `/.devops/oauth?redirectUri=${window.location.href}`;
   }
 
   public DataAppSetupFormGroup: FormGroup;
@@ -25,7 +25,7 @@ export class SettingsComponent implements OnInit {
   public EntInfraFormGroup: FormGroup;
 
   public get GitHubOAuthURL(): string {
-    return `/.github/oauth?redirectUrl=${window.location.href}`;
+    return `/.github/oauth?redirectUri=${window.location.href}`;
   }
 
   public InfraConfigFormGroup: FormGroup;
