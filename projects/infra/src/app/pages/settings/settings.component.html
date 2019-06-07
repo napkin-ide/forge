@@ -187,44 +187,6 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="InfraSetupFormGroup">
-    <mat-spinner *ngIf="State.Loading"></mat-spinner>
-
-    <form [formGroup]="InfraSetupFormGroup">
-      <ng-template matStepLabel>Setup Infrastructure</ng-template>
-
-      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.InfrastructureConfigured && !State.Loading">
-        <div fxFlex="60%" fxFlex.lt-sm="95%">
-          <mat-card class="spread">
-            <ng-container>
-              <div class="spread">
-                <h4>Template Settings</h4>
-
-                <mat-form-field class="mat-full-width">
-                  <mat-select
-                    placeholder="Infrastructure Template"
-                    (selectionChange)="SetInfraTemplate($event)"
-                    [value]="State.InfraTemplate.SelectedTemplate"
-                  >
-                    <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
-                  </mat-select>
-
-                  <mat-hint>Select from the available templates.</mat-hint>
-                </mat-form-field>
-              </div>
-            </ng-container>
-          </mat-card>
-
-          <div class="spread" *ngIf="State.SourceControlConfigured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()">
-              Commit {{ State.Environment.Name }} Infrastructure
-            </a>
-          </div>
-        </div>
-      </div>
-    </form>
-  </mat-step>
-
   <mat-step [stepControl]="DevOpsSetupFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
@@ -280,6 +242,44 @@
 
           <div class="spread" *ngIf="State.DevOps.Configured">
             <a mat-raised-button class="mat-full-width" color="accent" (click)="ConfigureDevOps()">Setup Azure Dev Ops</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="InfraSetupFormGroup">
+    <mat-spinner *ngIf="State.Loading"></mat-spinner>
+
+    <form [formGroup]="InfraSetupFormGroup">
+      <ng-template matStepLabel>Setup Infrastructure</ng-template>
+
+      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.InfrastructureConfigured && !State.Loading">
+        <div fxFlex="60%" fxFlex.lt-sm="95%">
+          <mat-card class="spread">
+            <ng-container>
+              <div class="spread">
+                <h4>Template Settings</h4>
+
+                <mat-form-field class="mat-full-width">
+                  <mat-select
+                    placeholder="Infrastructure Template"
+                    (selectionChange)="SetInfraTemplate($event)"
+                    [value]="State.InfraTemplate.SelectedTemplate"
+                  >
+                    <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
+                  </mat-select>
+
+                  <mat-hint>Select from the available templates.</mat-hint>
+                </mat-form-field>
+              </div>
+            </ng-container>
+          </mat-card>
+
+          <div class="spread" *ngIf="State.SourceControlConfigured">
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()">
+              Commit {{ State.Environment.Name }} Infrastructure
+            </a>
           </div>
         </div>
       </div>
