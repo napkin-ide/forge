@@ -92,7 +92,9 @@
                 <h4>Git Hub Source Control Setup</h4>
 
                 <div class="spread" *ngIf="!State.SourceControlConfigured">
-                  <a mat-raised-button class="mat-full-width" color="primary" [href]="GitHubOAuthURL" target="_parent">Configure Git Hub Connection</a>
+                  <a mat-raised-button class="mat-full-width" color="primary" [href]="GitHubOAuthURL" target="_parent"
+                    >Configure Git Hub Connection</a
+                  >
                 </div>
 
                 <mat-form-field class="mat-full-width" *ngIf="State.SourceControlConfigured">
@@ -295,47 +297,71 @@
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps?.Setup && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
           <mat-card class="spread">
-            <ng-container>
-              <div class="spread">
-                <h4>Phew... Now that that crap is done, let's get to building something.</h4>
+            <div class="spread">
+              <h4>Phew... Now that that crap is done, let's get to building something.</h4>
 
-                <p class="mat-body-2">Here is where we are at:</p>
+              <p class="mat-body-2">Here is where we are at:</p>
 
-                <mat-list>
-                  <mat-list-item>
-                    <mat-icon matListIcon>cloud</mat-icon>
+              <mat-list>
+                <mat-list-item>
+                  <mat-icon matListIcon>cloud</mat-icon>
 
-                    <h3 matLine class="mat-headline">Enterprise Infrastructure</h3>
+                  <h3 matLine class="mat-headline">Enterprise Infrastructure</h3>
 
-                    <p matLine class="mat-body-2">
-                      Yup, we got that...
-                    </p>
-                  </mat-list-item>
+                  <p matLine class="mat-body-2">
+                    Yup, we got that...
+                  </p>
+                </mat-list-item>
 
-                  <mat-list-item>
-                    <mat-icon matListIcon>build</mat-icon>
+                <mat-list-item>
+                  <mat-icon matListIcon>build</mat-icon>
 
-                    <h3 matLine class="mat-headline">Enterprise Dev Ops</h3>
+                  <h3 matLine class="mat-headline">Enterprise Dev Ops</h3>
 
-                    <p matLine class="mat-body-2">
-                      Does a bear shit in the woods?... That means yes, we got that too...
-                    </p>
-                  </mat-list-item>
-                </mat-list>
-              </div>
-            </ng-container>
+                  <p matLine class="mat-body-2">
+                    Does a bear shit in the woods?... That means yes, we got that too...
+                  </p>
+                </mat-list-item>
+              </mat-list>
+            </div>
           </mat-card>
+        </div>
 
-          <div class="spread">
+        <div fxFlex="60%" fxFlex.lt-sm="95%">
+          <mat-card class="spread">
             <div class="spread">
               <h4 class="mat-display-1">Low Code Unit Application Architectures</h4>
 
               <p matLine class="mat-body-2 spread">
                 Some info on what is next... Let's create and seed a repository so that we can start building our first apps...
               </p>
+            </div>
+          </mat-card>
+        </div>
 
+        <div fxFlex="90%" fxFlex.lt-sm="95%">
+          <div class="spread">
+            <div class="spread">
               <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps.Setup && !State.Loading">
-                <div fxFlex="60%" fxFlex.lt-sm="95%">
+                <div fxFlex="30%" fxFlex.lt-sm="95%">
+                  <mat-card class="spread">
+                    <img mat-card-image src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular" />
+
+                    <mat-card-content class="spread">
+                      <h3 class="mat-headline">Simple Angular Seed</h3>
+
+                      <p matLine class="mat-body-2">
+                        Start with a simple angular seed
+                      </p>
+                    </mat-card-content>
+                  </mat-card>
+
+                  <div class="spread" *ngIf="State.DevOps.Configured">
+                    <a mat-raised-button class="mat-full-width" color="accent" (click)="ConfigureDevOps()">Setup Angular Seed</a>
+                  </div>
+                </div>
+
+                <div fxFlex="30%" fxFlex.lt-sm="95%">
                   <mat-card class="spread">
                     <img mat-card-image src="https://angular.io/assets/images/logos/angular/angular.svg" alt="Angular" />
 
