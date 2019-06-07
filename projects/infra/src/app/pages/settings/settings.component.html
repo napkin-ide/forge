@@ -92,7 +92,7 @@
                 <h4>Git Hub Source Control Setup</h4>
 
                 <div class="spread" *ngIf="!State.SourceControlConfigured">
-                  <a mat-raised-button class="mat-full-width" color="primary" [href]="GitHubOAuthURL">Configure Git Hub Connection</a>
+                  <a mat-raised-button class="mat-full-width" color="primary" [href]="GitHubOAuthURL" target="_parent">Configure Git Hub Connection</a>
                 </div>
 
                 <mat-form-field class="mat-full-width" *ngIf="State.SourceControlConfigured">
@@ -239,7 +239,7 @@
                 <h4>Azure Dev Ops Setup</h4>
 
                 <div class="spread">
-                  <a mat-raised-button class="mat-full-width" color="primary" [href]="AzureDevOpsOAuthURL">
+                  <a mat-raised-button class="mat-full-width" color="primary" [href]="AzureDevOpsOAuthURL" target="_parent">
                     Configure Azure Dev Ops Connection
                   </a>
                 </div>
