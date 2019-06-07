@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { IdeActivity, ExternalDialogComponent, IdeStateStateManagerContext } from '@napkin-ide/common';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'nide-activity-bar',
@@ -9,6 +9,9 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./activity-bar.component.scss']
 })
 export class ActivityBarComponent implements OnInit {
+  //  Fields
+  protected rootActDialog: MatDialogRef<ExternalDialogComponent, any>;
+
   //  Properties
   public Activities: IdeActivity[];
 
@@ -48,16 +51,20 @@ export class ActivityBarComponent implements OnInit {
 
   //  API Methods
   public OpenRootActivity(act: IdeActivity): void {
-    const dialogRef = this.dialog.open(ExternalDialogComponent, {
-      width: '90%',
-      data: { ExternalPath: act.Lookup }
-    });
+    if (!this.rootActDialog) {
+      this.rootActDialog = this.dialog.open(ExternalDialogComponent, {
+        width: '90%',
+        data: { ExternalPath: act.Lookup }
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.Loading = true;
+      this.rootActDialog.afterClosed().subscribe(result => {
+        this.Loading = true;
 
-      this.ideState.$Refresh();
-    });
+        this.ideState.$Refresh();
+
+        this.rootActDialog = null;
+      });
+    }
   }
 
   public SelectActivity(activity: IdeActivity) {
