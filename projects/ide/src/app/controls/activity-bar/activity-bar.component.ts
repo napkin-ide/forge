@@ -38,6 +38,10 @@ export class ActivityBarComponent implements OnInit {
 
       console.log(ideState);
 
+      if (!this.InfraConfigured) {
+        this.OpenRootActivity(this.RootActivities[0]);
+      }
+
       // this.ideState.AddStatusChange('Activities Loaded...');
     });
   }
