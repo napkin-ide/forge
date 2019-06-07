@@ -38,7 +38,7 @@ export class ActivityBarComponent implements OnInit {
 
       console.log(ideState);
 
-      if (!this.InfraConfigured) {
+      if (!this.InfraConfigured && this.RootActivities) {
         this.OpenRootActivity(this.RootActivities[0]);
       }
 
