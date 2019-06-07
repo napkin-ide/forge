@@ -15,7 +15,7 @@ export class SettingsComponent implements OnInit {
 
   //  Properties
   public get AzureDevOpsOAuthURL(): string {
-    return `/.devops/oauth?redirectUri=${window.location.href}`;
+    return `/.devops/oauth?redirectUri=${this.OAuthRedirectURL}`;
   }
 
   public DataAppSetupFormGroup: FormGroup;
@@ -25,12 +25,16 @@ export class SettingsComponent implements OnInit {
   public EntInfraFormGroup: FormGroup;
 
   public get GitHubOAuthURL(): string {
-    return `/.github/oauth?redirectUri=${window.location.href}`;
+    return `/.github/oauth?redirectUri=${this.OAuthRedirectURL}`;
   }
 
   public InfraConfigFormGroup: FormGroup;
 
   public InfraSetupFormGroup: FormGroup;
+
+  public get OAuthRedirectURL(): string {
+    return `${location.protocol}//${location.hostname}:${location.port}/forge`;
+  }
 
   public SetupStepTypes = ForgeInfrastructureSetupStepTypes;
 
