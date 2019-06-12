@@ -39,6 +39,15 @@ export class ForgeInfrastructureStateManagerContext extends StateManagerContext<
     });
   }
 
+  public CreateAppFromSeed(name: string) {
+    this.Execute({
+      Arguments: {
+        Name: name
+      },
+      Type: 'create-app-from-seed'
+    });
+  }
+
   public SetSelectedInfraTemplate(template: string) {
     this.Execute({
       Arguments: {
@@ -63,6 +72,15 @@ export class ForgeInfrastructureStateManagerContext extends StateManagerContext<
         Step: step
       },
       Type: 'set-setup-step'
+    });
+  }
+
+  public SetupApplicationSeed(seed: string) {
+    this.Execute({
+      Arguments: {
+        Seed: seed
+      },
+      Type: 'setup-application-seed'
     });
   }
 

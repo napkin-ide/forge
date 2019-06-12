@@ -1,4 +1,6 @@
 export class ForgeInfrastructureState {
+  public AppSeed?: InfrastructureApplicationSeedState;
+
   public DevOps?: DevOpsState;
 
   public Environment?: any;
@@ -37,7 +39,29 @@ export class GitHubState {
 }
 
 export class InfrastructureTemplateState {
+  public Options?: string[];
+
   public SelectedTemplate?: string;
+}
+
+export class InfrastructureApplicationSeedOption {
+  public Description?: string;
+
+  public ImageSource?: string;
+
+  public Lookup?: string;
+
+  public Name?: string;
+}
+
+export class InfrastructureApplicationSeedState {
+  public Created?: boolean;
+
+  public NewName?: string;
+
+  public Options?: InfrastructureApplicationSeedOption[];
+
+  public SelectedSeed?: string;
 }
 
 export enum ForgeInfrastructureSetupStepTypes {

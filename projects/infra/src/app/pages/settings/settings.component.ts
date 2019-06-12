@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ForgeInfrastructureState, ForgeInfrastructureSetupStepTypes } from '../../state/infra.state';
 import { ForgeInfrastructureStateManagerContext } from '../../state/infra-state-manager.context';
 import { MatSelectChange, MatStepper } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
+import { InfrastructureApplicationSeedOption } from './../../state/infra.state';
 
 @Component({
   selector: 'lcu-settings',
@@ -16,6 +18,12 @@ export class SettingsComponent implements OnInit {
   //  Properties
   public get AzureDevOpsOAuthURL(): string {
     return `/.devops/oauth?redirectUri=${this.OAuthRedirectURL}`;
+  }
+
+  public get CurrentAppSeed(): InfrastructureApplicationSeedOption {
+    return this.State.AppSeed && this.State.AppSeed.SelectedSeed
+      ? this.State.AppSeed.Options.find(o => o.Lookup === this.State.AppSeed.SelectedSeed)
+      : null;
   }
 
   public DataAppSetupFormGroup: FormGroup;
@@ -46,7 +54,11 @@ export class SettingsComponent implements OnInit {
   public UseDefaultSettings: boolean;
 
   //  Constructors
-  constructor(protected formBldr: FormBuilder, protected infraState: ForgeInfrastructureStateManagerContext) {
+  constructor(
+    protected formBldr: FormBuilder,
+    protected infraState: ForgeInfrastructureStateManagerContext,
+    protected sanitizer: DomSanitizer
+  ) {
     this.UseDefaultSettings = true;
   }
 
@@ -77,36 +89,15 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  protected stateChanged() {
-    if (!this.State.EnvSettings) {
-      this.State.EnvSettings = {};
-    }
-
-    this.InfraConfigFormGroup.patchValue({
-      azureTenantId: this.State.EnvSettings.AzureTenantID,
-      azureSubId: this.State.EnvSettings.AzureSubID,
-      azureAppId: this.State.EnvSettings.AzureAppID,
-      azureAppAuthKey: this.State.EnvSettings.AzureAppAuthKey
-    });
-
-    this.Stepper.linear = false;
-
-    this.Stepper.selectedIndex = 0;
-
-    const stepIndex = this.GetCurrentStepIndex();
-
-    for (let i = 0; i < stepIndex; i++) {
-      this.Stepper.next();
-    }
-
-    this.Stepper.linear = true;
-  }
-
   //  API methods
   public CancelSetup() {
     this.State.Loading = true;
 
     this.infraState.SetSetupStep(null);
+  }
+
+  public CleanImage(source: string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(source);
   }
 
   public CommitInfra() {
@@ -133,6 +124,12 @@ export class SettingsComponent implements OnInit {
     this.State.Loading = true;
 
     this.infraState.ConfigureDevOps();
+  }
+
+  public CreateAppFromSeed() {
+    this.State.Loading = true;
+
+    this.infraState.CreateAppFromSeed(this.State.AppSeed.NewName);
   }
 
   public GetCurrentStepIndex(): number {
@@ -171,5 +168,35 @@ export class SettingsComponent implements OnInit {
     this.infraState.SetSelectedOrg(event.value);
   }
 
+  public SetupApplicationSeed(lookup: string) {
+    this.State.Loading = true;
+
+    this.infraState.SetupApplicationSeed(lookup);
+  }
+
   //  Helpers
+  protected stateChanged() {
+    if (!this.State.EnvSettings) {
+      this.State.EnvSettings = {};
+    }
+
+    this.InfraConfigFormGroup.patchValue({
+      azureTenantId: this.State.EnvSettings.AzureTenantID,
+      azureSubId: this.State.EnvSettings.AzureSubID,
+      azureAppId: this.State.EnvSettings.AzureAppID,
+      azureAppAuthKey: this.State.EnvSettings.AzureAppAuthKey
+    });
+
+    this.Stepper.linear = false;
+
+    this.Stepper.selectedIndex = 0;
+
+    const stepIndex = this.GetCurrentStepIndex();
+
+    for (let i = 0; i < stepIndex; i++) {
+      this.Stepper.next();
+    }
+
+    this.Stepper.linear = true;
+  }
 }
