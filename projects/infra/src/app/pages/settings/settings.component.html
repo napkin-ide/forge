@@ -242,8 +242,28 @@
             </ng-container>
           </mat-card>
 
+          <mat-card>
+            <div class="spread">
+              <h4>NPM Configuration Details</h4>
+
+              <mat-form-field class="mat-full-width">
+                <input matInput placeholder="NPM Registry URL" formControlName="npmRegistry" required />
+
+                <mat-hint>...</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="mat-full-width">
+                <input matInput placeholder="NPM Personal Access Token" formControlName="npmAccessToken" required />
+
+                <mat-hint>...</mat-hint>
+              </mat-form-field>
+            </div>
+          </mat-card>
+
           <div class="spread" *ngIf="State.DevOps.Configured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="ConfigureDevOps()">Setup Azure Dev Ops</a>
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="ConfigureDevOps()" [disabled]="!DevOpsSetupFormGroup.valid"
+              >Setup Azure Dev Ops</a
+            >
           </div>
         </div>
       </div>
@@ -279,7 +299,7 @@
           </mat-card>
 
           <div class="spread" *ngIf="State.SourceControlConfigured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()">
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()" [disabled]="!InfraSetupFormGroup.valid">
               Commit {{ State.Environment.Name }} Infrastructure
             </a>
           </div>
@@ -385,7 +405,13 @@
                           Create Application
                         </button>
 
-                        <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">
+                        <a
+                          mat-button
+                          class="mat-full-width"
+                          color="warn"
+                          (click)="SetupApplicationSeed(null)"
+                          [disabled]="!DevOpsSetupFormGroup.valid"
+                        >
                           Back to App Seed Select
                         </a>
                       </div>

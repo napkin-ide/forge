@@ -21,9 +21,12 @@ export class ForgeInfrastructureStateManagerContext extends StateManagerContext<
     });
   }
 
-  public ConfigureDevOps() {
+  public ConfigureDevOps(npmRegistry: string, npmAccessToken: string) {
     this.Execute({
-      Arguments: {},
+      Arguments: {
+        NPMRegistry: npmRegistry,
+        NPMAccessToken: npmAccessToken
+      },
       Type: 'configure-dev-ops'
     });
   }

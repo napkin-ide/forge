@@ -66,7 +66,10 @@ export class SettingsComponent implements OnInit {
   public ngOnInit() {
     this.DataAppSetupFormGroup = this.formBldr.group({});
 
-    this.DevOpsSetupFormGroup = this.formBldr.group({});
+    this.DevOpsSetupFormGroup = this.formBldr.group({
+      npmRegistry: ['', Validators.required],
+      npmAccessToken: ['', Validators.required]
+    });
 
     this.EntInfraFormGroup = this.formBldr.group({});
 
@@ -123,7 +126,11 @@ export class SettingsComponent implements OnInit {
   public ConfigureDevOps() {
     this.State.Loading = true;
 
-    this.infraState.ConfigureDevOps();
+    const npmRegistry: string = this.DevOpsSetupFormGroup.controls.npmRegistry.value;
+
+    const npmAccessToken: string = this.DevOpsSetupFormGroup.controls.npmAccessToken.value;
+
+    this.infraState.ConfigureDevOps(npmRegistry, npmAccessToken);
   }
 
   public CreateAppFromSeed() {
@@ -179,6 +186,11 @@ export class SettingsComponent implements OnInit {
     if (!this.State.EnvSettings) {
       this.State.EnvSettings = {};
     }
+
+    this.DevOpsSetupFormGroup.patchValue({
+      npmRegistry: this.State.DevOps.NPMRegistry,
+      npmAccessToken: this.State.DevOps.NPMAccessToken
+    });
 
     this.InfraConfigFormGroup.patchValue({
       azureTenantId: this.State.EnvSettings.AzureTenantID,
