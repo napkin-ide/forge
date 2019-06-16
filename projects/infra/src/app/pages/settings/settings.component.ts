@@ -187,17 +187,21 @@ export class SettingsComponent implements OnInit {
       this.State.EnvSettings = {};
     }
 
-    this.DevOpsSetupFormGroup.patchValue({
-      npmRegistry: this.State.DevOps.NPMRegistry,
-      npmAccessToken: this.State.DevOps.NPMAccessToken
-    });
+    if (this.State.DevOps) {
+      this.DevOpsSetupFormGroup.patchValue({
+        npmRegistry: this.State.DevOps.NPMRegistry,
+        npmAccessToken: this.State.DevOps.NPMAccessToken
+      });
+    }
 
-    this.InfraConfigFormGroup.patchValue({
-      azureTenantId: this.State.EnvSettings.AzureTenantID,
-      azureSubId: this.State.EnvSettings.AzureSubID,
-      azureAppId: this.State.EnvSettings.AzureAppID,
-      azureAppAuthKey: this.State.EnvSettings.AzureAppAuthKey
-    });
+    if (this.State.EnvSettings) {
+      this.InfraConfigFormGroup.patchValue({
+        azureTenantId: this.State.EnvSettings.AzureTenantID,
+        azureSubId: this.State.EnvSettings.AzureSubID,
+        azureAppId: this.State.EnvSettings.AzureAppID,
+        azureAppAuthKey: this.State.EnvSettings.AzureAppAuthKey
+      });
+    }
 
     this.Stepper.linear = false;
 
