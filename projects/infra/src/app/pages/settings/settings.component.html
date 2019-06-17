@@ -308,10 +308,10 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="EntInfraFormGroup">
+  <mat-step [stepControl]="DataAppSetupFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
-    <form [formGroup]="EntInfraFormGroup">
+    <form [formGroup]="DataAppSetupFormGroup">
       <ng-template matStepLabel>Setup Application</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps?.Setup && !State.Loading">
@@ -399,8 +399,8 @@
                       </mat-form-field>
 
                       <div class="spread">
-                        <a mat-raised-button class="mat-full-width" color="accent" (click)="CreateAppFromSeed()" [disabled]="!EntInfraFormGroup.valid">
-                          Create Application
+                        <a mat-raised-button class="mat-full-width" color="accent" (click)="CreateAppFromSeed()" [disabled]="!DataAppSetupFormGroup.valid">
+                          Create {{ CurrentAppSeed.Name }}
                         </a>
 
                         <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">

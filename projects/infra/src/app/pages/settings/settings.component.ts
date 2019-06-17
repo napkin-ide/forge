@@ -64,14 +64,14 @@ export class SettingsComponent implements OnInit {
 
   //  Life Cycle
   public ngOnInit() {
-    this.DataAppSetupFormGroup = this.formBldr.group({});
+    this.EntInfraFormGroup = this.formBldr.group({});
 
     this.DevOpsSetupFormGroup = this.formBldr.group({
       npmRegistry: ['', Validators.required],
       npmAccessToken: ['', Validators.required]
     });
 
-    this.EntInfraFormGroup = this.formBldr.group({
+    this.DataAppSetupFormGroup = this.formBldr.group({
       appName: ['', Validators.required]
     });
 
