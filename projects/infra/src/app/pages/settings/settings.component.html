@@ -387,7 +387,6 @@
               <ng-container *ngIf="CurrentAppSeed">
                 <div fxFlex="60%" fxFlex.lt-sm="95%">
                   <mat-card class="spread">
-                    <form (ngSubmit)="CreateAppFromSeed()">
                       <mat-form-field class="mat-full-width">
                         <input
                           matInput
@@ -401,15 +400,14 @@
                       </mat-form-field>
 
                       <div class="spread">
-                        <button mat-raised-button class="mat-full-width" color="accent" type="submit" [disabled]="!EntInfraFormGroup.valid">
+                        <a mat-raised-button class="mat-full-width" color="accent" (click)="CreateAppFromSeed()" [disabled]="!EntInfraFormGroup.valid">
                           Create Application
-                        </button>
+                        </a>
 
                         <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">
                           Back to App Seed Select
                         </a>
                       </div>
-                    </form>
                   </mat-card>
                 </div>
               </ng-container>
