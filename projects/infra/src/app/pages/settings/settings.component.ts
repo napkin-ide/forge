@@ -138,7 +138,7 @@ export class SettingsComponent implements OnInit {
   public CreateAppFromSeed() {
     this.State.Loading = true;
 
-    this.infraState.CreateAppFromSeed(this.EntInfraFormGroup.controls.appName.value);
+    this.infraState.CreateAppFromSeed(this.DataAppSetupFormGroup.controls.appName.value);
   }
 
   public GetCurrentStepIndex(): number {
