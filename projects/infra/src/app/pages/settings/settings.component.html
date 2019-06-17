@@ -308,10 +308,10 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="DevOpsSetupFormGroup">
+  <mat-step [stepControl]="EntInfraFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
-    <form [formGroup]="DevOpsSetupFormGroup">
+    <form [formGroup]="EntInfraFormGroup">
       <ng-template matStepLabel>Setup Application</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps?.Setup && !State.Loading">
@@ -401,17 +401,11 @@
                       </mat-form-field>
 
                       <div class="spread">
-                        <button mat-raised-button class="mat-full-width" color="accent" type="submit">
+                        <button mat-raised-button class="mat-full-width" color="accent" type="submit" [disabled]="!EntInfraFormGroup.valid">
                           Create Application
                         </button>
 
-                        <a
-                          mat-button
-                          class="mat-full-width"
-                          color="warn"
-                          (click)="SetupApplicationSeed(null)"
-                          [disabled]="!DevOpsSetupFormGroup.valid"
-                        >
+                        <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">
                           Back to App Seed Select
                         </a>
                       </div>
