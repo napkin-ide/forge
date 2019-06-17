@@ -180,7 +180,7 @@
           </mat-card>
 
           <div class="spread" *ngIf="State.SourceControlConfigured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="Configure()">Configure Azure Infrastructure</a>
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="Configure()" [disabled]="!InfraConfigFormGroup.valid">Configure Azure Infrastructure</a>
 
             <a mat-button class="mat-full-width" color="warn" (click)="CancelSetup()">Back To Setup</a>
           </div>
@@ -391,8 +391,7 @@
                         <input
                           matInput
                           placeholder="New {{ CurrentAppSeed.Name }} Name"
-                          [(ngModel)]="State.AppSeed.NewName"
-                          name="appName"
+                          formControlName="appName"
                           required
                         />
 

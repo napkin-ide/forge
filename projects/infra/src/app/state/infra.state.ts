@@ -65,8 +65,6 @@ export class InfrastructureApplicationSeedOption {
 export class InfrastructureApplicationSeedState {
   public Created?: boolean;
 
-  public NewName?: string;
-
   public Options?: InfrastructureApplicationSeedOption[];
 
   public SelectedSeed?: string;

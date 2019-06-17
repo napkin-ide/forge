@@ -71,7 +71,9 @@ export class SettingsComponent implements OnInit {
       npmAccessToken: ['', Validators.required]
     });
 
-    this.EntInfraFormGroup = this.formBldr.group({});
+    this.EntInfraFormGroup = this.formBldr.group({
+      appName: ['', Validators.required]
+    });
 
     this.InfraConfigFormGroup = this.formBldr.group({
       azureTenantId: ['', Validators.required],
@@ -136,7 +138,7 @@ export class SettingsComponent implements OnInit {
   public CreateAppFromSeed() {
     this.State.Loading = true;
 
-    this.infraState.CreateAppFromSeed(this.State.AppSeed.NewName);
+    this.infraState.CreateAppFromSeed(this.EntInfraFormGroup.controls.appName.value);
   }
 
   public GetCurrentStepIndex(): number {
