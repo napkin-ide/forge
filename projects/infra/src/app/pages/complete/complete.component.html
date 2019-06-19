@@ -1,0 +1,175 @@
+<div class="spread" *ngIf="!State.Loading">
+  <div fxLayout="row wrap" fxLayoutAlign="center center">
+    <div fxFlex="90%">
+      <mat-card class="spread">
+        <div class="spread">
+          <h2 class="mat-display-2">Finalizing Your Application Setup</h2>
+
+          <p class="mat-body-3">
+            Let's take a look at what we have set up so far, get you reading on next steps, and we'll let you know when everything is setup
+            and ready to go...
+          </p>
+        </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="40%" fxFlex.lt-sm="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>check_circle_outline</mat-icon>
+
+          <mat-card-title>Azure Infrastructure</mat-card-title>
+        </mat-card-header>
+
+        <div>
+          <mat-list>
+            <mat-list-item>
+              <mat-icon matListIcon>check</mat-icon>
+
+              <div matLine>Created or Brought your own Azure Subscription</div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon>check</mat-icon>
+
+              <div matLine>Established a Management Hook</div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon>check</mat-icon>
+
+              <div matLine>
+                Deployed first version of {{ State.InfraTemplate.SelectedTemplate }} Infrastructure to
+                {{ State.Environment.Lookup }}
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="40%" fxFlex.lt-sm="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>check_circle_outline</mat-icon>
+
+          <mat-card-title>GitHub Connection</mat-card-title>
+        </mat-card-header>
+
+        <div>
+            <mat-list>
+              <mat-list-item>
+                <mat-icon matListIcon>check</mat-icon>
+
+                <div matLine>Created or Brought your own Git Repository</div>
+              </mat-list-item>
+
+              <mat-list-item>
+                <mat-icon matListIcon>check</mat-icon>
+
+                <div matLine>Forked a default infrastructure repo to @{{ State.EnvSettings["GitHubOrganization"] }}/{{ State.EnvSettings["GitHubRepository"] }}</div>
+              </mat-list-item>
+
+              <mat-list-item>
+                <mat-icon matListIcon>check</mat-icon>
+
+                <div matLine>
+                  Created a repository for your {{ State.AppSeed.SelectedSeed }} application
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="40%" fxFlex.lt-sm="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>check_circle_outline</mat-icon>
+
+          <mat-card-title>Dev/Ops</mat-card-title>
+        </mat-card-header>
+
+        <div>
+            <mat-list>
+              <mat-list-item>
+                <mat-icon matListIcon>check</mat-icon>
+
+                <div matLine>Established a new Azure Dev Ops Project:  LCU OS</div>
+              </mat-list-item>
+
+              <mat-list-item>
+                <mat-icon matListIcon>check</mat-icon>
+
+                <div matLine>Created an automated build and release for managing changes to infrastructure</div>
+              </mat-list-item>
+
+              <mat-list-item>
+                <mat-icon matListIcon>check</mat-icon>
+
+                <div matLine>
+                  Created an automated build for your first application.
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="40%" fxFlex.lt-sm="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar *ngIf="State.AppSeed.State == AppSeedStepTypes.Created">check_circle_outline</mat-icon>
+
+          <mat-card-title>Application Seed</mat-card-title>
+        </mat-card-header>
+
+        <div *ngIf="State.AppSeed.State == AppSeedStepTypes.Creating">
+            <mat-list>
+              <mat-list-item>
+                <mat-icon matListIcon>check</mat-icon>
+
+                <div matLine>Seeded your application repository with {{ State.AppSeed.SelectedSeed }}</div>
+              </mat-list-item>
+
+              <mat-list-item>
+                <mat-icon matListIcon>check</mat-icon>
+
+                <div matLine>Established a Data Applications configuration in your forge</div>
+              </mat-list-item>
+
+              <mat-list-item>
+                <mat-icon matListIcon>check</mat-icon>
+
+                <div matLine>
+                  Hosted your first application on the Dynamic Application Framework
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+
+        <div class="spread">
+          <h3>Finalizating Application Setup</h3>
+
+          <mat-spinner></mat-spinner>
+        </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>search</mat-icon>
+
+          <mat-card-title>Getting Started & Next Steps</mat-card-title>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </div>
+
+  <pre>{{ State | json }}</pre>
+</div>
+
+<div class="spread" *ngIf="State.Loading">
+  <mat-spinner></mat-spinner>
+</div>

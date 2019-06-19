@@ -1,0 +1,37 @@
+@import '../../../../../common/src/styles/theme';
+
+@mixin org($theme) {
+  $config: mat-typography-config();
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  ::ng-deep {
+    .mat-stepper-horizontal,
+    .mat-stepper-vertical {
+      background: transparent !important;
+    }
+
+    .mat-list .mat-list-item .mat-line {
+      word-wrap: break-word;
+      white-space: pre-wrap;
+    }
+  }
+
+  :host {
+    .side-bar-section {
+      text-align: center;
+
+      .mat-icon-button {
+        margin: auto;
+      }
+
+      .mat-card {
+        margin: 1rem;
+      }
+    }
+  }
+}
+
+@include org($nide-theme);

@@ -287,7 +287,8 @@
                   <mat-select
                     placeholder="Infrastructure Template"
                     (selectionChange)="SetInfraTemplate($event)"
-                    [value]="State.InfraTemplate.SelectedTemplate"
+                    formControlName="infraTemplate"
+                    required
                   >
                     <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
                   </mat-select>

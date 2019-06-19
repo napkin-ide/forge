@@ -5,6 +5,7 @@ import { ForgeInfrastructureStateManagerContext } from '../../state/infra-state-
 import { MatSelectChange, MatStepper } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { InfrastructureApplicationSeedOption } from './../../state/infra.state';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'lcu-settings',
@@ -57,7 +58,8 @@ export class SettingsComponent implements OnInit {
   constructor(
     protected formBldr: FormBuilder,
     protected infraState: ForgeInfrastructureStateManagerContext,
-    protected sanitizer: DomSanitizer
+    protected sanitizer: DomSanitizer,
+    protected router: Router
   ) {
     this.UseDefaultSettings = true;
   }
@@ -82,7 +84,9 @@ export class SettingsComponent implements OnInit {
       azureAppAuthKey: ['', Validators.required]
     });
 
-    this.InfraSetupFormGroup = this.formBldr.group({});
+    this.InfraSetupFormGroup = this.formBldr.group({
+      infraTemplate: ['', Validators.required]
+    });
 
     this.infraState.Context.subscribe(state => {
       this.State = state;
@@ -185,6 +189,10 @@ export class SettingsComponent implements OnInit {
 
   //  Helpers
   protected stateChanged() {
+    if (this.State.AppSeed && this.State.AppSeed.Step) {
+      //  TODO:  Route to complete
+    }
+
     if (!this.State.EnvSettings) {
       this.State.EnvSettings = {};
     }
@@ -202,6 +210,12 @@ export class SettingsComponent implements OnInit {
         azureSubId: this.State.EnvSettings.AzureSubID,
         azureAppId: this.State.EnvSettings.AzureAppID,
         azureAppAuthKey: this.State.EnvSettings.AzureAppAuthKey
+      });
+    }
+
+    if (this.State.InfraTemplate) {
+      this.InfraSetupFormGroup.patchValue({
+        infraTemplate: this.State.InfraTemplate.SelectedTemplate
       });
     }
 

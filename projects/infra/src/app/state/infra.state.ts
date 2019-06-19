@@ -63,7 +63,7 @@ export class InfrastructureApplicationSeedOption {
 }
 
 export class InfrastructureApplicationSeedState {
-  public Created?: boolean;
+  public Step?: ForgeInfrastructureApplicationSeedStepTypes;
 
   public Options?: InfrastructureApplicationSeedOption[];
 
@@ -80,4 +80,9 @@ export enum ForgeInfrastructureSetupStepTypes {
   Azure = 'Azure',
   AWS = 'AWS',
   Custom = 'Custom'
+}
+
+export enum ForgeInfrastructureApplicationSeedStepTypes {
+  Creating = 'Creating',
+  Created = 'Created'
 }
