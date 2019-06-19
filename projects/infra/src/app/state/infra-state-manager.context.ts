@@ -14,6 +14,13 @@ export class ForgeInfrastructureStateManagerContext extends StateManagerContext<
   }
 
   //  API Methods
+  public AppSeedCompleteCheck() {
+    this.Execute({
+      Arguments: {},
+      Type: 'app-seed-complete-check'
+    });
+  }
+
   public CommitInfrastructure() {
     this.Execute({
       Arguments: {},

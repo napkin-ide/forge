@@ -9,6 +9,7 @@ import { ForgeInfrastructureStateManagerContext } from '../../state/infra-state-
 import { MatSelectChange, MatStepper } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { InfrastructureApplicationSeedOption } from '../../state/infra.state';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'lcu-complete',
@@ -33,7 +34,7 @@ export class CompleteComponent implements OnInit {
   public State: ForgeInfrastructureState;
 
   //  Constructors
-  constructor(protected infraState: ForgeInfrastructureStateManagerContext, protected sanitizer: DomSanitizer) {
+  constructor(protected infraState: ForgeInfrastructureStateManagerContext, protected sanitizer: DomSanitizer, protected router: Router) {
     this.State = {};
   }
 
@@ -52,5 +53,15 @@ export class CompleteComponent implements OnInit {
   //  API methods
 
   //  Helpers
-  protected stateChanged() {}
+  protected stateChanged() {
+    if (this.State.AppSeed && !this.State.AppSeed.Step) {
+      this.router.navigate(['../']);
+    }
+
+    if (this.State.AppSeed && this.State.AppSeed.Step === ForgeInfrastructureApplicationSeedStepTypes.Creating) {
+      setTimeout(() => {
+        this.infraState.AppSeedCompleteCheck();
+      }, 5000);
+    }
+  }
 }

@@ -9,17 +9,11 @@
             Let's take a look at what we have set up so far, get you reading on next steps, and we'll let you know when everything is setup
             and ready to go...
           </p>
-
-          <div class="spread" *ngIf="State.AppSeed.Step == AppSeedStepTypes.Creating">
-            <h3 class="spread">Finalizating Application Setup</h3>
-
-            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-          </div>
         </div>
       </mat-card>
     </div>
 
-    <div fxFlex="40%" fxFlex.lt-md="90%">
+    <div fxFlex="50%" fxFlex.lt-md="90%">
       <mat-card class="spread">
         <mat-card-header>
           <mat-icon mat-card-avatar>lock</mat-icon>
@@ -35,7 +29,7 @@
 
           <mat-nav-list>
             <mat-list-item>
-              <mat-icon matListIcon>check</mat-icon>
+              <mat-icon matListIcon>check_box</mat-icon>
 
               <div matLine>Secure Connection to Azure</div>
 
@@ -49,7 +43,7 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>check</mat-icon>
+              <mat-icon matListIcon>check_box</mat-icon>
 
               <div matLine>Secure Connection to GitHub</div>
 
@@ -59,7 +53,7 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>check</mat-icon>
+              <mat-icon matListIcon>check_box</mat-icon>
 
               <div matLine>Secure Connection to Azure Dev Ops</div>
 
@@ -69,7 +63,7 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>check</mat-icon>
+              <mat-icon matListIcon>check_box</mat-icon>
 
               <div matLine>Secure Connection to NPM</div>
 
@@ -82,7 +76,7 @@
       </mat-card>
     </div>
 
-    <div fxFlex="40%" fxFlex.lt-md="90%">
+    <div fxFlex="50%" fxFlex.lt-md="90%">
       <mat-card class="spread">
         <mat-card-header>
           <mat-icon mat-card-avatar>code</mat-icon>
@@ -97,7 +91,7 @@
 
           <mat-nav-list>
             <mat-list-item>
-              <mat-icon matListIcon>check</mat-icon>
+              <mat-icon matListIcon>check_box</mat-icon>
 
               <div matLine>Connected to your GitHub Organization:</div>
 
@@ -111,7 +105,7 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>check</mat-icon>
+              <mat-icon matListIcon>check_box</mat-icon>
 
               <div matLine>Created an infrastructure repo:</div>
 
@@ -125,7 +119,7 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>check</mat-icon>
+              <mat-icon matListIcon>{{ State.AppSeed.HasBuild ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
 
               <div matLine>Created a repository for your {{ State.AppSeed?.SelectedSeed }} application:</div>
 
@@ -133,16 +127,20 @@
                 <strong>@{{ GitHubOrg }}/{{ State.AppSeed.NewName }}</strong>
               </div>
 
-              <a mat-icon-button target="_blank" href="https://github.com/{{ GitHubOrg }}/{{ State.AppSeed?.NewName }}">
+              <a mat-icon-button target="_blank" href="https://github.com/{{ GitHubOrg }}/{{ State.AppSeed?.NewName }}" [disabled]="!State.AppSeed.HasBuild">
                 <mat-icon>launch</mat-icon>
               </a>
             </mat-list-item>
           </mat-nav-list>
+
+          <div class="spread" *ngIf="!State.AppSeed.HasBuild">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
         </div>
       </mat-card>
     </div>
 
-    <div fxFlex="40%" fxFlex.lt-md="90%">
+    <div fxFlex="50%" fxFlex.lt-md="90%">
       <mat-card class="spread">
         <mat-card-header>
           <mat-icon mat-card-avatar>cloud</mat-icon>
@@ -157,33 +155,37 @@
 
           <mat-nav-list>
             <mat-list-item>
-              <mat-icon matListIcon>check</mat-icon>
+              <mat-icon matListIcon>{{ State.AppSeed.InfraBuilt ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
 
               <div matLine>
                 Deployed your first version of <strong>{{ State.InfraTemplate.SelectedTemplate }}</strong> Infrastructure to
                 <strong>{{ State.Environment.Lookup }}</strong>
               </div>
 
-              <a mat-icon-button target="_blank" href="https://portal.azure.com">
+              <a mat-icon-button target="_blank" href="https://portal.azure.com" [disabled]="!State.AppSeed.InfraBuilt">
                 <mat-icon>launch</mat-icon>
               </a>
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>check</mat-icon>
+              <mat-icon matListIcon>{{ State.AppSeed.HasBuild ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
 
               <div matLine>Established a new Azure Dev Ops Project (LCU OS) with automated builds and releases</div>
 
-              <a mat-icon-button target="_blank" href="https://fathym.visualstudio.com/LCU%20OS/_build">
+              <a mat-icon-button target="_blank" href="https://fathym.visualstudio.com/LCU%20OS/_build" [disabled]="!State.AppSeed.HasBuild">
                 <mat-icon>launch</mat-icon>
               </a>
             </mat-list-item>
           </mat-nav-list>
+
+          <div class="spread" *ngIf="!State.AppSeed.InfraBuilt || !State.AppSeed.HasBuild">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
         </div>
       </mat-card>
     </div>
 
-    <div fxFlex="40%" fxFlex.lt-md="90%">
+    <div fxFlex="50%" fxFlex.lt-md="90%">
       <mat-card class="spread">
         <mat-card-header>
           <mat-icon mat-card-avatar>dashboard</mat-icon>
@@ -197,9 +199,9 @@
             Framework.
           </p>
 
-          <mat-list>
+          <mat-nav-list>
             <mat-list-item>
-              <mat-icon matListIcon>check</mat-icon>
+              <mat-icon matListIcon>{{ State.AppSeed.AppSeeded ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
 
               <div matLine>
                 Seeded your application repository with <strong>{{ State.AppSeed.SelectedSeed }}</strong> template.
@@ -207,27 +209,31 @@
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>check</mat-icon>
+              <mat-icon matListIcon>{{ State.AppSeed.Step == AppSeedStepTypes.Created ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
 
               <div matLine>Established a Data Applications configuration in your forge</div>
 
-              <a mat-icon-button target="_blank" href="/{{ GitHubOrg }}/{{ State.AppSeed.NewName }}">
+              <a mat-icon-button target="_blank" href="/{{ GitHubOrg }}/{{ State.AppSeed.NewName }}" [disabled]="!State.AppSeed.Step != AppSeedStepTypes.Created">
                 <mat-icon>launch</mat-icon>
               </a>
             </mat-list-item>
 
             <mat-list-item>
-              <mat-icon matListIcon>check</mat-icon>
+              <mat-icon matListIcon>{{ State.AppSeed.Step == AppSeedStepTypes.Created ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
 
               <div matLine>
                 Prepared your forge with default Low Code Units to manage your current configuration
               </div>
 
-              <a mat-icon-button target="_parent" href="/forge">
+              <a mat-icon-button target="_parent" href="/forge" [disabled]="!State.AppSeed.Step != AppSeedStepTypes.Created">
                 <mat-icon>launch</mat-icon>
               </a>
             </mat-list-item>
-          </mat-list>
+          </mat-nav-list>
+
+          <div class="spread" *ngIf="!State.AppSeed.AppSeeded || State.AppSeed.Step != AppSeedStepTypes.Created">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
         </div>
       </mat-card>
     </div>
