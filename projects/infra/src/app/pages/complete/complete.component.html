@@ -9,149 +9,225 @@
             Let's take a look at what we have set up so far, get you reading on next steps, and we'll let you know when everything is setup
             and ready to go...
           </p>
+
+          <div class="spread" *ngIf="State.AppSeed.Step == AppSeedStepTypes.Creating">
+            <h3 class="spread">Finalizating Application Setup</h3>
+
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
         </div>
       </mat-card>
     </div>
 
-    <div fxFlex="40%" fxFlex.lt-sm="90%">
+    <div fxFlex="40%" fxFlex.lt-md="90%">
       <mat-card class="spread">
         <mat-card-header>
-          <mat-icon mat-card-avatar>check_circle_outline</mat-icon>
+          <mat-icon mat-card-avatar>lock</mat-icon>
 
-          <mat-card-title>Azure Infrastructure</mat-card-title>
+          <mat-card-title>LCU Orchestration</mat-card-title>
         </mat-card-header>
 
         <div>
-          <mat-list>
+          <p class="mat-body-2 spread">
+            In order to help orchestrate the various aspects of the LowCoeUnit community into the solutions your building, we had to create
+            and get hooked into a few of your systems.
+          </p>
+
+          <mat-nav-list>
             <mat-list-item>
               <mat-icon matListIcon>check</mat-icon>
 
-              <div matLine>Created or Brought your own Azure Subscription</div>
+              <div matLine>Secure Connection to Azure</div>
+
+              <a
+                mat-icon-button
+                target="_blank"
+                href="https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredAppsPreview"
+              >
+                <mat-icon>settings</mat-icon>
+              </a>
             </mat-list-item>
 
             <mat-list-item>
               <mat-icon matListIcon>check</mat-icon>
 
-              <div matLine>Established a Management Hook</div>
+              <div matLine>Secure Connection to GitHub</div>
+
+              <a mat-icon-button target="_blank" href="https://github.com/settings/applications">
+                <mat-icon>settings</mat-icon>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon>check</mat-icon>
+
+              <div matLine>Secure Connection to Azure Dev Ops</div>
+
+              <a mat-icon-button target="_blank" href="https://aex.dev.azure.com/me?mkt=en-US&campaign=o~msft~vsts~usercard">
+                <mat-icon>settings</mat-icon>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon>check</mat-icon>
+
+              <div matLine>Secure Connection to NPM</div>
+
+              <a mat-icon-button target="_blank" href="https://www.npmjs.com/settings/mcgear/tokens">
+                <mat-icon>settings</mat-icon>
+              </a>
+            </mat-list-item>
+          </mat-nav-list>
+        </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="40%" fxFlex.lt-md="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>code</mat-icon>
+
+          <mat-card-title>Source Control Configuration</mat-card-title>
+        </mat-card-header>
+
+        <div>
+          <p class="mat-body-2 spread">
+            For next steps on starting development against your new repositories, look below.
+          </p>
+
+          <mat-nav-list>
+            <mat-list-item>
+              <mat-icon matListIcon>check</mat-icon>
+
+              <div matLine>Connected to your GitHub Organization:</div>
+
+              <div matLine>
+                <strong>{{ State.GitHub.SelectedOrg }}</strong>
+              </div>
+
+              <a mat-icon-button target="_blank" href="https://github.com/settings/organizations">
+                <mat-icon>launch</mat-icon>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon>check</mat-icon>
+
+              <div matLine>Created an infrastructure repo:</div>
+
+              <div matLine>
+                <strong>@{{ GitHubOrg }}/{{ GitHubRepo }}</strong>
+              </div>
+
+              <a mat-icon-button target="_blank" href="https://github.com/{{ GitHubOrg }}/{{ GitHubRepo }}">
+                <mat-icon>launch</mat-icon>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon>check</mat-icon>
+
+              <div matLine>Created a repository for your {{ State.AppSeed?.SelectedSeed }} application:</div>
+
+              <div matLine>
+                <strong>@{{ GitHubOrg }}/{{ State.AppSeed.NewName }}</strong>
+              </div>
+
+              <a mat-icon-button target="_blank" href="https://github.com/{{ GitHubOrg }}/{{ State.AppSeed?.NewName }}">
+                <mat-icon>launch</mat-icon>
+              </a>
+            </mat-list-item>
+          </mat-nav-list>
+        </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="40%" fxFlex.lt-md="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>cloud</mat-icon>
+
+          <mat-card-title>Azure Dev/Ops</mat-card-title>
+        </mat-card-header>
+
+        <div>
+          <p class="mat-body-2 spread">
+            In order to simplify and streamline your development process, we've setup a Dev/Ops process for you.
+          </p>
+
+          <mat-nav-list>
+            <mat-list-item>
+              <mat-icon matListIcon>check</mat-icon>
+
+              <div matLine>
+                Deployed your first version of <strong>{{ State.InfraTemplate.SelectedTemplate }}</strong> Infrastructure to
+                <strong>{{ State.Environment.Lookup }}</strong>
+              </div>
+
+              <a mat-icon-button target="_blank" href="https://portal.azure.com">
+                <mat-icon>launch</mat-icon>
+              </a>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon>check</mat-icon>
+
+              <div matLine>Established a new Azure Dev Ops Project (LCU OS) with automated builds and releases</div>
+
+              <a mat-icon-button target="_blank" href="https://fathym.visualstudio.com/LCU%20OS/_build">
+                <mat-icon>launch</mat-icon>
+              </a>
+            </mat-list-item>
+          </mat-nav-list>
+        </div>
+      </mat-card>
+    </div>
+
+    <div fxFlex="40%" fxFlex.lt-md="90%">
+      <mat-card class="spread">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>dashboard</mat-icon>
+
+          <mat-card-title>Application Seed</mat-card-title>
+        </mat-card-header>
+
+        <div>
+          <p class="mat-body-2 spread">
+            Utilizing all your created assets, we have setup a default application for you and hosted it in the Dynamic Application
+            Framework.
+          </p>
+
+          <mat-list>
+            <mat-list-item>
+              <mat-icon matListIcon>check</mat-icon>
+
+              <div matLine>
+                Seeded your application repository with <strong>{{ State.AppSeed.SelectedSeed }}</strong> template.
+              </div>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-icon matListIcon>check</mat-icon>
+
+              <div matLine>Established a Data Applications configuration in your forge</div>
+
+              <a mat-icon-button target="_blank" href="/{{ GitHubOrg }}/{{ State.AppSeed.NewName }}">
+                <mat-icon>launch</mat-icon>
+              </a>
             </mat-list-item>
 
             <mat-list-item>
               <mat-icon matListIcon>check</mat-icon>
 
               <div matLine>
-                Deployed first version of {{ State.InfraTemplate.SelectedTemplate }} Infrastructure to
-                {{ State.Environment.Lookup }}
+                Prepared your forge with default Low Code Units to manage your current configuration
               </div>
+
+              <a mat-icon-button target="_parent" href="/forge">
+                <mat-icon>launch</mat-icon>
+              </a>
             </mat-list-item>
           </mat-list>
-        </div>
-      </mat-card>
-    </div>
-
-    <div fxFlex="40%" fxFlex.lt-sm="90%">
-      <mat-card class="spread">
-        <mat-card-header>
-          <mat-icon mat-card-avatar>check_circle_outline</mat-icon>
-
-          <mat-card-title>GitHub Connection</mat-card-title>
-        </mat-card-header>
-
-        <div>
-            <mat-list>
-              <mat-list-item>
-                <mat-icon matListIcon>check</mat-icon>
-
-                <div matLine>Created or Brought your own Git Repository</div>
-              </mat-list-item>
-
-              <mat-list-item>
-                <mat-icon matListIcon>check</mat-icon>
-
-                <div matLine>Forked a default infrastructure repo to @{{ State.EnvSettings["GitHubOrganization"] }}/{{ State.EnvSettings["GitHubRepository"] }}</div>
-              </mat-list-item>
-
-              <mat-list-item>
-                <mat-icon matListIcon>check</mat-icon>
-
-                <div matLine>
-                  Created a repository for your {{ State.AppSeed.SelectedSeed }} application
-                </div>
-              </mat-list-item>
-            </mat-list>
-          </div>
-      </mat-card>
-    </div>
-
-    <div fxFlex="40%" fxFlex.lt-sm="90%">
-      <mat-card class="spread">
-        <mat-card-header>
-          <mat-icon mat-card-avatar>check_circle_outline</mat-icon>
-
-          <mat-card-title>Dev/Ops</mat-card-title>
-        </mat-card-header>
-
-        <div>
-            <mat-list>
-              <mat-list-item>
-                <mat-icon matListIcon>check</mat-icon>
-
-                <div matLine>Established a new Azure Dev Ops Project:  LCU OS</div>
-              </mat-list-item>
-
-              <mat-list-item>
-                <mat-icon matListIcon>check</mat-icon>
-
-                <div matLine>Created an automated build and release for managing changes to infrastructure</div>
-              </mat-list-item>
-
-              <mat-list-item>
-                <mat-icon matListIcon>check</mat-icon>
-
-                <div matLine>
-                  Created an automated build for your first application.
-                </div>
-              </mat-list-item>
-            </mat-list>
-          </div>
-      </mat-card>
-    </div>
-
-    <div fxFlex="40%" fxFlex.lt-sm="90%">
-      <mat-card class="spread">
-        <mat-card-header>
-          <mat-icon mat-card-avatar *ngIf="State.AppSeed.State == AppSeedStepTypes.Created">check_circle_outline</mat-icon>
-
-          <mat-card-title>Application Seed</mat-card-title>
-        </mat-card-header>
-
-        <div *ngIf="State.AppSeed.State == AppSeedStepTypes.Creating">
-            <mat-list>
-              <mat-list-item>
-                <mat-icon matListIcon>check</mat-icon>
-
-                <div matLine>Seeded your application repository with {{ State.AppSeed.SelectedSeed }}</div>
-              </mat-list-item>
-
-              <mat-list-item>
-                <mat-icon matListIcon>check</mat-icon>
-
-                <div matLine>Established a Data Applications configuration in your forge</div>
-              </mat-list-item>
-
-              <mat-list-item>
-                <mat-icon matListIcon>check</mat-icon>
-
-                <div matLine>
-                  Hosted your first application on the Dynamic Application Framework
-                </div>
-              </mat-list-item>
-            </mat-list>
-          </div>
-
-        <div class="spread">
-          <h3>Finalizating Application Setup</h3>
-
-          <mat-spinner></mat-spinner>
         </div>
       </mat-card>
     </div>
@@ -167,7 +243,7 @@
     </div>
   </div>
 
-  <pre>{{ State | json }}</pre>
+  <pre style="text-align: left;">{{ State | json }}</pre>
 </div>
 
 <div class="spread" *ngIf="State.Loading">

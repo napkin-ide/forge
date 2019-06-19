@@ -22,10 +22,20 @@ export class CompleteComponent implements OnInit {
   //  Properties
   public AppSeedStepTypes = ForgeInfrastructureApplicationSeedStepTypes;
 
+  public get GitHubOrg(): string {
+    return this.State.EnvSettings ? this.State.EnvSettings['GitHubOrganization'] : '';
+  }
+
+  public get GitHubRepo(): string {
+    return this.State.EnvSettings ? this.State.EnvSettings['GitHubRepository'] : '';
+  }
+
   public State: ForgeInfrastructureState;
 
   //  Constructors
-  constructor(protected infraState: ForgeInfrastructureStateManagerContext, protected sanitizer: DomSanitizer) {}
+  constructor(protected infraState: ForgeInfrastructureStateManagerContext, protected sanitizer: DomSanitizer) {
+    this.State = {};
+  }
 
   //  Life Cycle
   public ngOnInit() {

@@ -13,23 +13,21 @@
       background: transparent !important;
     }
 
-    .mat-list .mat-list-item .mat-line {
-      word-wrap: break-word;
-      white-space: pre-wrap;
+    .mat-list .mat-list-item, .mat-nav-list .mat-list-item {
+      text-align: left;
+
+      .mat-line {
+        word-wrap: break-word !important;
+        white-space: pre-wrap !important;
+      }
     }
   }
 
   :host {
-    .side-bar-section {
-      text-align: center;
+    text-align: center;
 
-      .mat-icon-button {
-        margin: auto;
-      }
-
-      .mat-card {
-        margin: 1rem;
-      }
+    strong {
+      font-weight: bold !important;
     }
   }
 }
