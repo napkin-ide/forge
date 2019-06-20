@@ -213,7 +213,7 @@
 
               <div matLine>Established a Data Applications configuration in your forge</div>
 
-              <a mat-icon-button target="_blank" href="/{{ GitHubOrg }}/{{ State.AppSeed.NewName }}" [disabled]="!State.AppSeed.Step != AppSeedStepTypes.Created">
+              <a mat-icon-button target="_blank" href="/{{ GitHubOrg }}/{{ State.AppSeed.NewName }}" [disabled]="!State.AppSeed.Step == AppSeedStepTypes.Created">
                 <mat-icon>launch</mat-icon>
               </a>
             </mat-list-item>
@@ -225,7 +225,7 @@
                 Prepared your forge with default Low Code Units to manage your current configuration
               </div>
 
-              <a mat-icon-button target="_parent" href="/forge" [disabled]="!State.AppSeed.Step != AppSeedStepTypes.Created">
+              <a mat-icon-button target="_parent" href="/forge" [disabled]="!State.AppSeed.Step == AppSeedStepTypes.Created">
                 <mat-icon>launch</mat-icon>
               </a>
             </mat-list-item>
