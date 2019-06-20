@@ -8,16 +8,10 @@ import { ForgePublicState } from './core/forge-public.state';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public State: ForgePublicState;
-
-  constructor(protected state: ForgePublicStateManagerContext) {
+  constructor() {
 
   }
 
   public ngOnInit(): void {
-    this.state.Context.subscribe(state => {
-      this.State = state;
-      console.log('app', state);
-    });
   }
 }
