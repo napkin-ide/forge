@@ -190,7 +190,7 @@ export class SettingsComponent implements OnInit {
   //  Helpers
   protected stateChanged() {
     if (this.State.AppSeed && this.State.AppSeed.Step) {
-      this.router.navigate(['complete']);
+      // this.router.navigate(['complete']);
     }
 
     if (!this.State.EnvSettings) {
