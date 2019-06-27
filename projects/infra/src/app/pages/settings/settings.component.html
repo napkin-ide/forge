@@ -180,7 +180,7 @@
           </mat-card>
 
           <div class="spread" *ngIf="State.SourceControlConfigured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="Configure()">Configure Azure Infrastructure</a>
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="Configure()" [disabled]="!InfraConfigFormGroup.valid">Configure Azure Infrastructure</a>
 
             <a mat-button class="mat-full-width" color="warn" (click)="CancelSetup()">Back To Setup</a>
           </div>
@@ -242,8 +242,28 @@
             </ng-container>
           </mat-card>
 
+          <mat-card class="spread" *ngIf="State.DevOps.Configured">
+            <div class="spread">
+              <h4>NPM Configuration Details</h4>
+
+              <mat-form-field class="mat-full-width">
+                <input matInput placeholder="NPM Registry URL" formControlName="npmRegistry" required />
+
+                <mat-hint>...</mat-hint>
+              </mat-form-field>
+
+              <mat-form-field class="mat-full-width">
+                <input matInput placeholder="NPM Personal Access Token" formControlName="npmAccessToken" required />
+
+                <mat-hint>...</mat-hint>
+              </mat-form-field>
+            </div>
+          </mat-card>
+
           <div class="spread" *ngIf="State.DevOps.Configured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="ConfigureDevOps()">Setup Azure Dev Ops</a>
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="ConfigureDevOps()" [disabled]="!DevOpsSetupFormGroup.valid"
+              >Setup Azure Dev Ops</a
+            >
           </div>
         </div>
       </div>
@@ -267,7 +287,8 @@
                   <mat-select
                     placeholder="Infrastructure Template"
                     (selectionChange)="SetInfraTemplate($event)"
-                    [value]="State.InfraTemplate.SelectedTemplate"
+                    formControlName="infraTemplate"
+                    required
                   >
                     <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
                   </mat-select>
@@ -279,7 +300,7 @@
           </mat-card>
 
           <div class="spread" *ngIf="State.SourceControlConfigured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()">
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()" [disabled]="!InfraSetupFormGroup.valid">
               Commit {{ State.Environment.Name }} Infrastructure
             </a>
           </div>
@@ -288,10 +309,10 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="DevOpsSetupFormGroup">
+  <mat-step [stepControl]="DataAppSetupFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
-    <form [formGroup]="DevOpsSetupFormGroup">
+    <form [formGroup]="DataAppSetupFormGroup">
       <ng-template matStepLabel>Setup Application</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps?.Setup && !State.Loading">
@@ -367,13 +388,11 @@
               <ng-container *ngIf="CurrentAppSeed">
                 <div fxFlex="60%" fxFlex.lt-sm="95%">
                   <mat-card class="spread">
-                    <form (ngSubmit)="CreateAppFromSeed()">
                       <mat-form-field class="mat-full-width">
                         <input
                           matInput
                           placeholder="New {{ CurrentAppSeed.Name }} Name"
-                          [(ngModel)]="State.AppSeed.NewName"
-                          name="appName"
+                          formControlName="appName"
                           required
                         />
 
@@ -381,15 +400,14 @@
                       </mat-form-field>
 
                       <div class="spread">
-                        <button mat-raised-button class="mat-full-width" color="accent" type="submit">
-                          Create Application
-                        </button>
+                        <a mat-raised-button class="mat-full-width" color="accent" (click)="CreateAppFromSeed()" [disabled]="!DataAppSetupFormGroup.valid">
+                          Create {{ CurrentAppSeed.Name }}
+                        </a>
 
                         <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">
                           Back to App Seed Select
                         </a>
                       </div>
-                    </form>
                   </mat-card>
                 </div>
               </ng-container>

@@ -19,9 +19,9 @@
 
       <div *ngIf="State.Step === StepTypes['Terms']">
           <h1 class="mat-display-3">Terms / Conditions</h1>
-  
+
           <h2 class="mat-headline">Agree to our terms and conditions</h2>
-  
+
         </div>
     </div>
   </div>
@@ -37,21 +37,21 @@
       <div *ngIf="State.Step === StepTypes['Register']">
         <h1 class="mat-display-3">Sign Up for Fathym</h1>
         <!-- [success]="Registering && State.Success" -->
-        <lcu-register 
+        <lcu-register
           [success]="SuccessfulRegistration"
           [terms-checked]="TermsChecked"
-          [success-message]="SuccessMessage" 
-          error="{{ State.Error }}" 
-          loading="{{ State.Loading }}" 
+          [success-message]="SuccessMessage"
+          error="{{ State.Error }}"
+          loading="{{ State.Loading }}"
           (register)="Register($event)"
           (already-registered)="SetStep('SignIn')"
           (show-terms)="SetStep('Terms')">
         </lcu-register>
       </div>
-      
+
       <div *ngIf="State.Step === StepTypes['Terms']">
-          <lcu-terms-conditions 
-            [title]=TermsTitle 
+          <lcu-terms-conditions
+            [title]=TermsTitle
             [sub-title]=TermsSubTitle
             (agree-to-terms)='AgreeToTerms($event)'
             [terms-condition-config]='TermsConditionsConfig'>
@@ -60,4 +60,8 @@
       <p class="mat-title" color="primary">{{ ReconnectionMessage }}</p>
     </div>
   </div>
+</div>
+
+<div class="loading-indicator" *ngIf="State.Loading === true">
+    <mat-spinner ></mat-spinner>
 </div>

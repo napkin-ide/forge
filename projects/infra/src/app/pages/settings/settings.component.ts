@@ -5,6 +5,7 @@ import { ForgeInfrastructureStateManagerContext } from '../../state/infra-state-
 import { MatSelectChange, MatStepper } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { InfrastructureApplicationSeedOption } from './../../state/infra.state';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'lcu-settings',
@@ -57,18 +58,24 @@ export class SettingsComponent implements OnInit {
   constructor(
     protected formBldr: FormBuilder,
     protected infraState: ForgeInfrastructureStateManagerContext,
-    protected sanitizer: DomSanitizer
+    protected sanitizer: DomSanitizer,
+    protected router: Router
   ) {
     this.UseDefaultSettings = true;
   }
 
   //  Life Cycle
   public ngOnInit() {
-    this.DataAppSetupFormGroup = this.formBldr.group({});
-
-    this.DevOpsSetupFormGroup = this.formBldr.group({});
-
     this.EntInfraFormGroup = this.formBldr.group({});
+
+    this.DevOpsSetupFormGroup = this.formBldr.group({
+      npmRegistry: ['', Validators.required],
+      npmAccessToken: ['', Validators.required]
+    });
+
+    this.DataAppSetupFormGroup = this.formBldr.group({
+      appName: ['', Validators.required]
+    });
 
     this.InfraConfigFormGroup = this.formBldr.group({
       azureTenantId: ['', Validators.required],
@@ -77,7 +84,9 @@ export class SettingsComponent implements OnInit {
       azureAppAuthKey: ['', Validators.required]
     });
 
-    this.InfraSetupFormGroup = this.formBldr.group({});
+    this.InfraSetupFormGroup = this.formBldr.group({
+      infraTemplate: ['', Validators.required]
+    });
 
     this.infraState.Context.subscribe(state => {
       this.State = state;
@@ -123,13 +132,17 @@ export class SettingsComponent implements OnInit {
   public ConfigureDevOps() {
     this.State.Loading = true;
 
-    this.infraState.ConfigureDevOps();
+    const npmRegistry: string = this.DevOpsSetupFormGroup.controls.npmRegistry.value;
+
+    const npmAccessToken: string = this.DevOpsSetupFormGroup.controls.npmAccessToken.value;
+
+    this.infraState.ConfigureDevOps(npmRegistry, npmAccessToken);
   }
 
   public CreateAppFromSeed() {
     this.State.Loading = true;
 
-    this.infraState.CreateAppFromSeed(this.State.AppSeed.NewName);
+    this.infraState.CreateAppFromSeed(this.DataAppSetupFormGroup.controls.appName.value);
   }
 
   public GetCurrentStepIndex(): number {
@@ -176,16 +189,35 @@ export class SettingsComponent implements OnInit {
 
   //  Helpers
   protected stateChanged() {
+    if (this.State.AppSeed && this.State.AppSeed.Step) {
+      this.router.navigate(['complete']);
+    }
+
     if (!this.State.EnvSettings) {
       this.State.EnvSettings = {};
     }
 
-    this.InfraConfigFormGroup.patchValue({
-      azureTenantId: this.State.EnvSettings.AzureTenantID,
-      azureSubId: this.State.EnvSettings.AzureSubID,
-      azureAppId: this.State.EnvSettings.AzureAppID,
-      azureAppAuthKey: this.State.EnvSettings.AzureAppAuthKey
-    });
+    if (this.State.DevOps) {
+      this.DevOpsSetupFormGroup.patchValue({
+        npmRegistry: this.State.DevOps.NPMRegistry,
+        npmAccessToken: this.State.DevOps.NPMAccessToken
+      });
+    }
+
+    if (this.State.EnvSettings) {
+      this.InfraConfigFormGroup.patchValue({
+        azureTenantId: this.State.EnvSettings.AzureTenantID,
+        azureSubId: this.State.EnvSettings.AzureSubID,
+        azureAppId: this.State.EnvSettings.AzureAppID,
+        azureAppAuthKey: this.State.EnvSettings.AzureAppAuthKey
+      });
+    }
+
+    if (this.State.InfraTemplate) {
+      this.InfraSetupFormGroup.patchValue({
+        infraTemplate: this.State.InfraTemplate.SelectedTemplate
+      });
+    }
 
     this.Stepper.linear = false;
 

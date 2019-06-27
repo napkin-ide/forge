@@ -105,8 +105,7 @@
             <ng-container *ngIf="State.HostFlow">
               <mat-form-field class="mat-full-width" *ngIf="State.HostFlow == 'shared'">
                 <mat-select placeholder="Root Domain" formControlName="root">
-                  <mat-option value="fathym-int.com">fathym-int.com</mat-option>
-                  <mat-option value="lowcodeunit.com">lowcodeunit.com</mat-option>
+                  <mat-option [value]="host" *ngFor="let host of State.HostOptions">{{ host }}</mat-option>
                 </mat-select>
               </mat-form-field>
 

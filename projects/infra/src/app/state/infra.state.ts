@@ -27,6 +27,10 @@ export class ForgeInfrastructureState {
 export class DevOpsState {
   public Configured?: boolean;
 
+  public NPMAccessToken?: string;
+
+  public NPMRegistry?: string;
+
   public Setup?: boolean;
 }
 
@@ -45,6 +49,8 @@ export class InfrastructureTemplateState {
 }
 
 export class InfrastructureApplicationSeedOption {
+  public Commands?: string[];
+
   public Description?: string;
 
   public ImageSource?: string;
@@ -52,20 +58,33 @@ export class InfrastructureApplicationSeedOption {
   public Lookup?: string;
 
   public Name?: string;
+
+  public SeedFork?: InfrastructureApplicationSeedFork;
 }
 
 export class InfrastructureApplicationSeedState {
-  public Created?: boolean;
-
   public NewName?: string;
 
   public Options?: InfrastructureApplicationSeedOption[];
 
   public SelectedSeed?: string;
+
+  public Step?: ForgeInfrastructureApplicationSeedStepTypes;
+}
+
+export class InfrastructureApplicationSeedFork {
+  public Organization?: string;
+
+  public Repository?: string;
 }
 
 export enum ForgeInfrastructureSetupStepTypes {
   Azure = 'Azure',
   AWS = 'AWS',
   Custom = 'Custom'
+}
+
+export enum ForgeInfrastructureApplicationSeedStepTypes {
+  Creating = 'Creating',
+  Created = 'Created'
 }

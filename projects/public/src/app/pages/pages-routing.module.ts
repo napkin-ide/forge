@@ -4,13 +4,13 @@ import { IdentityComponent } from './identity/identity.component';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '**',
     loadChildren: './marketing/marketing.module#MarketingModule'
-  },
-  {
-    path: '',
-    component: IdentityComponent
   }
+  // {
+  //   path: '',
+  //   component: IdentityComponent
+  // }
 ];
 
 @NgModule({
