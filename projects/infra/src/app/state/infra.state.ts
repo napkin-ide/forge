@@ -31,7 +31,11 @@ export class DevOpsState {
 
   public NPMRegistry?: string;
 
+  public ProjectName?: string;
+
   public Setup?: boolean;
+
+  public Unauthorized?: string;
 }
 
 export class GitHubState {

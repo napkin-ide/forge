@@ -170,9 +170,9 @@
             <mat-list-item>
               <mat-icon matListIcon>{{ State.AppSeed.HasBuild ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
 
-              <div matLine>Established a new Azure Dev Ops Project (LCU OS) with automated builds and releases</div>
+              <div matLine>Established a new Azure Dev Ops Project ({{ State.DevOps.ProjectName }}) with automated builds and releases</div>
 
-              <a mat-icon-button target="_blank" href="https://fathym.visualstudio.com/LCU%20OS/_build" [disabled]="!State.AppSeed.HasBuild">
+              <a mat-icon-button target="_blank" href="https://fathym.visualstudio.com/{{ State.DevOps.ProjectName }}/_build" [disabled]="!State.AppSeed.HasBuild">
                 <mat-icon>launch</mat-icon>
               </a>
             </mat-list-item>
