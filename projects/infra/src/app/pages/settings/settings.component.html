@@ -108,23 +108,20 @@
   </mat-step>
 
   <mat-step [stepControl]="InfraConfigFormGroup">
-    <!-- <mat-spinner *ngIf="State.Loading"></mat-spinner> -->
+    <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="InfraConfigFormGroup">
       <ng-template matStepLabel>Configure Infrastructure</ng-template>
 
-      <div fxLayout="row wrap" fxLayoutAlign="center center">
-        <!-- *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading"> -->
+      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
-          <mat-card class="spread" >
-            <!-- *ngIf="UseDefaultSettings"> -->
+          <mat-card class="spread" *ngIf="UseDefaultSettings">
             <ng-container>
               <div class="spread">
                 <img src="assets/img/github-logo.png" style="width:75%; margin-left: 12.5%">
                 <h4 style="text-align: center">GitHub Source Control Setup</h4>
 
-                <div class="spread">
-                   <!-- *ngIf="!State.SourceControlConfigured"> -->
+                <div class="spread" *ngIf="!State.SourceControlConfigured">
                   <a mat-raised-button class="mat-full-width" color="primary" [href]="GitHubOAuthURL" target="_parent"
                     >Configure GitHub Connection</a
                   >
@@ -132,8 +129,7 @@
 
                 <p style="text-align:center; font-style: italic">Fathym strongly recommends you create a new GitHub organization that contains your LCU automation.</p>
 
-                <mat-form-field class="mat-full-width" >
-                  <!-- *ngIf="State.SourceControlConfigured"> -->
+                <mat-form-field class="mat-full-width" *ngIf="State.SourceControlConfigured">
                   <mat-select placeholder="GitHub Organization" (selectionChange)="SetOrg($event)" [value]="State.GitHub.SelectedOrg">
                     <mat-option *ngFor="let org of State.GitHub.Organizations" [value]="org.Login">{{ org.Login }}</mat-option>
                   </mat-select>
@@ -144,8 +140,7 @@
             </ng-container>
           </mat-card>
 
-          <mat-card class="spread">
-             <!-- *ngIf="UseDefaultSettings && State.SourceControlConfigured && State.GitHub.SelectedOrg"> -->
+          <mat-card class="spread" *ngIf="UseDefaultSettings && State.SourceControlConfigured && State.GitHub.SelectedOrg">
             <ng-container>
               <div class="spread">
                 <h4>Microsoft Azure Subscription Setup</h4>
@@ -211,15 +206,13 @@
             </ng-container>
           </mat-card>
 
-          <mat-card class="spread" >
-            <!-- *ngIf="!UseDefaultSettings"> -->
+          <mat-card class="spread" *ngIf="!UseDefaultSettings">
             <h3 style="text-align:center">Advanced Settings</h3>
 
             <p style="text-align: center">Coming Soon! Please switch back to Default Azure Settings.</p>
           </mat-card>
 
-          <div class="spread">
-             <!-- *ngIf="State.SourceControlConfigured"> -->
+          <div class="spread" *ngIf="State.SourceControlConfigured">
             <a mat-raised-button class="mat-full-width" color="accent" (click)="Configure()" [disabled]="!InfraConfigFormGroup.valid">Configure Azure Infrastructure</a>
 
             <a mat-button class="mat-full-width" color="warn" (click)="CancelSetup()" style="margin-top: 2em">Back To Setup</a>
@@ -230,16 +223,14 @@
   </mat-step>
 
   <mat-step [stepControl]="DevOpsSetupFormGroup">
-    <!-- <mat-spinner *ngIf="State.Loading"></mat-spinner> -->
+    <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="DevOpsSetupFormGroup">
       <ng-template matStepLabel>Setup Dev Ops</ng-template>
 
-      <div fxLayout="row wrap" fxLayoutAlign="center center"> 
-      <!-- *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading"> -->
+      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
-          <mat-card class="spread">
-             <!-- *ngIf="!State.DevOps.Configured"> -->
+          <mat-card class="spread" *ngIf="!State.DevOps.Configured">
             <ng-container>
               <div class="spread">
                 <h4>Azure Dev Ops Setup</h4>
@@ -253,8 +244,7 @@
             </ng-container>
           </mat-card>
 
-          <mat-card class="spread">
-             <!-- *ngIf="State.DevOps.Configured"> -->
+          <mat-card class="spread" *ngIf="State.DevOps.Configured">
             <ng-container>
               <div class="spread">
                 <h4>Azure Dev Ops Setup Details</h4>
@@ -285,8 +275,7 @@
             </ng-container>
           </mat-card>
 
-          <mat-card class="spread">
-             <!-- *ngIf="State.DevOps.Configured"> -->
+          <mat-card class="spread" *ngIf="State.DevOps.Configured">
             <div class="spread">
               <h4>NPM Configuration Details</h4>
 
@@ -304,8 +293,7 @@
             </div>
           </mat-card>
 
-          <div class="spread" >
-            <!-- *ngIf="State.DevOps.Configured"> -->
+          <div class="spread" *ngIf="State.DevOps.Configured">
             <a mat-raised-button class="mat-full-width" color="accent" (click)="ConfigureDevOps()" [disabled]="!DevOpsSetupFormGroup.valid"
               >Setup Azure Dev Ops</a
             >
@@ -316,7 +304,7 @@
   </mat-step>
 
   <mat-step [stepControl]="InfraSetupFormGroup">
-    <!-- <mat-spinner *ngIf="State.Loading"></mat-spinner> -->
+    <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="InfraSetupFormGroup">
       <ng-template matStepLabel>Setup Infrastructure</ng-template>
