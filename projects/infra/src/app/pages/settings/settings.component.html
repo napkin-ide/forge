@@ -14,8 +14,7 @@
     <form [formGroup]="EntInfraFormGroup">
       <ng-template matStepLabel>Enterprise Infrastructure</ng-template>
 
-      <div fxLayout="row wrap">
-      <!-- *ngIf="!State.Loading"> -->
+      <div fxLayout="row wrap" *ngIf="!State.Loading">
         <div fxFlex="25%">
           <mat-card class="spread">
 
