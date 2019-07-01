@@ -134,7 +134,11 @@
           <div *ngIf="State.Step == 'Provisioning'">
             <h1 class="mat-display-3">Creating Your {{ State.OrganizationName }} Forge</h1>
 
-            <a mat-button [href]="'http://' + State.Host" class="mat-headline">{{ State.Host }}</a>
+            <a mat-button href="https://{{ State.Host }}/forge" class="mat-headline">{{ State.Host }}</a>
+
+            <p class="mat-body-2">
+              Redirecting in 5 seconds...
+            </p>
           </div>
         </div>
 
