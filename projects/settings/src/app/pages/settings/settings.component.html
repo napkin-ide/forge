@@ -1,5 +1,5 @@
 <div class="spread">
-  <h2 class="mat-display-2">Enterprise Forge Settings</h2>
+  <h2 class="mat-display-2 title">Enterprise Forge Settings</h2>
 
   <mat-tab-group mat-stretch-tabs *ngIf="!MainLoading">
     <mat-tab label="Setup" *ngIf="State.Arch?.LCUs?.length > 0 && LCUGroups?.length > 0">
@@ -113,7 +113,7 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <div class="mat-headline">
+            <div class="mat-headline title">
               Manage
 
               <mat-form-field>
@@ -146,7 +146,7 @@
                 *ngFor="let section of State.SideBarSections"
               >
                 <mat-card>
-                  <div class="mat-headline">
+                  <div class="mat-headline title">
                     {{ section }}
 
                     <ng-container *ngIf="section != State.EditSection">
@@ -264,7 +264,7 @@
 
               <div fxFlex="30%" class="side-bar-section">
                 <mat-card>
-                  <h2 class="mat-headline">Add New Side Bar Section</h2>
+                  <h2 class="mat-headline title">Add New Side Bar Section</h2>
 
                   <form [formGroup]="NewSideBarSectionForm" (ngSubmit)="AddSideBarSection()">
                     <mat-form-field>
@@ -287,7 +287,7 @@
       <div class="spread">
         <mat-card>
           <div>
-            <div class="mat-headline">
+            <div class="mat-headline title">
               Manage
 
               <mat-form-field>

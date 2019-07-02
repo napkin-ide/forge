@@ -4,36 +4,36 @@
       <div *ngIf="State.Step == 'New'">
         <h1 class="mat-display-1">Welcome, Let's Get Started</h1>
 
-        <h2 class="mat-headline">Your organization serves as the backbone for organizing the solutions you build...</h2>
+        <h2 class="mat-headline title">Your organization serves as the backbone for organizing the solutions you build...</h2>
       </div>
 
       <div *ngIf="State.Step == 'Host'">
         <h1 class="mat-display-1">Create Organization Host</h1>
 
         <ng-container *ngIf="State.HostFlow == null">
-          <h2 class="mat-headline">If you have your own organization domain, follow that flow to validate domain ownership.</h2>
+          <h2 class="mat-headline title">If you have your own organization domain, follow that flow to validate domain ownership.</h2>
 
-          <h2 class="mat-headline">If you would like to use a shared domain, please follow that flow to secure your unused domain.</h2>
+          <h2 class="mat-headline title">If you would like to use a shared domain, please follow that flow to secure your unused domain.</h2>
         </ng-container>
 
         <ng-container *ngIf="State.HostFlow == 'shared'">
-          <h2 class="mat-headline">Select the root domain for your shared site.</h2>
+          <h2 class="mat-headline title">Select the root domain for your shared site.</h2>
 
-          <h2 class="mat-headline">
+          <h2 class="mat-headline title">
             Choose the desired subdomain for your shared site, and click confirm to verify it is available and secure it.
           </h2>
         </ng-container>
 
         <ng-container *ngIf="State.HostFlow == 'private'">
-          <h2 class="mat-headline">
+          <h2 class="mat-headline title">
             Enter the full domain that you would like to use for your site. Something like:
           </h2>
 
-          <h2 class="mat-headline">
+          <h2 class="mat-headline title">
             www.my-domain.com
           </h2>
 
-          <h2 *ngIf="HostValid" class="mat-headline">
+          <h2 *ngIf="HostValid" class="mat-headline title">
             Then you will need to add a CNAME record for your domain provider.  The record should have '{{ Subdomain }}' point to 'lcu-prd.azurewebsites.net'
           </h2>
         </ng-container>
@@ -42,7 +42,7 @@
       <div *ngIf="State.Step == 'Provisioning'">
         <h1 class="mat-display-2">Thank You</h1>
 
-        <h2 class="mat-headline">{{ State.Provisioning }}</h2>
+        <h2 class="mat-headline title">{{ State.Provisioning }}</h2>
       </div>
     </div>
   </div>
@@ -71,13 +71,13 @@
             <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="!State.HostFlow">
               <div fxFlex="50%" fxFlex.lt-md="100%">
                 <mat-card>
-                  <h2 class="mat-headline">Use a Fathym Domain</h2>
+                  <h2 class="mat-headline title">Use a Fathym Domain</h2>
 
-                  <p class="mat-subtitle">
+                  <p class="mat-subtitle paragraph-title">
                     Don't have your own domain? Or just want to get started quickly? This is the route for you.
                   </p>
 
-                  <p class="mat-subtitle">
+                  <p class="mat-subtitle paragraph-title">
                     You'll be able to add your own domain later on, click below to get started.
                   </p>
 
@@ -87,13 +87,13 @@
 
               <div fxFlex="50%" fxFlex.lt-md="100%">
                 <mat-card>
-                  <h2 class="mat-headline">Bring Your Own Domain</h2>
+                  <h2 class="mat-headline title">Bring Your Own Domain</h2>
 
-                  <p class="mat-subtitle">
+                  <p class="mat-subtitle paragraph-title">
                     Ready to get started forging your own domain? We'll walk you through getting started here.
                   </p>
 
-                  <p class="mat-subtitle">
+                  <p class="mat-subtitle paragraph-title">
                     You'll be able to add more domains later on, so click below to get started
                   </p>
 
@@ -134,7 +134,7 @@
           <div *ngIf="State.Step == 'Provisioning'">
             <h1 class="mat-display-3">Creating Your {{ State.OrganizationName }} Forge</h1>
 
-            <a mat-button [href]="'http://' + State.Host" class="mat-headline">{{ State.Host }}</a>
+            <a mat-button [href]="'http://' + State.Host" class="mat-headline title">{{ State.Host }}</a>
           </div>
         </div>
 
