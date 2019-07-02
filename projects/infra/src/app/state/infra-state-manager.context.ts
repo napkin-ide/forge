@@ -94,6 +94,16 @@ export class ForgeInfrastructureStateManagerContext extends StateManagerContext<
     });
   }
 
+  public SetupGitHubOAuth(clientId: string, clientSecret: string) {
+    this.Execute({
+      Arguments: {
+        ClientId: clientId,
+        ClientSecret: clientSecret
+      },
+      Type: 'setup-git-hub-o-auth'
+    });
+  }
+
   //  Helpers
   protected defaultValue() {
     return <ForgeInfrastructureState>{ Loading: true, DevOps: {} };

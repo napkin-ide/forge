@@ -39,6 +39,8 @@ export class DevOpsState {
 }
 
 export class GitHubState {
+  public OAuthConfigured?: boolean;
+
   public Organizations?: any; //{ Login: string }[];
 
   public OrgRepos?: any; //{ Name: string, Owner: { Login: string }}[];
