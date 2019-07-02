@@ -31,10 +31,16 @@ export class DevOpsState {
 
   public NPMRegistry?: string;
 
+  public ProjectName?: string;
+
   public Setup?: boolean;
+
+  public Unauthorized?: string;
 }
 
 export class GitHubState {
+  public OAuthConfigured?: boolean;
+
   public Organizations?: any; //{ Login: string }[];
 
   public OrgRepos?: any; //{ Name: string, Owner: { Login: string }}[];
