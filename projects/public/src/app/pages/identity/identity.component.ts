@@ -4,9 +4,9 @@ import { ForgePublicStateManagerContext } from '../../core/forge-public-state-ma
 import { ForgePublicState, ForgePublicStepTypes } from '../../core/forge-public.state';
 import { RegisterModel, SignInModel, TermsConditionsModel } from '@lcu-ide/lcu-identity-common';
 import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
-import { authConfig } from '@napkin-ide/common';
+//import { authConfig } from '@napkin-ide/common';
 
-
+ 
 @Component({
   selector: 'lib-identity',
   templateUrl: './identity.component.html',

@@ -30,6 +30,8 @@
 		"version:org-reg": "npm version patch --prefix projects/org-reg",
 		"ng": "ng",
 		"start": "ng serve",
+		"start:public": "ng serve public --port=4211",
+		"start:infra": "ng serve infra --port=4242",
 		"test": "ng test",
 		"lint": "ng lint",
 		"e2e": "ng e2e",
