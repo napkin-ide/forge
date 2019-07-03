@@ -16,7 +16,13 @@ import { IdeStateService } from './svc/ide-state.service';
 import { IdeStateStateManagerContext } from '@napkin-ide/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { environment } from '../environments/environment';
-import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu-ide/common';
+import { 
+  FathymSharedModule,
+  LCUServiceSettings,
+  MaterialModule,
+  FaviconsService,
+  BrowserFavicons,
+  BROWSER_FAVICONS_CONFIG } from '@lcu-ide/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +45,40 @@ import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu-ide
     {
       provide: LCUServiceSettings,
       useValue: FathymSharedModule.DefaultServiceSettings(environment)
+    },
+    {
+      provide: FaviconsService, useClass: BrowserFavicons
+    },
+    {
+      provide: BROWSER_FAVICONS_CONFIG,
+      useValue: {
+        icons: {
+          'arctic-theme': {
+            type: 'image/png',
+            href: '../assets/favicons/thinky_arctic.png'
+          },
+          'cool-candy': {
+            type: 'image/png',
+            href: '../assets/favicons/thinky_cool_candy.png'
+          },
+          flipper: {
+            type: 'image/png',
+            href: '../assets/favicons/thinky_flipper.png'
+          },
+          ice: {
+            type: 'image/png',
+            href: '../assets/favicons/thinky_ice.png'
+          },
+          circle: {
+            type: 'image/png',
+            href: '../assets/favicons/thinky_circle_red.png',
+            isDefault: true
+          }
+        },
+         // determine whether or not a random token is auto-appended to the HREF
+        // values whenever an icon is injected into the document
+        cacheBusting: true
+      }
     }
   ],
   bootstrap: [AppComponent]

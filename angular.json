@@ -64,6 +64,11 @@
 								"glob": "package.json",
 								"input": "./projects/public",
 								"output": "/"
+							},
+							{
+								"glob": "**/*",
+								"input": "./node_modules/@lcu-ide/common/assets/fonts",
+								"output": "./assets/fonts"
 							}
 						],
 						"styles": [
@@ -200,6 +205,11 @@
 								"glob": "package.json",
 								"input": "./projects/ide",
 								"output": "/"
+							},
+							{
+								"glob": "**/*",
+								"input": "./node_modules/@lcu-ide/common/assets/fonts",
+								"output": "./assets/fonts"
 							}
 						],
 						"styles": [
@@ -336,6 +346,11 @@
 								"glob": "package.json",
 								"input": "./projects/org-reg/",
 								"output": "/"
+							},
+							{
+								"glob": "**/*",
+								"input": "./node_modules/@lcu-ide/common/assets/fonts",
+								"output": "./assets/fonts"
 							}
 						],
 						"styles": [
@@ -472,6 +487,11 @@
 								"glob": "package.json",
 								"input": "./projects/settings/",
 								"output": "/"
+							},
+							{
+								"glob": "**/*",
+								"input": "./node_modules/@lcu-ide/common/assets/fonts",
+								"output": "./assets/fonts"
 							}
 						],
 						"styles": [
@@ -608,6 +628,11 @@
 								"glob": "package.json",
 								"input": "./projects/infra/",
 								"output": "/"
+							},
+							{
+								"glob": "**/*",
+								"input": "./node_modules/@lcu-ide/common/assets/fonts",
+								"output": "./assets/fonts"
 							}
 						],
 						"styles": [

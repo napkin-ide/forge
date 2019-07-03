@@ -1,12 +1,3 @@
-<!-- <div class="spread">
-  <ng-container *ngIf="!State.Loading">
-    <ng-container *ngIf="State.InfrastructureConfigured">
-    </ng-container>
-  </ng-container>
-
-  <mat-spinner *ngIf="State.Loading"></mat-spinner>
-</div> -->
-
 <mat-horizontal-stepper [linear]="true" [selectedIndex]="GetCurrentStepIndex()">
   <mat-step [stepControl]="EntInfraFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
@@ -14,62 +5,89 @@
     <form [formGroup]="EntInfraFormGroup">
       <ng-template matStepLabel>Enterprise Infrastructure</ng-template>
 
-      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="!State.Loading">
-        <div fxFlex="40%">
+      <div fxLayout="row wrap" *ngIf="!State.Loading">
+        <div fxFlex="25%" fxFlex.lt-md="50%" fxFlex.lt-sm="90%">
           <mat-card class="spread">
             <ng-container>
-              <h2 class="mat-headline">Use Default Azure Configurations</h2>
+              <h2 class="mat-headline title" style="text-align: center">Configure Microsoft Azure</h2>
 
-              <p class="mat-subtitle spread">
-                Azure provides a number of ways to work with Devices...
+              <img src="assets/img/Azure-logo.png" style="margin-left: 10%; width: 80%" />
+
+              <p class="mat-subtitle paragraph-title spread" style="font-size: 0.8em; text-align:center">
+                You can use Azure in numerous ways to work with your devices.
               </p>
 
-              <p class="mat-subtitle">
-                To get started, we'll set you up on a set of best practices, you'll be able to customize in the future.
-              </p>
+              <p class="mat-subtitle paragraph-title"></p>
+              Start with Fathym's best practices and templates, which you can customize later.
 
               <div class="spread">
-                <a mat-raised-button color="accent" (click)="GetStartedWithAzure()">Get Started on Azure</a>
+                <a mat-raised-button color="accent" (click)="GetStartedWithAzure()" style="width: 100%">Get Started</a>
               </div>
             </ng-container>
           </mat-card>
         </div>
 
-        <div fxFlex="40%">
+        <div fxFlex="25%" fxFlex.lt-md="50%" fxFlex.lt-sm="90%">
           <mat-card class="spread">
             <ng-container>
-              <h2 class="mat-headline">Use AWS Configurations</h2>
+              <h2 class="mat-headline title" style="text-align: center">Configure with Google</h2>
 
-              <p class="mat-subtitle spread">
+              <img src="assets/img/google-comingsoon.jpg" style="width: 100%" />
+
+              <!-- <p class="mat-subtitle paragraph-title spread">
+                Google...
+              </p> -->
+
+              <p class="mat-subtitle paragraph-title">
+                Use Google configurations to get your devices running.
+              </p>
+
+              <div class="spread">
+                <a mat-raised-button color="accent" [disabled]="true" style="width: 100%">Coming Soon!</a>
+              </div>
+            </ng-container>
+          </mat-card>
+        </div>
+
+        <div fxFlex="25%" fxFlex.lt-md="50%" fxFlex.lt-sm="90%">
+          <mat-card class="spread">
+            <ng-container>
+              <h2 class="mat-headline title" style="text-align: center">Configure with AWS</h2>
+
+              <img src="assets/img/aws-comingsoon.jpg" style="width: 100%" />
+
+              <!-- <p class="mat-subtitle paragraph-title spread">
                 AWS...
-              </p>
+              </p> -->
 
-              <p class="mat-subtitle">
-                Blah blah blah blah, coming soon, blah blah blah....
+              <p class="mat-subtitle paragraph-title">
+                Use Amazon Web Service configurations to get your devices running.
               </p>
 
               <div class="spread">
-                <a mat-raised-button color="accent" [disabled]="true">AWS Coming Soon!</a>
+                <a mat-raised-button color="accent" [disabled]="true" style="width: 100%">Coming Soon!</a>
               </div>
             </ng-container>
           </mat-card>
         </div>
 
-        <div fxFlex="80%">
+        <div fxFlex="25%" fxFlex.lt-md="50%" fxFlex.lt-sm="90%">
           <mat-card class="spread">
             <ng-container>
-              <h2 class="mat-headline" jjhhbv>Orchestrate and Expand an Enterprise Infrastructure</h2>
+              <h2 class="mat-headline title" style="text-align: center" jjhhbv>Configure with Your Infrastructure</h2>
 
-              <p class="mat-subtitle spread">
+              <img src="assets/img/infrastructure-comingsoon.jpg" style="width: 100%" />
+
+              <!-- <p class="mat-subtitle paragraph-title spread">
                 Something about bringing your own infrastructure...
-              </p>
+              </p> -->
 
-              <p class="mat-subtitle">
-                Blah blah blah blah, coming soon, blah blah blah....
+              <p class="mat-subtitle paragraph-title">
+                Use your company's infrastructure to get your devices running.
               </p>
 
               <div class="spread">
-                <a mat-raised-button color="accent" [disabled]="true">Customizable Infrastructure Coming Soon!</a>
+                <a mat-raised-button color="accent" [disabled]="true" style="width: 100%">Coming Soon!</a>
               </div>
             </ng-container>
           </mat-card>
@@ -85,104 +103,195 @@
       <ng-template matStepLabel>Configure Infrastructure</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
-        <div fxFlex="60%" fxFlex.lt-sm="95%">
-          <mat-card class="spread" *ngIf="UseDefaultSettings">
-            <ng-container>
+        <div fxFlex="60%" fxFlex.lt-md="95%">
+          <div>
+            <mat-card class="spread">
               <div class="spread">
-                <h4>Git Hub Source Control Setup</h4>
+                <p class="mat-body-3 plain-text">
+                  Establishing a quality, recurring way to provision and manage architecture is key to delivering quality products. In the
+                  following sections we will setup and establish your enterprise source control through GitHub in order to enable a seamless
+                  Dev/Ops process for deploying infrastructure and applications. These assets belong to you and your organization, we are
+                  here to guide you in setting up and orchestrating the vast array of technolgies needed to deliver quality solutions.
+                </p>
+              </div>
+            </mat-card>
 
-                <div class="spread" *ngIf="!State.SourceControlConfigured">
-                  <a mat-raised-button class="mat-full-width" color="primary" [href]="GitHubOAuthURL" target="_parent"
-                    >Configure Git Hub Connection</a
-                  >
+            <ng-container *ngIf="UseDefaultSettings">
+              <mat-card class="spread">
+                <div class="spread" style="text-align: center">
+                  <img src="assets/img/github-logo.png" style="width:75%; margin-left: 12.5%" />
+
+                  <ng-container *ngIf="!State.GitHub.OAuthConfigured">
+                    <h4>GitHub Source Control Setup</h4>
+
+                    <p class="mat-body-2 plain-text">
+                      To manage GitHub on your new domain, you'll first have to setup a GitHub OAuth Application. This application will
+                      create a secure way for you to mange your enterprise source control across a vast number of users (internal and
+                      external).
+                    </p>
+
+                      <div class="spread">
+                        <a
+                          mat-stroked-button
+                          color="primary"
+                          target="_blank"
+                          class="mat-full-width"
+                          href="https://github.com/settings/applications/new"
+                        >
+                          Creating GitHub OAuth App (Start New)
+                        </a>
+                      </div>
+
+                      <mat-list style="text-align: left;">
+                        <mat-list-item>
+                          <span matLine>Application Name:</span>
+
+                          <strong matLine>{{ State.EnterpriseName }} - LCU</strong>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                          <span matLine>Homepage URL:</span>
+
+                          <strong matLine>{{ RootURL }}</strong>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                          <span matLine>Application Description:</span>
+
+                          <strong matLine>{{ State.EnterpriseName }} - Low Code Unit</strong>
+                        </mat-list-item>
+
+                        <mat-list-item>
+                          <span matLine>Authorization callback URL:</span>
+
+                          <strong matLine>{{ RootURL }}/.github/authorize</strong>
+                        </mat-list-item>
+                      </mat-list>
+
+                      <div class="spread">
+                        <a
+                          mat-stroked-button
+                          color="primary"
+                          target="_blank"
+                          class="mat-full-width"
+                          href="https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/"
+                        >
+                          Creating a new GitHub OAuth App (Documentation)
+                        </a>
+                      </div>
+
+                      <mat-form-field class="mat-full-width">
+                        <input matInput placeholder="Git Hub Client ID" formControlName="gitHubClientId" required />
+
+                        <mat-hint>...</mat-hint>
+                      </mat-form-field>
+
+                      <mat-form-field class="mat-full-width">
+                        <input matInput placeholder="Git Hub Client Secret" formControlName="gitHubClientSecret" required />
+
+                        <mat-hint>...</mat-hint>
+                      </mat-form-field>
+
+                      <div class="spread" *ngIf="!State.SourceControlConfigured">
+                        <a mat-raised-button class="mat-full-width" color="primary" (click)="SetupGitHubOAuth()">
+                          Configure GitHub Connection
+                        </a>
+                      </div>
+                    </ng-container>
+
+                    <p style="text-align:center; font-style: italic">
+                      Fathym strongly recommends you create a new GitHub organization that contains your LCU automation.
+                    </p>
+
+                    <mat-form-field class="mat-full-width" *ngIf="State.SourceControlConfigured">
+                      <mat-select placeholder="GitHub Organization" (selectionChange)="SetOrg($event)" [value]="State.GitHub.SelectedOrg">
+                        <mat-option *ngFor="let org of State.GitHub.Organizations" [value]="org.Login">{{ org.Login }}</mat-option>
+                      </mat-select>
+
+                      <!-- <mat-hint>It is recommended that you create a new organization to contain your LCU automation.</mat-hint> -->
+                    </mat-form-field>
+                  </ng-container>
                 </div>
+              </mat-card>
 
-                <mat-form-field class="mat-full-width" *ngIf="State.SourceControlConfigured">
-                  <mat-select placeholder="GitHub Organization" (selectionChange)="SetOrg($event)" [value]="State.GitHub.SelectedOrg">
-                    <mat-option *ngFor="let org of State.GitHub.Organizations" [value]="org.Login">{{ org.Login }}</mat-option>
-                  </mat-select>
+              <mat-card class="spread" *ngIf="State.SourceControlConfigured && State.GitHub.SelectedOrg">
+                <div class="spread">
+                  <h4>Microsoft Azure Subscription Setup</h4>
 
-                  <mat-hint>It is recommended that you create a new organization to contain your LCU automation.</mat-hint>
-                </mat-form-field>
-              </div>
+                  <ng-container>
+                    <div class="spread">
+                      <p class="mat-body-2 plain-text" style="text-align: center">
+                        An Azure enterprise and subscription are required.
+                      </p>
+
+                      <a
+                        mat-stroked-button
+                        color="primary"
+                        style="margin-top: 1em; margin-bottom: 2em"
+                        target="_blank"
+                        class="mat-full-width spread"
+                        href="https://azure.microsoft.com/free/"
+                      >
+                        Create a Free Azure Account
+                      </a>
+
+                      <p class="mat-body-2 plain-text" style="text-align: center">
+                        Fathym needs access to your Azure subscription to help you manage your infrastructure.
+                      </p>
+
+                      <a
+                        mat-stroked-button
+                        color="primary"
+                        style="margin-top: 1em; margin-bottom: 2em"
+                        target="_blank"
+                        class="mat-full-width spread"
+                        href="https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal"
+                      >
+                        Locate your configuration information
+                      </a>
+                    </div>
+
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Azure Tenant (Directory) ID" formControlName="azureTenantId" required />
+
+                      <mat-hint>32 Character Limit</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Azure Subscription ID" formControlName="azureSubId" required />
+
+                      <mat-hint>32 Character Limit</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Azure App ID" formControlName="azureAppId" required />
+
+                      <mat-hint>32 Character Limit</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Azure App Auth key" formControlName="azureAppAuthKey" required />
+
+                      <mat-hint>32 Character Limit</mat-hint>
+                    </mat-form-field>
+                  </ng-container>
+                </div>
+              </mat-card>
             </ng-container>
-          </mat-card>
 
-          <mat-card class="spread" *ngIf="UseDefaultSettings && State.SourceControlConfigured && State.GitHub.SelectedOrg">
-            <ng-container>
-              <div class="spread">
-                <h4>Azure Subscription Setup</h4>
+            <mat-card class="spread" *ngIf="!UseDefaultSettings">
+              <h3 style="text-align:center">Advanced Settings</h3>
 
-                <ng-container>
-                  <div class="spread">
-                    <p class="mat-body-2">
-                      You will need your own azure enteprise and subscription to get started, if you don't already have one you can follow
-                      these instructions to create one
-                    </p>
+              <p style="text-align: center">Coming Soon! Please switch back to Default Azure Settings.</p>
+            </mat-card>
 
-                    <a
-                      mat-stroked-button
-                      color="primary"
-                      target="_blank"
-                      class="mat-full-width spread"
-                      href="https://azure.microsoft.com/free/"
-                    >
-                      Create Free Azure Account
-                    </a>
+            <div class="spread" *ngIf="State.SourceControlConfigured">
+              <a mat-raised-button class="mat-full-width" color="accent" (click)="Configure()" [disabled]="!InfraConfigFormGroup.valid"
+                >Configure Azure Infrastructure</a
+              >
 
-                    <p class="mat-body-2">
-                      In order to help you manage your enterprise infrastructure, you'll need to give us access to your subscription.
-                    </p>
-
-                    <a
-                      mat-stroked-button
-                      color="primary"
-                      target="_blank"
-                      class="mat-full-width spread"
-                      href="https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal"
-                    >
-                      Follow these directions to find configuration information
-                    </a>
-                  </div>
-
-                  <mat-form-field class="mat-full-width">
-                    <input matInput placeholder="Azure Tenant (Directory) ID" formControlName="azureTenantId" required />
-
-                    <mat-hint>....</mat-hint>
-                  </mat-form-field>
-
-                  <mat-form-field class="mat-full-width">
-                    <input matInput placeholder="Azure Subscription ID" formControlName="azureSubId" required />
-
-                    <mat-hint>....</mat-hint>
-                  </mat-form-field>
-
-                  <mat-form-field class="mat-full-width">
-                    <input matInput placeholder="Azure App ID" formControlName="azureAppId" required />
-
-                    <mat-hint>....</mat-hint>
-                  </mat-form-field>
-
-                  <mat-form-field class="mat-full-width">
-                    <input matInput placeholder="Azure App Auth key" formControlName="azureAppAuthKey" required />
-
-                    <mat-hint>....</mat-hint>
-                  </mat-form-field>
-                </ng-container>
-              </div>
-            </ng-container>
-          </mat-card>
-
-          <mat-card class="spread" *ngIf="!UseDefaultSettings">
-            <h3>Advanced Settings</h3>
-
-            <p>Coming Soon! Please switch back to Default Azure Settings.</p>
-          </mat-card>
-
-          <div class="spread" *ngIf="State.SourceControlConfigured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="Configure()" [disabled]="!InfraConfigFormGroup.valid">Configure Azure Infrastructure</a>
-
-            <a mat-button class="mat-full-width" color="warn" (click)="CancelSetup()">Back To Setup</a>
+              <a mat-button class="mat-full-width" color="warn" (click)="CancelSetup()" style="margin-top: 2em">Back To Setup</a>
+            </div>
           </div>
         </div>
       </div>
@@ -197,73 +306,205 @@
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
-          <mat-card class="spread" *ngIf="!State.DevOps.Configured">
-            <ng-container>
+          <div>
+            <mat-card class="spread">
               <div class="spread">
-                <h4>Azure Dev Ops Setup</h4>
+                <p class="mat-body-3">
+                  A repeatable way to manage the build and release of your solutions is important to the quality of your product. We'll help
+                  you setup and establish an end-to-end workflow for the release and deployment of your solutions on your architecture.
+                </p>
+              </div>
+            </mat-card>
 
+            <mat-card class="spread" *ngIf="!State.DevOps.OAuthConfigured">
+              <div class="spread" style="text-align: center">
+                <img src="assets/img/Azure-logo.png" style="width:25%; margin: auto" />
+
+                <ng-container>
+                  <h4>Dev/Ops Setup</h4>
+
+                  <ng-container *ngIf="!State.DevOps.Configured">
+                    <p class="mat-body-2">
+                      To manage Dev/Ops on your new domain, you'll first have to setup an Azure DevOps OAuth Application. This application
+                      will create a secure way for you to mange your enterprise Dev/Ops across a vast number of users (internal and
+                      external).
+                    </p>
+
+                    <div class="spread">
+                      <a
+                        mat-stroked-button
+                        color="primary"
+                        target="_blank"
+                        class="mat-full-width"
+                        href="https://aex.dev.azure.com/app/register?mkt=en-US"
+                      >
+                        Creating DevOps OAuth App (Start New)
+                      </a>
+                    </div>
+
+                    <div fxLayout="row wrap" fxLayoutAlign="center center">
+                      <div fxFlex="40%" fxFlex.lt-md="80%" class="spread">
+                        <mat-list style="text-align: left;">
+                          <mat-list-item>
+                            <span matLine>Company name:</span>
+
+                            <strong matLine>{{ State.EnterpriseName }}</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Company website:</span>
+
+                            <strong matLine>{{ RootURL }}</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Terms of service URL:</span>
+
+                            <strong matLine>{{ RootURL }}/terms</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Privacy statement URL:</span>
+
+                            <strong matLine>{{ RootURL }}/privacy</strong>
+                          </mat-list-item>
+                        </mat-list>
+                      </div>
+
+                      <div fxFlex="40%" fxFlex.lt-md="80%" class="spread">
+                        <mat-list style="text-align: left;">
+                          <mat-list-item>
+                            <span matLine>Application name:</span>
+
+                            <strong matLine>{{ State.EnterpriseName }} - LCU</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Description:</span>
+
+                            <strong matLine>{{ State.EnterpriseName }} - Low Code Unit</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Logo URL:</span>
+
+                            <strong matLine>{{ RootURL }}/img/logo</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Application website:</span>
+
+                            <strong matLine>{{ RootURL }}</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Authorization callback URL:</span>
+
+                            <strong matLine>{{ RootURL }}/.devops/authorize</strong>
+                          </mat-list-item>
+                        </mat-list>
+                      </div>
+                    </div>
+
+                    <div class="spread">
+                      <a
+                        mat-stroked-button
+                        color="primary"
+                        target="_blank"
+                        class="mat-full-width"
+                        href="https://docs.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops"
+                      >
+                        Creating a new DevOps OAuth App (Documentation)
+                      </a>
+                    </div>
+
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Dev Ops App ID" formControlName="devOpsAppId" required />
+
+                      <mat-hint>...</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Dev Ops Client Secret" formControlName="devOpsClientSecret" required />
+
+                      <mat-hint>...</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Dev Ops Scopes" formControlName="devOpsScopes" required />
+
+                      <mat-hint>...</mat-hint>
+                    </mat-form-field>
+
+                    <div class="spread">
+                      <a mat-raised-button class="mat-full-width" color="primary" (click)="SetupDevOpsOAuth()">
+                        Configure Azure Dev Ops Connection
+                      </a>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </mat-card>
+
+            <mat-card class="spread" *ngIf="State.DevOps.Configured">
+              <ng-container>
                 <div class="spread">
-                  <a mat-raised-button class="mat-full-width" color="primary" [href]="AzureDevOpsOAuthURL" target="_parent">
-                    Configure Azure Dev Ops Connection
-                  </a>
+                  <h4>Azure Dev Ops Setup Details</h4>
+
+                  <mat-list>
+                    <mat-list-item>
+                      <mat-icon matListIcon>settings_system_daydream</mat-icon>
+
+                      <h3 matLine class="mat-headline">Dev Ops Project Setup</h3>
+
+                      <p matLine class="mat-body-2">
+                        We'll create a new Azure Dev Ops project called 'LCU OS' to contain the various integrations related to your site.
+                      </p>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                      <mat-icon matListIcon>build</mat-icon>
+
+                      <h3 matLine class="mat-headline">Infrastructure Build & Release</h3>
+
+                      <p matLine class="mat-body-2">
+                        We'll setup an automatic build and release process that will listen for changes to your infrastructure and deploy
+                        them to azure for you. Changes will never delete resources, in order to aintain the integrity of enterprise data.
+                      </p>
+                    </mat-list-item>
+                  </mat-list>
                 </div>
-              </div>
-            </ng-container>
-          </mat-card>
+              </ng-container>
+            </mat-card>
 
-          <mat-card class="spread" *ngIf="State.DevOps.Configured">
-            <ng-container>
+            <mat-card class="spread" *ngIf="State.DevOps.Configured">
               <div class="spread">
-                <h4>Azure Dev Ops Setup Details</h4>
+                <h4>NPM Configuration Details</h4>
 
-                <mat-list>
-                  <mat-list-item>
-                    <mat-icon matListIcon>settings_system_daydream</mat-icon>
+                <mat-form-field class="mat-full-width">
+                  <input matInput placeholder="NPM Registry URL" formControlName="npmRegistry" required />
 
-                    <h3 matLine class="mat-headline">Dev Ops Project Setup</h3>
+                  <mat-hint>...</mat-hint>
+                </mat-form-field>
 
-                    <p matLine class="mat-body-2">
-                      We'll create a new Azure Dev Ops project called 'LCU OS' to contain the various integrations related to your site.
-                    </p>
-                  </mat-list-item>
+                <mat-form-field class="mat-full-width">
+                  <input matInput placeholder="NPM Personal Access Token" formControlName="npmAccessToken" required />
 
-                  <mat-list-item>
-                    <mat-icon matListIcon>build</mat-icon>
-
-                    <h3 matLine class="mat-headline">Infrastructure Build & Release</h3>
-
-                    <p matLine class="mat-body-2">
-                      We'll setup an automatic build and release process that will listen for changes to your infrastructure and deploy them
-                      to azure for you. Changes will never delete resources, in order to aintain the integrity of enterprise data.
-                    </p>
-                  </mat-list-item>
-                </mat-list>
+                  <mat-hint>...</mat-hint>
+                </mat-form-field>
               </div>
-            </ng-container>
-          </mat-card>
+            </mat-card>
 
-          <mat-card class="spread" *ngIf="State.DevOps.Configured">
-            <div class="spread">
-              <h4>NPM Configuration Details</h4>
-
-              <mat-form-field class="mat-full-width">
-                <input matInput placeholder="NPM Registry URL" formControlName="npmRegistry" required />
-
-                <mat-hint>...</mat-hint>
-              </mat-form-field>
-
-              <mat-form-field class="mat-full-width">
-                <input matInput placeholder="NPM Personal Access Token" formControlName="npmAccessToken" required />
-
-                <mat-hint>...</mat-hint>
-              </mat-form-field>
+            <div class="spread" *ngIf="State.DevOps.Configured">
+              <a
+                mat-raised-button
+                class="mat-full-width"
+                color="accent"
+                (click)="ConfigureDevOps()"
+                [disabled]="!DevOpsSetupFormGroup.valid"
+                >Setup Azure Dev Ops</a
+              >
             </div>
-          </mat-card>
-
-          <div class="spread" *ngIf="State.DevOps.Configured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="ConfigureDevOps()" [disabled]="!DevOpsSetupFormGroup.valid"
-              >Setup Azure Dev Ops</a
-            >
           </div>
         </div>
       </div>
@@ -321,15 +562,15 @@
             <div class="spread">
               <h4>Phew... Now that that crap is done, let's get to building something.</h4>
 
-              <p class="mat-body-2">Here is where we are at:</p>
+              <p class="mat-body-2 plain-text">Here is where we are at:</p>
 
               <mat-list>
                 <mat-list-item>
                   <mat-icon matListIcon>cloud</mat-icon>
 
-                  <h3 matLine class="mat-headline">Enterprise Infrastructure</h3>
+                  <h3 matLine class="mat-headline title title">Enterprise Infrastructure</h3>
 
-                  <p matLine class="mat-body-2">
+                  <p matLine class="mat-body-2 plain-text">
                     Yup, we got that...
                   </p>
                 </mat-list-item>
@@ -337,9 +578,9 @@
                 <mat-list-item>
                   <mat-icon matListIcon>build</mat-icon>
 
-                  <h3 matLine class="mat-headline">Enterprise Dev Ops</h3>
+                  <h3 matLine class="mat-headline title title">Enterprise Dev Ops</h3>
 
-                  <p matLine class="mat-body-2">
+                  <p matLine class="mat-body-2 plain-text">
                     Does a bear shit in the woods?... That means yes, we got that too...
                   </p>
                 </mat-list-item>
@@ -353,7 +594,7 @@
             <div class="spread">
               <h4 class="mat-display-1">Low Code Unit Application Architectures</h4>
 
-              <p matLine class="mat-body-2 spread">
+              <p matLine class="mat-body-2 plain-text spread">
                 Some info on what is next... Let's create and seed a repository so that we can start building our first apps...
               </p>
             </div>
@@ -369,9 +610,9 @@
                     <img mat-card-image [src]="CleanImage(appSeed.ImageSource)" alt="Low Code Unit" />
 
                     <mat-card-content class="spread">
-                      <h3 class="mat-headline">{{ appSeed.Name }}</h3>
+                      <h3 class="mat-headline title title">{{ appSeed.Name }}</h3>
 
-                      <p matLine class="mat-body-2">
+                      <p matLine class="mat-body-2 plain-text">
                         {{ appSeed.Description }}
                       </p>
 
@@ -388,26 +629,27 @@
               <ng-container *ngIf="CurrentAppSeed">
                 <div fxFlex="60%" fxFlex.lt-sm="95%">
                   <mat-card class="spread">
-                      <mat-form-field class="mat-full-width">
-                        <input
-                          matInput
-                          placeholder="New {{ CurrentAppSeed.Name }} Name"
-                          formControlName="appName"
-                          required
-                        />
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="New {{ CurrentAppSeed.Name }} Name" formControlName="appName" required />
 
-                        <mat-hint>....</mat-hint>
-                      </mat-form-field>
+                      <mat-hint>....</mat-hint>
+                    </mat-form-field>
 
-                      <div class="spread">
-                        <a mat-raised-button class="mat-full-width" color="accent" (click)="CreateAppFromSeed()" [disabled]="!DataAppSetupFormGroup.valid">
-                          Create {{ CurrentAppSeed.Name }}
-                        </a>
+                    <div class="spread">
+                      <a
+                        mat-raised-button
+                        class="mat-full-width"
+                        color="accent"
+                        (click)="CreateAppFromSeed()"
+                        [disabled]="!DataAppSetupFormGroup.valid"
+                      >
+                        Create {{ CurrentAppSeed.Name }}
+                      </a>
 
-                        <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">
-                          Back to App Seed Select
-                        </a>
-                      </div>
+                      <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">
+                        Back to App Seed Select
+                      </a>
+                    </div>
                   </mat-card>
                 </div>
               </ng-container>

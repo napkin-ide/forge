@@ -44,28 +44,34 @@ export class OrgComponent implements OnInit {
   public ngOnInit() {
     this.orgRegState.Context.subscribe(state => {
       this.State = state;
+
+      if (this.State.Step === 'Provisioning') {
+        setTimeout(() => {
+          location.href = `https://${this.State.Host}/forge`;
+        }, 5000);
+      }
     });
   }
 
   public onChanges() {
     this.HostValid = false;
 
-    if (!this.StateLoading)
+    if (!this.StateLoading) {
       this.State.HostApprovalMessage = '';
-    
-    var host = this.HostForm.controls['host'].value;
+    }
 
-    if (this.State.HostFlow == 'private' && host && host.split('.').length >= 3) {
+    const host = this.HostForm.controls['host'].value;
+
+    if (this.State.HostFlow === 'private' && host && host.split('.').length >= 3) {
       this.HostValid = true;
       this.Subdomain = host.split('.')[0];
-    }
-    else if (this.State.HostFlow == 'shared' && host && host.length > 0) {
+    } else if (this.State.HostFlow === 'shared' && host && host.length > 0) {
       this.HostValid = true;
     }
 
     this.StateLoading = false;
   }
-  
+
 
   //  API methods
   public CreateOrg() {
@@ -78,7 +84,7 @@ export class OrgComponent implements OnInit {
     this.State.Loading = true;
     this.StateLoading = true;
 
-    if (this.State.HostFlow === 'private') {      
+    if (this.State.HostFlow === 'private') {
       this.orgRegState.SecureHost(this.HostForm.controls['host'].value);
     } else if (this.State.HostFlow === 'shared') {
       this.orgRegState.SecureHost(`${this.HostForm.controls['host'].value}.${this.HostForm.controls['root'].value}`);

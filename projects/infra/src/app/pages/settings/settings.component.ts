@@ -42,7 +42,11 @@ export class SettingsComponent implements OnInit {
   public InfraSetupFormGroup: FormGroup;
 
   public get OAuthRedirectURL(): string {
-    return `${location.protocol}//${location.hostname}:${location.port}/forge`;
+    return `${this.RootURL}/forge`;
+  }
+
+  public get RootURL(): string {
+    return `${location.protocol}//${location.hostname}:${location.port}`;
   }
 
   public SetupStepTypes = ForgeInfrastructureSetupStepTypes;
@@ -66,22 +70,27 @@ export class SettingsComponent implements OnInit {
 
   //  Life Cycle
   public ngOnInit() {
-    this.EntInfraFormGroup = this.formBldr.group({});
-
-    this.DevOpsSetupFormGroup = this.formBldr.group({
-      npmRegistry: ['', Validators.required],
-      npmAccessToken: ['', Validators.required]
-    });
-
     this.DataAppSetupFormGroup = this.formBldr.group({
       appName: ['', Validators.required]
     });
+
+    this.DevOpsSetupFormGroup = this.formBldr.group({
+      npmRegistry: ['', Validators.required],
+      npmAccessToken: ['', Validators.required],
+      devOpsAppId: [''],
+      devOpsClientSecret: [''],
+      devOpsScopes: ['']
+    });
+
+    this.EntInfraFormGroup = this.formBldr.group({});
 
     this.InfraConfigFormGroup = this.formBldr.group({
       azureTenantId: ['', Validators.required],
       azureSubId: ['', Validators.required],
       azureAppId: ['', Validators.required],
-      azureAppAuthKey: ['', Validators.required]
+      azureAppAuthKey: ['', Validators.required],
+      gitHubClientId: [''],
+      gitHubClientSecret: ['']
     });
 
     this.InfraSetupFormGroup = this.formBldr.group({
@@ -187,10 +196,37 @@ export class SettingsComponent implements OnInit {
     this.infraState.SetupApplicationSeed(lookup);
   }
 
+  public SetupDevOpsOAuth() {
+    this.State.Loading = true;
+
+    this.infraState.SetupDevOpsOAuth(
+      this.DevOpsSetupFormGroup.controls.devOpsAppId.value,
+      this.DevOpsSetupFormGroup.controls.devOpsScopes.value,
+      this.DevOpsSetupFormGroup.controls.devOpsClientSecret.value
+    );
+  }
+
+  public SetupGitHubOAuth() {
+    this.State.Loading = true;
+
+    this.infraState.SetupGitHubOAuth(
+      this.InfraConfigFormGroup.controls.gitHubClientId.value,
+      this.InfraConfigFormGroup.controls.gitHubClientSecret.value
+    );
+  }
+
   //  Helpers
   protected stateChanged() {
     if (this.State.AppSeed && this.State.AppSeed.Step) {
-      this.router.navigate(['complete']);
+      // this.router.navigate(['complete']);
+    }
+
+    if (this.State.GitHub && this.State.GitHub.OAuthConfigured && !this.State.SourceControlConfigured) {
+      window.open(this.GitHubOAuthURL, '_parent');
+    }
+
+    if (this.State.DevOps && this.State.DevOps.OAuthConfigured && !this.State.DevOps.Configured) {
+      window.open(this.AzureDevOpsOAuthURL, '_parent');
     }
 
     if (!this.State.EnvSettings) {

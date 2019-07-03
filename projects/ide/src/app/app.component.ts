@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IdeStateStateManagerContext } from '@napkin-ide/common';
+import { FaviconsService } from '@lcu-ide/common';
 
 @Component({
   selector: 'nide-root',
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit {
   public ShowPanels: boolean;
 
   //  Constructors
-  constructor(protected ideState: IdeStateStateManagerContext) {}
+  constructor(protected ideState: IdeStateStateManagerContext, protected faviconsService: FaviconsService) {}
 
   //  Life Cycle
   public ngOnInit() {
@@ -20,5 +21,14 @@ export class AppComponent implements OnInit {
 
       // this.ideState.AddStatusChange('Editors Loaded...');
     });
+
+    this.resetFavicon();
+  }
+
+  /**
+    * Set default favicon
+    */
+   protected resetFavicon(): void {
+    this.faviconsService.reset();
   }
 }
