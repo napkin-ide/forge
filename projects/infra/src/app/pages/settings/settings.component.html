@@ -9,15 +9,15 @@
         <div fxFlex="25%" fxFlex.lt-md="50%" fxFlex.lt-sm="90%">
           <mat-card class="spread">
             <ng-container>
-              <h2 class="mat-headline" style="text-align: center">Configure Microsoft Azure</h2>
+              <h2 class="mat-headline title" style="text-align: center">Configure Microsoft Azure</h2>
 
               <img src="assets/img/Azure-logo.png" style="margin-left: 10%; width: 80%" />
 
-              <p class="mat-subtitle spread" style="font-size: 0.8em; text-align:center">
+              <p class="mat-subtitle paragraph-title spread" style="font-size: 0.8em; text-align:center">
                 You can use Azure in numerous ways to work with your devices.
               </p>
 
-              <p class="mat-subtitle"></p>
+              <p class="mat-subtitle paragraph-title"></p>
               Start with Fathym's best practices and templates, which you can customize later.
 
               <div class="spread">
@@ -30,15 +30,15 @@
         <div fxFlex="25%" fxFlex.lt-md="50%" fxFlex.lt-sm="90%">
           <mat-card class="spread">
             <ng-container>
-              <h2 class="mat-headline" style="text-align: center">Configure with Google</h2>
+              <h2 class="mat-headline title" style="text-align: center">Configure with Google</h2>
 
               <img src="assets/img/google-comingsoon.jpg" style="width: 100%" />
 
-              <!-- <p class="mat-subtitle spread">
+              <!-- <p class="mat-subtitle paragraph-title spread">
                 Google...
               </p> -->
 
-              <p class="mat-subtitle">
+              <p class="mat-subtitle paragraph-title">
                 Use Google configurations to get your devices running.
               </p>
 
@@ -52,15 +52,15 @@
         <div fxFlex="25%" fxFlex.lt-md="50%" fxFlex.lt-sm="90%">
           <mat-card class="spread">
             <ng-container>
-              <h2 class="mat-headline" style="text-align: center">Configure with AWS</h2>
+              <h2 class="mat-headline title" style="text-align: center">Configure with AWS</h2>
 
               <img src="assets/img/aws-comingsoon.jpg" style="width: 100%" />
 
-              <!-- <p class="mat-subtitle spread">
+              <!-- <p class="mat-subtitle paragraph-title spread">
                 AWS...
               </p> -->
 
-              <p class="mat-subtitle">
+              <p class="mat-subtitle paragraph-title">
                 Use Amazon Web Service configurations to get your devices running.
               </p>
 
@@ -74,15 +74,15 @@
         <div fxFlex="25%" fxFlex.lt-md="50%" fxFlex.lt-sm="90%">
           <mat-card class="spread">
             <ng-container>
-              <h2 class="mat-headline" style="text-align: center" jjhhbv>Configure with Your Infrastructure</h2>
+              <h2 class="mat-headline title" style="text-align: center" jjhhbv>Configure with Your Infrastructure</h2>
 
               <img src="assets/img/infrastructure-comingsoon.jpg" style="width: 100%" />
 
-              <!-- <p class="mat-subtitle spread">
+              <!-- <p class="mat-subtitle paragraph-title spread">
                 Something about bringing your own infrastructure...
               </p> -->
 
-              <p class="mat-subtitle">
+              <p class="mat-subtitle paragraph-title">
                 Use your company's infrastructure to get your devices running.
               </p>
 
@@ -107,7 +107,7 @@
           <div>
             <mat-card class="spread">
               <div class="spread">
-                <p class="mat-body-3">
+                <p class="mat-body-3 plain-text">
                   Establishing a quality, recurring way to provision and manage architecture is key to delivering quality products. In the
                   following sections we will setup and establish your enterprise source control through GitHub in order to enable a seamless
                   Dev/Ops process for deploying infrastructure and applications. These assets belong to you and your organization, we are
@@ -124,12 +124,11 @@
                   <ng-container *ngIf="!State.GitHub.OAuthConfigured">
                     <h4>GitHub Source Control Setup</h4>
 
-                    <ng-container *ngIf="!State.SourceControlConfigured">
-                      <p class="mat-body-2">
-                        To manage GitHub on your new domain, you'll first have to setup a GitHub OAuth Application. This application will
-                        create a secure way for you to mange your enterprise source control across a vast number of users (internal and
-                        external).
-                      </p>
+                    <p class="mat-body-2 plain-text">
+                      To manage GitHub on your new domain, you'll first have to setup a GitHub OAuth Application. This application will
+                      create a secure way for you to mange your enterprise source control across a vast number of users (internal and
+                      external).
+                    </p>
 
                       <div class="spread">
                         <a
@@ -221,7 +220,7 @@
 
                   <ng-container>
                     <div class="spread">
-                      <p class="mat-body-2" style="text-align: center">
+                      <p class="mat-body-2 plain-text" style="text-align: center">
                         An Azure enterprise and subscription are required.
                       </p>
 
@@ -236,7 +235,7 @@
                         Create a Free Azure Account
                       </a>
 
-                      <p class="mat-body-2" style="text-align: center">
+                      <p class="mat-body-2 plain-text" style="text-align: center">
                         Fathym needs access to your Azure subscription to help you manage your infrastructure.
                       </p>
 
@@ -563,15 +562,15 @@
             <div class="spread">
               <h4>Phew... Now that that crap is done, let's get to building something.</h4>
 
-              <p class="mat-body-2">Here is where we are at:</p>
+              <p class="mat-body-2 plain-text">Here is where we are at:</p>
 
               <mat-list>
                 <mat-list-item>
                   <mat-icon matListIcon>cloud</mat-icon>
 
-                  <h3 matLine class="mat-headline">Enterprise Infrastructure</h3>
+                  <h3 matLine class="mat-headline title title">Enterprise Infrastructure</h3>
 
-                  <p matLine class="mat-body-2">
+                  <p matLine class="mat-body-2 plain-text">
                     Yup, we got that...
                   </p>
                 </mat-list-item>
@@ -579,9 +578,9 @@
                 <mat-list-item>
                   <mat-icon matListIcon>build</mat-icon>
 
-                  <h3 matLine class="mat-headline">Enterprise Dev Ops</h3>
+                  <h3 matLine class="mat-headline title title">Enterprise Dev Ops</h3>
 
-                  <p matLine class="mat-body-2">
+                  <p matLine class="mat-body-2 plain-text">
                     Does a bear shit in the woods?... That means yes, we got that too...
                   </p>
                 </mat-list-item>
@@ -595,7 +594,7 @@
             <div class="spread">
               <h4 class="mat-display-1">Low Code Unit Application Architectures</h4>
 
-              <p matLine class="mat-body-2 spread">
+              <p matLine class="mat-body-2 plain-text spread">
                 Some info on what is next... Let's create and seed a repository so that we can start building our first apps...
               </p>
             </div>
@@ -611,9 +610,9 @@
                     <img mat-card-image [src]="CleanImage(appSeed.ImageSource)" alt="Low Code Unit" />
 
                     <mat-card-content class="spread">
-                      <h3 class="mat-headline">{{ appSeed.Name }}</h3>
+                      <h3 class="mat-headline title title">{{ appSeed.Name }}</h3>
 
-                      <p matLine class="mat-body-2">
+                      <p matLine class="mat-body-2 plain-text">
                         {{ appSeed.Description }}
                       </p>
 

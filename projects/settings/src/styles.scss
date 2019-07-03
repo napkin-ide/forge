@@ -22,7 +22,7 @@
   body {
     margin: 0;
     background-color: mat-color($primary, 300);
-    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    // font-family: Roboto, 'Helvetica Neue', sans-serif;
   }
 
   .mat-list-base .mat-list-item,
@@ -45,7 +45,7 @@
   .mat-form-field {
   }
 
-  .mat-headline {
+  .mat-headline title title {
     .mat-form-field-flex {
       width: 350px;
     }

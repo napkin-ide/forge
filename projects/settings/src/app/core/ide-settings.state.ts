@@ -1,5 +1,6 @@
 import { IdeActivity } from '@napkin-ide/common';
 
+
 export class IdeSettingsState {
   public Activities: IdeActivity[];
 
