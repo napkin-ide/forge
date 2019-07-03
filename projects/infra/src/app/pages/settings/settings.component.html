@@ -124,67 +124,81 @@
                   <ng-container *ngIf="!State.GitHub.OAuthConfigured">
                     <h4>GitHub Source Control Setup</h4>
 
-                    <p class="mat-body-2">
-                      To manage GitHub on your new domain, you'll first have to setup a GitHub OAuth Application. This application will
-                      create a secure way for you to mange your enterprise source control across a vast number of users (internal and
-                      external).
-                    </p>
+                    <ng-container *ngIf="!State.SourceControlConfigured">
+                      <p class="mat-body-2">
+                        To manage GitHub on your new domain, you'll first have to setup a GitHub OAuth Application. This application will
+                        create a secure way for you to mange your enterprise source control across a vast number of users (internal and
+                        external).
+                      </p>
 
-                    <div class="spread">
-                      <a
-                        mat-stroked-button
-                        color="primary"
-                        target="_blank"
-                        class="mat-full-width"
-                        href="https://github.com/settings/applications/new"
-                      >
-                        Creating GitHub OAuth App (Start New)
-                      </a>
-                    </div>
+                      <div class="spread">
+                        <a
+                          mat-stroked-button
+                          color="primary"
+                          target="_blank"
+                          class="mat-full-width"
+                          href="https://github.com/settings/applications/new"
+                        >
+                          Creating GitHub OAuth App (Start New)
+                        </a>
+                      </div>
 
-                    <mat-list>
-                      <mat-list-item> Application Name: <strong>Low Code Unit</strong> </mat-list-item>
+                      <mat-list style="text-align: left;">
+                        <mat-list-item>
+                          <span matLine>Application Name:</span>
 
-                      <mat-list-item>
-                        Homepage URL: <strong>{{ RootURL }}</strong>
-                      </mat-list-item>
+                          <strong matLine>{{ State.EnterpriseName }} - LCU</strong>
+                        </mat-list-item>
 
-                      <mat-list-item> Application Description: <strong>Low Code Unit</strong> </mat-list-item>
+                        <mat-list-item>
+                          <span matLine>Homepage URL:</span>
 
-                      <mat-list-item>
-                        Authorization callback URL: <strong>{{ RootURL }}/.github/authorize</strong>
-                      </mat-list-item>
-                    </mat-list>
+                          <strong matLine>{{ RootURL }}</strong>
+                        </mat-list-item>
 
-                    <div class="spread">
-                      <a
-                        mat-stroked-button
-                        color="primary"
-                        target="_blank"
-                        class="mat-full-width"
-                        href="https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/"
-                      >
-                        Creating a new GitHub OAuth App (Documentation)
-                      </a>
-                    </div>
+                        <mat-list-item>
+                          <span matLine>Application Description:</span>
 
-                    <mat-form-field class="mat-full-width">
-                      <input matInput placeholder="Git Hub Client ID" formControlName="gitHubClientId" required />
+                          <strong matLine>{{ State.EnterpriseName }} - Low Code Unit</strong>
+                        </mat-list-item>
 
-                      <mat-hint>...</mat-hint>
-                    </mat-form-field>
+                        <mat-list-item>
+                          <span matLine>Authorization callback URL:</span>
 
-                    <mat-form-field class="mat-full-width">
-                      <input matInput placeholder="Git Hub Client Secret" formControlName="gitHubClientSecret" required />
+                          <strong matLine>{{ RootURL }}/.github/authorize</strong>
+                        </mat-list-item>
+                      </mat-list>
 
-                      <mat-hint>...</mat-hint>
-                    </mat-form-field>
+                      <div class="spread">
+                        <a
+                          mat-stroked-button
+                          color="primary"
+                          target="_blank"
+                          class="mat-full-width"
+                          href="https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/"
+                        >
+                          Creating a new GitHub OAuth App (Documentation)
+                        </a>
+                      </div>
 
-                    <div class="spread" *ngIf="!State.SourceControlConfigured">
-                      <a mat-raised-button class="mat-full-width" color="primary" (cilck)="SetupGitHubOAuth()">
-                        Configure GitHub Connection
-                      </a>
-                    </div>
+                      <mat-form-field class="mat-full-width">
+                        <input matInput placeholder="Git Hub Client ID" formControlName="gitHubClientId" required />
+
+                        <mat-hint>...</mat-hint>
+                      </mat-form-field>
+
+                      <mat-form-field class="mat-full-width">
+                        <input matInput placeholder="Git Hub Client Secret" formControlName="gitHubClientSecret" required />
+
+                        <mat-hint>...</mat-hint>
+                      </mat-form-field>
+
+                      <div class="spread" *ngIf="!State.SourceControlConfigured">
+                        <a mat-raised-button class="mat-full-width" color="primary" (click)="SetupGitHubOAuth()">
+                          Configure GitHub Connection
+                        </a>
+                      </div>
+                    </ng-container>
 
                     <p style="text-align:center; font-style: italic">
                       Fathym strongly recommends you create a new GitHub organization that contains your LCU automation.
@@ -192,7 +206,7 @@
 
                     <mat-form-field class="mat-full-width" *ngIf="State.SourceControlConfigured">
                       <mat-select placeholder="GitHub Organization" (selectionChange)="SetOrg($event)" [value]="State.GitHub.SelectedOrg">
-                        <mat-option *ngFor="let org of State.GitHub.Organizations" [value]="org.Login">{{ org | json }}</mat-option>
+                        <mat-option *ngFor="let org of State.GitHub.Organizations" [value]="org.Login">{{ org.Login }}</mat-option>
                       </mat-select>
 
                       <!-- <mat-hint>It is recommended that you create a new organization to contain your LCU automation.</mat-hint> -->
@@ -293,73 +307,205 @@
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
-          <mat-card class="spread" *ngIf="!State.DevOps.Configured">
-            <ng-container>
+          <div>
+            <mat-card class="spread">
               <div class="spread">
-                <h4>Azure Dev Ops Setup</h4>
+                <p class="mat-body-3">
+                  A repeatable way to manage the build and release of your solutions is important to the quality of your product. We'll help
+                  you setup and establish an end-to-end workflow for the release and deployment of your solutions on your architecture.
+                </p>
+              </div>
+            </mat-card>
 
+            <mat-card class="spread" *ngIf="!State.DevOps.OAuthConfigured">
+              <div class="spread" style="text-align: center">
+                <img src="assets/img/Azure-logo.png" style="width:25%; margin: auto" />
+
+                <ng-container>
+                  <h4>Dev/Ops Setup</h4>
+
+                  <ng-container *ngIf="!State.DevOps.Configured">
+                    <p class="mat-body-2">
+                      To manage Dev/Ops on your new domain, you'll first have to setup an Azure DevOps OAuth Application. This application
+                      will create a secure way for you to mange your enterprise Dev/Ops across a vast number of users (internal and
+                      external).
+                    </p>
+
+                    <div class="spread">
+                      <a
+                        mat-stroked-button
+                        color="primary"
+                        target="_blank"
+                        class="mat-full-width"
+                        href="https://aex.dev.azure.com/app/register?mkt=en-US"
+                      >
+                        Creating DevOps OAuth App (Start New)
+                      </a>
+                    </div>
+
+                    <div fxLayout="row wrap" fxLayoutAlign="center center">
+                      <div fxFlex="40%" fxFlex.lt-md="80%" class="spread">
+                        <mat-list style="text-align: left;">
+                          <mat-list-item>
+                            <span matLine>Company name:</span>
+
+                            <strong matLine>{{ State.EnterpriseName }}</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Company website:</span>
+
+                            <strong matLine>{{ RootURL }}</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Terms of service URL:</span>
+
+                            <strong matLine>{{ RootURL }}/terms</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Privacy statement URL:</span>
+
+                            <strong matLine>{{ RootURL }}/privacy</strong>
+                          </mat-list-item>
+                        </mat-list>
+                      </div>
+
+                      <div fxFlex="40%" fxFlex.lt-md="80%" class="spread">
+                        <mat-list style="text-align: left;">
+                          <mat-list-item>
+                            <span matLine>Application name:</span>
+
+                            <strong matLine>{{ State.EnterpriseName }} - LCU</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Description:</span>
+
+                            <strong matLine>{{ State.EnterpriseName }} - Low Code Unit</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Logo URL:</span>
+
+                            <strong matLine>{{ RootURL }}/img/logo</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Application website:</span>
+
+                            <strong matLine>{{ RootURL }}</strong>
+                          </mat-list-item>
+
+                          <mat-list-item>
+                            <span matLine>Authorization callback URL:</span>
+
+                            <strong matLine>{{ RootURL }}/.devops/authorize</strong>
+                          </mat-list-item>
+                        </mat-list>
+                      </div>
+                    </div>
+
+                    <div class="spread">
+                      <a
+                        mat-stroked-button
+                        color="primary"
+                        target="_blank"
+                        class="mat-full-width"
+                        href="https://docs.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops"
+                      >
+                        Creating a new DevOps OAuth App (Documentation)
+                      </a>
+                    </div>
+
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Dev Ops App ID" formControlName="devOpsAppId" required />
+
+                      <mat-hint>...</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Dev Ops Client Secret" formControlName="devOpsClientSecret" required />
+
+                      <mat-hint>...</mat-hint>
+                    </mat-form-field>
+
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Dev Ops Scopes" formControlName="devOpsScopes" required />
+
+                      <mat-hint>...</mat-hint>
+                    </mat-form-field>
+
+                    <div class="spread">
+                      <a mat-raised-button class="mat-full-width" color="primary" (click)="SetupDevOpsOAuth()">
+                        Configure Azure Dev Ops Connection
+                      </a>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </mat-card>
+
+            <mat-card class="spread" *ngIf="State.DevOps.Configured">
+              <ng-container>
                 <div class="spread">
-                  <a mat-raised-button class="mat-full-width" color="primary" [href]="AzureDevOpsOAuthURL" target="_parent">
-                    Configure Azure Dev Ops Connection
-                  </a>
+                  <h4>Azure Dev Ops Setup Details</h4>
+
+                  <mat-list>
+                    <mat-list-item>
+                      <mat-icon matListIcon>settings_system_daydream</mat-icon>
+
+                      <h3 matLine class="mat-headline">Dev Ops Project Setup</h3>
+
+                      <p matLine class="mat-body-2">
+                        We'll create a new Azure Dev Ops project called 'LCU OS' to contain the various integrations related to your site.
+                      </p>
+                    </mat-list-item>
+
+                    <mat-list-item>
+                      <mat-icon matListIcon>build</mat-icon>
+
+                      <h3 matLine class="mat-headline">Infrastructure Build & Release</h3>
+
+                      <p matLine class="mat-body-2">
+                        We'll setup an automatic build and release process that will listen for changes to your infrastructure and deploy
+                        them to azure for you. Changes will never delete resources, in order to aintain the integrity of enterprise data.
+                      </p>
+                    </mat-list-item>
+                  </mat-list>
                 </div>
-              </div>
-            </ng-container>
-          </mat-card>
+              </ng-container>
+            </mat-card>
 
-          <mat-card class="spread" *ngIf="State.DevOps.Configured">
-            <ng-container>
+            <mat-card class="spread" *ngIf="State.DevOps.Configured">
               <div class="spread">
-                <h4>Azure Dev Ops Setup Details</h4>
+                <h4>NPM Configuration Details</h4>
 
-                <mat-list>
-                  <mat-list-item>
-                    <mat-icon matListIcon>settings_system_daydream</mat-icon>
+                <mat-form-field class="mat-full-width">
+                  <input matInput placeholder="NPM Registry URL" formControlName="npmRegistry" required />
 
-                    <h3 matLine class="mat-headline">Dev Ops Project Setup</h3>
+                  <mat-hint>...</mat-hint>
+                </mat-form-field>
 
-                    <p matLine class="mat-body-2">
-                      We'll create a new Azure Dev Ops project called 'LCU OS' to contain the various integrations related to your site.
-                    </p>
-                  </mat-list-item>
+                <mat-form-field class="mat-full-width">
+                  <input matInput placeholder="NPM Personal Access Token" formControlName="npmAccessToken" required />
 
-                  <mat-list-item>
-                    <mat-icon matListIcon>build</mat-icon>
-
-                    <h3 matLine class="mat-headline">Infrastructure Build & Release</h3>
-
-                    <p matLine class="mat-body-2">
-                      We'll setup an automatic build and release process that will listen for changes to your infrastructure and deploy them
-                      to azure for you. Changes will never delete resources, in order to aintain the integrity of enterprise data.
-                    </p>
-                  </mat-list-item>
-                </mat-list>
+                  <mat-hint>...</mat-hint>
+                </mat-form-field>
               </div>
-            </ng-container>
-          </mat-card>
+            </mat-card>
 
-          <mat-card class="spread" *ngIf="State.DevOps.Configured">
-            <div class="spread">
-              <h4>NPM Configuration Details</h4>
-
-              <mat-form-field class="mat-full-width">
-                <input matInput placeholder="NPM Registry URL" formControlName="npmRegistry" required />
-
-                <mat-hint>...</mat-hint>
-              </mat-form-field>
-
-              <mat-form-field class="mat-full-width">
-                <input matInput placeholder="NPM Personal Access Token" formControlName="npmAccessToken" required />
-
-                <mat-hint>...</mat-hint>
-              </mat-form-field>
+            <div class="spread" *ngIf="State.DevOps.Configured">
+              <a
+                mat-raised-button
+                class="mat-full-width"
+                color="accent"
+                (click)="ConfigureDevOps()"
+                [disabled]="!DevOpsSetupFormGroup.valid"
+                >Setup Azure Dev Ops</a
+              >
             </div>
-          </mat-card>
-
-          <div class="spread" *ngIf="State.DevOps.Configured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="ConfigureDevOps()" [disabled]="!DevOpsSetupFormGroup.valid"
-              >Setup Azure Dev Ops</a
-            >
           </div>
         </div>
       </div>

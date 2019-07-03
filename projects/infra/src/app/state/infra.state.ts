@@ -3,6 +3,8 @@ export class ForgeInfrastructureState {
 
   public DevOps?: DevOpsState;
 
+  public EnterpriseName?: string;
+
   public Environment?: any;
 
   public EnvSettings?: any;
@@ -30,6 +32,8 @@ export class DevOpsState {
   public NPMAccessToken?: string;
 
   public NPMRegistry?: string;
+
+  public OAuthConfigured?: boolean;
 
   public ProjectName?: string;
 

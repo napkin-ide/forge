@@ -94,10 +94,21 @@ export class ForgeInfrastructureStateManagerContext extends StateManagerContext<
     });
   }
 
+  public SetupDevOpsOAuth(appId: string, scopes: string, clientSecret: string) {
+    this.Execute({
+      Arguments: {
+        AppID: appId,
+        Scopes: scopes,
+        ClientSecret: clientSecret
+      },
+      Type: 'setup-dev-ops-o-auth'
+    });
+  }
+
   public SetupGitHubOAuth(clientId: string, clientSecret: string) {
     this.Execute({
       Arguments: {
-        ClientId: clientId,
+        ClientID: clientId,
         ClientSecret: clientSecret
       },
       Type: 'setup-git-hub-o-auth'
