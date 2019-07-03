@@ -130,74 +130,73 @@
                       external).
                     </p>
 
-                      <div class="spread">
-                        <a
-                          mat-stroked-button
-                          color="primary"
-                          target="_blank"
-                          class="mat-full-width"
-                          href="https://github.com/settings/applications/new"
-                        >
-                          Creating GitHub OAuth App (Start New)
-                        </a>
-                      </div>
+                    <div class="spread">
+                      <a
+                        mat-stroked-button
+                        color="primary"
+                        target="_blank"
+                        class="mat-full-width"
+                        href="https://github.com/settings/applications/new"
+                      >
+                        Creating GitHub OAuth App (Start New)
+                      </a>
+                    </div>
 
-                      <mat-list style="text-align: left;">
-                        <mat-list-item>
-                          <span matLine>Application Name:</span>
+                    <mat-list style="text-align: left;">
+                      <mat-list-item>
+                        <span matLine>Application Name:</span>
 
-                          <strong matLine>{{ State.EnterpriseName }} - LCU</strong>
-                        </mat-list-item>
+                        <strong matLine>{{ State.EnterpriseName }} - LCU</strong>
+                      </mat-list-item>
 
-                        <mat-list-item>
-                          <span matLine>Homepage URL:</span>
+                      <mat-list-item>
+                        <span matLine>Homepage URL:</span>
 
-                          <strong matLine>{{ RootURL }}</strong>
-                        </mat-list-item>
+                        <strong matLine>{{ RootURL }}</strong>
+                      </mat-list-item>
 
-                        <mat-list-item>
-                          <span matLine>Application Description:</span>
+                      <mat-list-item>
+                        <span matLine>Application Description:</span>
 
-                          <strong matLine>{{ State.EnterpriseName }} - Low Code Unit</strong>
-                        </mat-list-item>
+                        <strong matLine>{{ State.EnterpriseName }} - Low Code Unit</strong>
+                      </mat-list-item>
 
-                        <mat-list-item>
-                          <span matLine>Authorization callback URL:</span>
+                      <mat-list-item>
+                        <span matLine>Authorization callback URL:</span>
 
-                          <strong matLine>{{ RootURL }}/.github/authorize</strong>
-                        </mat-list-item>
-                      </mat-list>
+                        <strong matLine>{{ RootURL }}/.github/authorize</strong>
+                      </mat-list-item>
+                    </mat-list>
 
-                      <div class="spread">
-                        <a
-                          mat-stroked-button
-                          color="primary"
-                          target="_blank"
-                          class="mat-full-width"
-                          href="https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/"
-                        >
-                          Creating a new GitHub OAuth App (Documentation)
-                        </a>
-                      </div>
+                    <div class="spread">
+                      <a
+                        mat-stroked-button
+                        color="primary"
+                        target="_blank"
+                        class="mat-full-width"
+                        href="https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/"
+                      >
+                        Creating a new GitHub OAuth App (Documentation)
+                      </a>
+                    </div>
 
-                      <mat-form-field class="mat-full-width">
-                        <input matInput placeholder="Git Hub Client ID" formControlName="gitHubClientId" required />
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Git Hub Client ID" formControlName="gitHubClientId" required />
 
-                        <mat-hint>...</mat-hint>
-                      </mat-form-field>
+                      <mat-hint>...</mat-hint>
+                    </mat-form-field>
 
-                      <mat-form-field class="mat-full-width">
-                        <input matInput placeholder="Git Hub Client Secret" formControlName="gitHubClientSecret" required />
+                    <mat-form-field class="mat-full-width">
+                      <input matInput placeholder="Git Hub Client Secret" formControlName="gitHubClientSecret" required />
 
-                        <mat-hint>...</mat-hint>
-                      </mat-form-field>
+                      <mat-hint>...</mat-hint>
+                    </mat-form-field>
 
-                      <div class="spread" *ngIf="!State.SourceControlConfigured">
-                        <a mat-raised-button class="mat-full-width" color="primary" (click)="SetupGitHubOAuth()">
-                          Configure GitHub Connection
-                        </a>
-                      </div>
-                    </ng-container>
+                    <div class="spread" *ngIf="!State.SourceControlConfigured">
+                      <a mat-raised-button class="mat-full-width" color="primary" (click)="SetupGitHubOAuth()">
+                        Configure GitHub Connection
+                      </a>
+                    </div>
 
                     <p style="text-align:center; font-style: italic">
                       Fathym strongly recommends you create a new GitHub organization that contains your LCU automation.
