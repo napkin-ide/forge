@@ -46,7 +46,9 @@ export class SettingsComponent implements OnInit {
   }
 
   public get RootURL(): string {
-    return `${location.protocol}//${location.hostname}:${location.port}`;
+    const port = location.port ? `:${location.port}` : '';
+
+    return `${location.protocol}//${location.hostname}${port}`;
   }
 
   public SetupStepTypes = ForgeInfrastructureSetupStepTypes;
@@ -98,12 +100,20 @@ export class SettingsComponent implements OnInit {
     });
 
     this.infraState.Context.subscribe(state => {
-      this.State = state;
+      if (state.AppSeed && state.AppSeed.Step) {
+        this.router.navigate(['complete']);
+      } else if (state.GitHub && state.GitHub.OAuthConfigured && !state.SourceControlConfigured) {
+        window.open(this.GitHubOAuthURL, '_parent');
+      } else if (state.DevOps && state.DevOps.OAuthConfigured && !state.DevOps.Configured) {
+        window.open(this.AzureDevOpsOAuthURL, '_parent');
+      } else {
+        this.State = state;
 
-      this.stateChanged();
+        this.stateChanged();
 
-      // For Debug
-      console.log(this.State);
+        // For Debug
+        console.log(this.State);
+      }
     });
   }
 
@@ -217,18 +227,6 @@ export class SettingsComponent implements OnInit {
 
   //  Helpers
   protected stateChanged() {
-    if (this.State.AppSeed && this.State.AppSeed.Step) {
-      this.router.navigate(['complete']);
-    }
-
-    if (this.State.GitHub && this.State.GitHub.OAuthConfigured && !this.State.SourceControlConfigured) {
-      window.open(this.GitHubOAuthURL, '_parent');
-    }
-
-    if (this.State.DevOps && this.State.DevOps.OAuthConfigured && !this.State.DevOps.Configured) {
-      window.open(this.AzureDevOpsOAuthURL, '_parent');
-    }
-
     if (!this.State.EnvSettings) {
       this.State.EnvSettings = {};
     }
