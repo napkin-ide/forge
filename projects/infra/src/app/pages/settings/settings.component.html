@@ -197,19 +197,19 @@
                         Configure GitHub Connection
                       </a>
                     </div>
-
-                    <p style="text-align:center; font-style: italic">
-                      Fathym strongly recommends you create a new GitHub organization that contains your LCU automation.
-                    </p>
-
-                    <mat-form-field class="mat-full-width" *ngIf="State.SourceControlConfigured">
-                      <mat-select placeholder="GitHub Organization" (selectionChange)="SetOrg($event)" [value]="State.GitHub.SelectedOrg">
-                        <mat-option *ngFor="let org of State.GitHub.Organizations" [value]="org.Login">{{ org.Login }}</mat-option>
-                      </mat-select>
-
-                      <!-- <mat-hint>It is recommended that you create a new organization to contain your LCU automation.</mat-hint> -->
-                    </mat-form-field>
                   </ng-container>
+
+                  <p style="text-align:center; font-style: italic">
+                    Fathym strongly recommends you create a new GitHub organization that contains your LCU automation.
+                  </p>
+
+                  <mat-form-field class="mat-full-width" *ngIf="State.SourceControlConfigured">
+                    <mat-select placeholder="GitHub Organization" (selectionChange)="SetOrg($event)" [value]="State.GitHub.SelectedOrg">
+                      <mat-option *ngFor="let org of State.GitHub.Organizations" [value]="org.Login">{{ org.Login }}</mat-option>
+                    </mat-select>
+
+                    <!-- <mat-hint>It is recommended that you create a new organization to contain your LCU automation.</mat-hint> -->
+                  </mat-form-field>
                 </div>
               </mat-card>
 
