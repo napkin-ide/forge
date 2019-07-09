@@ -119,12 +119,12 @@
             <ng-container *ngIf="UseDefaultSettings">
               <mat-card class="spread">
                 <div class="spread" style="text-align: center">
-                  <img src="assets/img/github-logo.png" style="width:75%; margin-left: 12.5%" />
+                  <img src="assets/img/github-logo.png" style="width:75%" />
 
                   <ng-container *ngIf="!State.GitHub.OAuthConfigured">
-                    <h4>GitHub Source Control Setup</h4>
+                    <h2 class="mat-headline title" style="text-align: center">GitHub Source Control Setup</h2>
 
-                    <p class="mat-body-2 plain-text">
+                    <p class="mat-body-2">
                       To manage GitHub on your new domain, you'll first have to setup a GitHub OAuth Application. This application will
                       create a secure way for you to mange your enterprise source control across a vast number of users (internal and
                       external).
@@ -183,13 +183,13 @@
                     <mat-form-field class="mat-full-width">
                       <input matInput placeholder="Git Hub Client ID" formControlName="gitHubClientId" required />
 
-                      <mat-hint>...</mat-hint>
+                      <!-- <mat-hint>...</mat-hint> -->
                     </mat-form-field>
 
                     <mat-form-field class="mat-full-width">
                       <input matInput placeholder="Git Hub Client Secret" formControlName="gitHubClientSecret" required />
 
-                      <mat-hint>...</mat-hint>
+                      <!-- <mat-hint>...</mat-hint> -->
                     </mat-form-field>
 
                     <div class="spread" *ngIf="!State.SourceControlConfigured">
@@ -215,7 +215,7 @@
 
               <mat-card class="spread" *ngIf="State.SourceControlConfigured && State.GitHub.SelectedOrg">
                 <div class="spread">
-                  <h4>Microsoft Azure Subscription Setup</h4>
+                  <h2 class="mat-headline title" style="text-align: center">Microsoft Azure Subscription Setup</h2>
 
                   <ng-container>
                     <div class="spread">
@@ -301,14 +301,14 @@
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="DevOpsSetupFormGroup">
-      <ng-template matStepLabel>Setup Dev Ops</ng-template>
+      <ng-template matStepLabel>Setup DevOps</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
           <div>
             <mat-card class="spread">
               <div class="spread">
-                <p class="mat-body-3">
+                <p class="mat-body-3 plain-text">
                   A repeatable way to manage the build and release of your solutions is important to the quality of your product. We'll help
                   you setup and establish an end-to-end workflow for the release and deployment of your solutions on your architecture.
                 </p>
@@ -320,12 +320,12 @@
                 <img src="assets/img/Azure-logo.png" style="width:25%; margin: auto" />
 
                 <ng-container>
-                  <h4>Dev/Ops Setup</h4>
+                  <h2 class="mat-headline title" style="text-align: center">Azure DevOps Setup</h2>
 
                   <ng-container *ngIf="!State.DevOps.Configured">
                     <p class="mat-body-2">
-                      To manage Dev/Ops on your new domain, you'll first have to setup an Azure DevOps OAuth Application. This application
-                      will create a secure way for you to mange your enterprise Dev/Ops across a vast number of users (internal and
+                      To manage DevOps on your new domain, you'll first have to setup an Azure DevOps OAuth Application. This application
+                      will create a secure way for you to mange your enterprise DevOps across a vast number of users (internal and
                       external).
                     </p>
 
@@ -420,24 +420,24 @@
                     <mat-form-field class="mat-full-width">
                       <input matInput placeholder="Dev Ops App ID" formControlName="devOpsAppId" required />
 
-                      <mat-hint>...</mat-hint>
+                      <!-- <mat-hint>...</mat-hint> -->
                     </mat-form-field>
 
                     <mat-form-field class="mat-full-width">
                       <input matInput placeholder="Dev Ops Client Secret" formControlName="devOpsClientSecret" required />
 
-                      <mat-hint>...</mat-hint>
+                      <!-- <mat-hint>...</mat-hint> -->
                     </mat-form-field>
 
                     <mat-form-field class="mat-full-width">
                       <input matInput placeholder="Dev Ops Scopes" formControlName="devOpsScopes" required />
 
-                      <mat-hint>...</mat-hint>
+                      <!-- <mat-hint>...</mat-hint> -->
                     </mat-form-field>
 
                     <div class="spread">
                       <a mat-raised-button class="mat-full-width" color="primary" (click)="SetupDevOpsOAuth()">
-                        Configure Azure Dev Ops Connection
+                        Configure Azure DevOps Connection
                       </a>
                     </div>
                   </ng-container>
@@ -448,27 +448,27 @@
             <mat-card class="spread" *ngIf="State.DevOps.Configured">
               <ng-container>
                 <div class="spread">
-                  <h4>Azure Dev Ops Setup Details</h4>
+                  <h2 class="mat-headline title" style="text-align: center">Azure DevOps Setup Details</h2>
 
                   <mat-list>
                     <mat-list-item>
                       <mat-icon matListIcon>settings_system_daydream</mat-icon>
 
-                      <h3 matLine class="mat-headline">Dev Ops Project Setup</h3>
+                      <h3 matLine class="mat-headline">DevOps Project Setup</h3>
 
-                      <p matLine class="mat-body-2">
-                        We'll create a new Azure Dev Ops project called 'LCU OS' to contain the various integrations related to your site.
-                      </p>
+                      <p matLine class="mat-body-2" style="word-wrap: break-word !important; white-space: pre-wrap !important">
+                          Fathym creates a new Azure DevOps project, LCU OS, that contains your boards, repositories, pipelines, planning, tracking, and more.
+                      </p> 
+                      
                     </mat-list-item>
 
                     <mat-list-item>
                       <mat-icon matListIcon>build</mat-icon>
 
-                      <h3 matLine class="mat-headline">Infrastructure Build & Release</h3>
+                      <h3 matLine class="mat-headline">Build & Release</h3>
 
-                      <p matLine class="mat-body-2">
-                        We'll setup an automatic build and release process that will listen for changes to your infrastructure and deploy
-                        them to azure for you. Changes will never delete resources, in order to aintain the integrity of enterprise data.
+                      <p matLine class="mat-body-2" style="word-wrap: break-word !important; white-space: pre-wrap !important">
+                        Fathym sets up an automated build and release process using continuous integration (CI) and continuous delivery (CD) for consistent results.
                       </p>
                     </mat-list-item>
                   </mat-list>
@@ -478,18 +478,19 @@
 
             <mat-card class="spread" *ngIf="State.DevOps.Configured">
               <div class="spread">
-                <h4>NPM Configuration Details</h4>
+                <h2 class="mat-headline title" style="text-align: center">Node Package Manager</h2>
+                <p style="margin-top: 1em; text-align: center">Create authentication tokens for CLI with NPM. <a href="https://docs.npmjs.com/about-npm/" target="_blank">Learn More</a> about NPM.</p>
 
                 <mat-form-field class="mat-full-width">
                   <input matInput placeholder="NPM Registry URL" formControlName="npmRegistry" required />
 
-                  <mat-hint>...</mat-hint>
+                  <!-- <mat-hint>...</mat-hint> -->
                 </mat-form-field>
 
                 <mat-form-field class="mat-full-width">
                   <input matInput placeholder="NPM Personal Access Token" formControlName="npmAccessToken" required />
 
-                  <mat-hint>...</mat-hint>
+                  <!-- <mat-hint>...</mat-hint> -->
                 </mat-form-field>
               </div>
             </mat-card>
@@ -501,7 +502,7 @@
                 color="accent"
                 (click)="ConfigureDevOps()"
                 [disabled]="!DevOpsSetupFormGroup.valid"
-                >Setup Azure Dev Ops</a
+                >Setup Azure DevOps</a
               >
             </div>
           </div>
@@ -521,11 +522,12 @@
           <mat-card class="spread">
             <ng-container>
               <div class="spread">
-                <h4>Template Settings</h4>
+                <h2 class="mat-headline title" style="text-align: center">Template Settings</h2>
+                <p style="text-align: center">Customize your infrastructure template</p>
 
                 <mat-form-field class="mat-full-width">
                   <mat-select
-                    placeholder="Infrastructure Template"
+                    placeholder="Choose a template that best suits your needs"
                     (selectionChange)="SetInfraTemplate($event)"
                     formControlName="infraTemplate"
                     required
@@ -533,7 +535,7 @@
                     <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
                   </mat-select>
 
-                  <mat-hint>Select from the available templates.</mat-hint>
+                  <mat-hint>Commit your Habistack Production Infrastructure</mat-hint>
                 </mat-form-field>
               </div>
             </ng-container>
@@ -559,31 +561,32 @@
         <div fxFlex="60%" fxFlex.lt-sm="95%">
           <mat-card class="spread">
             <div class="spread">
-              <h4>Phew... Now that that crap is done, let's get to building something.</h4>
+              <h2 class="mat-headline title" style="text-align: center">Nearly Finished!</h2>
 
-              <p class="mat-body-2 plain-text">Here is where we are at:</p>
+              <!-- <p class="mat-body-2 plain-text">Here is where we are at:</p> -->
 
-              <mat-list>
+              <mat-list style="align-content: center">
                 <mat-list-item>
                   <mat-icon matListIcon>cloud</mat-icon>
 
                   <h3 matLine class="mat-headline title title">Enterprise Infrastructure</h3>
 
                   <p matLine class="mat-body-2 plain-text">
-                    Yup, we got that...
+                    Complete!
                   </p>
                 </mat-list-item>
 
                 <mat-list-item>
                   <mat-icon matListIcon>build</mat-icon>
 
-                  <h3 matLine class="mat-headline title title">Enterprise Dev Ops</h3>
+                  <h3 matLine class="mat-headline title title">Enterprise DevOps</h3>
 
                   <p matLine class="mat-body-2 plain-text">
-                    Does a bear shit in the woods?... That means yes, we got that too...
+                    Complete!
                   </p>
                 </mat-list-item>
               </mat-list>
+              <p style="margin-top: 1.5em; text-align: center">Now let's build something beautiful together...</p>
             </div>
           </mat-card>
         </div>
@@ -591,10 +594,10 @@
         <div fxFlex="60%" fxFlex.lt-sm="95%">
           <mat-card class="spread">
             <div class="spread">
-              <h4 class="mat-display-1">Low Code Unit Application Architectures</h4>
+              <h2 class="mat-headline title" style="text-align: center">Low Code Unit Application Architectures</h2>
 
-              <p matLine class="mat-body-2 plain-text spread">
-                Some info on what is next... Let's create and seed a repository so that we can start building our first apps...
+              <p matLine class="mat-body-3 plain-text" style="text-align: center">
+                Before you start building LCU applications, you need to create and seed a repository.
               </p>
             </div>
           </mat-card>

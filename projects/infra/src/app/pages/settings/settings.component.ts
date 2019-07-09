@@ -265,4 +265,15 @@ export class SettingsComponent implements OnInit {
 
     this.Stepper.linear = true;
   }
+  public NextStep(): void {
+    this.Stepper.linear = false;
+      this.Stepper.next();
+      this.Stepper.linear = true;
+  }
+ 
+  public PreviousStep(): void {
+    this.Stepper.linear = false;
+    this.Stepper.previous();
+    this.Stepper.linear = true;
+  }
 }
