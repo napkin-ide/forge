@@ -101,6 +101,7 @@ export class SettingsComponent implements OnInit {
 
     this.infraState.Context.subscribe(state => {
       if (state.AppSeed && state.AppSeed.Step) {
+        this.State = state;
         // this.router.navigate(['complete']);
       } else if (state.GitHub && state.GitHub.OAuthConfigured && !state.SourceControlConfigured) {
         window.open(this.GitHubOAuthURL, '_parent');
