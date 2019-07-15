@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {
+import { MatTooltipModule, 
   MatButtonModule,
   MatProgressSpinnerModule,
   MatFormFieldModule,
   MatInputModule,
   MatCardModule,
   MatIconModule,
-  MatSelectModule
-} from '@angular/material';
+  MatSelectModule } from '@angular/material';
 import { OrgComponent } from './org/org.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -28,7 +27,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTooltipModule
   ],
   exports: [OrgComponent]
 })
