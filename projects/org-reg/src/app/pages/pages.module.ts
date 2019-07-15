@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatTooltipModule, 
+import { 
   MatButtonModule,
   MatProgressSpinnerModule,
   MatFormFieldModule,
@@ -9,6 +9,7 @@ import { MatTooltipModule,
   MatCardModule,
   MatIconModule,
   MatSelectModule } from '@angular/material';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { OrgComponent } from './org/org.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
