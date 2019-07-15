@@ -51,7 +51,7 @@
     <div class="inner">
       <div>
         <div *ngIf="!State.Loading">
-          <form *ngIf="State.Step   v== 'New'" [formGroup]="NewForm" (ngSubmit)="CreateOrg()">
+          <form *ngIf="State.Step == 'New'" [formGroup]="NewForm" (ngSubmit)="CreateOrg()">
             <h1 class="mat-display-3">Create New Organization</h1>
 
             <mat-form-field class="mat-full-width">
