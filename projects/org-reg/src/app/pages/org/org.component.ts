@@ -91,9 +91,7 @@ export class OrgComponent implements OnInit {
       host = `${this.HostForm.controls['host'].value}.${this.HostForm.controls['root'].value}`;
     }
 
-    this.orgRegState.SetHost(host).then(res => {
-      this.orgRegState.SecureHost(host);
-    });
+    this.orgRegState.SecureHost(host);
   }
 
   public SetHostFlow(flow: string) {

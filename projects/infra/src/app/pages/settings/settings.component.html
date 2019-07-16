@@ -1,10 +1,3 @@
-<div fxLayout="row" fxLayoutGap="10px">
-    <button mat-raised-button (click)="PreviousStep()" color="primary">Previous</button>
-    <button mat-raised-button (click)="NextStep()" color="accent">Next</button>
- </div>
-
- <!-- Delete stuff above before pushing -->
-
 <mat-horizontal-stepper [linear]="true" [selectedIndex]="GetCurrentStepIndex()">
   <mat-step [stepControl]="EntInfraFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
@@ -109,9 +102,7 @@
     <form [formGroup]="InfraConfigFormGroup">
       <ng-template matStepLabel>Configure Infrastructure</ng-template>
 
-      <div fxLayout="row wrap" fxLayoutAlign="center center">
-          <!-- <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading"> -->
-            <!-- Use the line right above before push -->
+      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-md="95%">
           <div>
             <mat-card class="spread">
@@ -130,8 +121,7 @@
                 <div class="spread" style="text-align: center">
                   <img src="assets/img/github-logo.png" style="width:75%" />
 
-                  <ng-container >
-                    <!-- *ngIf="!State.GitHub.OAuthConfigured"> -->
+                  <ng-container *ngIf="!State.GitHub.OAuthConfigured">
                     <h2 class="mat-headline title" style="text-align: center">GitHub Source Control Setup</h2>
 
                     <p class="mat-body-2">
@@ -313,8 +303,7 @@
     <form [formGroup]="DevOpsSetupFormGroup">
       <ng-template matStepLabel>Setup DevOps</ng-template>
 
-      <div fxLayout="row wrap" fxLayoutAlign="center center">
-          <!-- <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading"> -->
+      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
           <div>
             <mat-card class="spread">
@@ -326,16 +315,14 @@
               </div>
             </mat-card>
 
-            <mat-card class="spread">
-               <!-- *ngIf="!State.DevOps.OAuthConfigured"> -->
+            <mat-card class="spread" *ngIf="!State.DevOps.OAuthConfigured">
               <div class="spread" style="text-align: center">
                 <img src="assets/img/Azure-logo.png" style="width:25%; margin: auto" />
 
                 <ng-container>
                   <h2 class="mat-headline title" style="text-align: center">Azure DevOps Setup</h2>
 
-                  <ng-container >
-                    <!-- *ngIf="!State.DevOps.Configured"> -->
+                  <ng-container *ngIf="!State.DevOps.Configured">
                     <p class="mat-body-2">
                       To manage DevOps on your new domain, you'll first have to setup an Azure DevOps OAuth Application. This application
                       will create a secure way for you to mange your enterprise DevOps across a vast number of users (internal and
@@ -458,8 +445,7 @@
               </div>
             </mat-card>
 
-            <mat-card class="spread" >
-              <!-- *ngIf="State.DevOps.Configured"> -->
+            <mat-card class="spread" *ngIf="State.DevOps.Configured">
               <ng-container>
                 <div class="spread">
                   <h2 class="mat-headline title" style="text-align: center">Azure DevOps Setup Details</h2>
@@ -472,8 +458,8 @@
 
                       <p matLine class="mat-body-2" style="word-wrap: break-word !important; white-space: pre-wrap !important">
                           Fathym creates a new Azure DevOps project, LCU OS, that contains your boards, repositories, pipelines, planning, tracking, and more.
-                      </p> 
-                      
+                      </p>
+
                     </mat-list-item>
 
                     <mat-list-item>
@@ -490,8 +476,7 @@
               </ng-container>
             </mat-card>
 
-            <mat-card class="spread">
-               <!-- *ngIf="State.DevOps.Configured"> -->
+            <mat-card class="spread" *ngIf="State.DevOps.Configured">
               <div class="spread">
                 <h2 class="mat-headline title" style="text-align: center">Node Package Manager</h2>
                 <p style="margin-top: 1em; text-align: center">Create authentication tokens for CLI with NPM. <a href="https://docs.npmjs.com/about-npm/" target="_blank">Learn More</a> about NPM.</p>
@@ -510,8 +495,7 @@
               </div>
             </mat-card>
 
-            <div class="spread">
-               <!-- *ngIf="State.DevOps.Configured"> -->
+            <div class="spread" *ngIf="State.DevOps.Configured">
               <a
                 mat-raised-button
                 class="mat-full-width"
@@ -533,8 +517,7 @@
     <form [formGroup]="InfraSetupFormGroup">
       <ng-template matStepLabel>Setup Infrastructure</ng-template>
 
-      <div fxLayout="row wrap" fxLayoutAlign="center center">
-          <!-- <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.InfrastructureConfigured && !State.Loading"> -->
+      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.InfrastructureConfigured && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
           <mat-card class="spread">
             <ng-container>
@@ -549,8 +532,12 @@
                     formControlName="infraTemplate"
                     required
                   >
+<<<<<<< HEAD
                     <!--<mat-option [value]="opt">{{ opt }}</mat-option>-->
                     <!-- <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option> -->
+=======
+                    <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
+>>>>>>> integration
                   </mat-select>
 
                   <mat-hint>Commit your Habistack Production Infrastructure</mat-hint>
@@ -559,11 +546,10 @@
             </ng-container>
           </mat-card>
 
-          <div class="spread">
-             <!-- *ngIf="State.SourceControlConfigured"> -->
-            <!-- <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()" [disabled]="!InfraSetupFormGroup.valid"> -->
-              <!-- Commit {{ State.Environment.Name }} Infrastructure
-            </a> -->
+          <div class="spread" *ngIf="State.SourceControlConfigured">
+            <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()" [disabled]="!InfraSetupFormGroup.valid">
+              Commit {{ State.Environment.Name }} Infrastructure
+            </a>
           </div>
         </div>
       </div>
@@ -576,8 +562,7 @@
     <form [formGroup]="DataAppSetupFormGroup">
       <ng-template matStepLabel>Setup Application</ng-template>
 
-      <div fxLayout="row wrap" fxLayoutAlign="center center">
-          <!-- <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps?.Setup && !State.Loading"> -->
+      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps?.Setup && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
           <mat-card class="spread">
             <div class="spread">
@@ -625,23 +610,22 @@
 
         <div fxFlex="90%" fxFlex.lt-sm="95%">
           <div class="spread">
-            <div fxLayout="row wrap" fxLayoutAlign="center center">
-                <!-- <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps.Setup && !State.Loading"> -->
+            <div fxLayout="row wrap" fxLayoutAlign="center start" *ngIf="State.DevOps.Setup && !State.Loading">
               <ng-container *ngIf="!CurrentAppSeed">
                 <div fxFlex="30%" fxFlex.lt-sm="95%" *ngFor="let appSeed of State.AppSeed?.Options">
                   <mat-card class="spread">
                     <img mat-card-image [src]="CleanImage(appSeed.ImageSource)" alt="Low Code Unit" />
 
                     <mat-card-content class="spread">
-                      <h3 class="mat-headline title title">{{ appSeed.Name }}</h3>
+                      <h3 class="mat-headline title" style="text-align: center; padding: 0px; margin: 0px">{{ appSeed.Name }}</h3>
 
-                      <p matLine class="mat-body-2 plain-text">
+                      <p matLine class="mat-body-2 plain-text" style="text-align: center">
                         {{ appSeed.Description }}
                       </p>
 
                       <div class="spread">
                         <a mat-raised-button class="mat-full-width" color="accent" (click)="SetupApplicationSeed(appSeed.Lookup)">
-                          Setup {{ appSeed.Name }}
+                          Create
                         </a>
                       </div>
                     </mat-card-content>
@@ -666,7 +650,7 @@
                         (click)="CreateAppFromSeed()"
                         [disabled]="!DataAppSetupFormGroup.valid"
                       >
-                        Create {{ CurrentAppSeed.Name }}
+                        Create
                       </a>
 
                       <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">
