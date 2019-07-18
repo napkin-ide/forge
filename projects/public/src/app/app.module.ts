@@ -1,5 +1,4 @@
 import { FlexLayoutModule } from '@angular/flex-layout';
-// import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,7 +9,6 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import { environment } from '../environments/environment';
 import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu-ide/common';
 import { ForgePublicStateManagerContext } from './core/forge-public-state-manager.context';
-import { MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,8 +18,8 @@ import { MatProgressSpinnerModule } from '@angular/material';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    OAuthModule.forRoot(),
-    MatProgressSpinnerModule],
+    OAuthModule.forRoot()
+  ],
   providers: [
     {
       provide: LCUServiceSettings,
