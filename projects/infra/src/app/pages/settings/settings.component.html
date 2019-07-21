@@ -458,8 +458,8 @@
 
                       <p matLine class="mat-body-2" style="word-wrap: break-word !important; white-space: pre-wrap !important">
                           Fathym creates a new Azure DevOps project, LCU OS, that contains your boards, repositories, pipelines, planning, tracking, and more.
-                      </p> 
-                      
+                      </p>
+
                     </mat-list-item>
 
                     <mat-list-item>
@@ -605,22 +605,22 @@
 
         <div fxFlex="90%" fxFlex.lt-sm="95%">
           <div class="spread">
-            <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps.Setup && !State.Loading">
+            <div fxLayout="row wrap" fxLayoutAlign="center start" *ngIf="State.DevOps.Setup && !State.Loading">
               <ng-container *ngIf="!CurrentAppSeed">
                 <div fxFlex="30%" fxFlex.lt-sm="95%" *ngFor="let appSeed of State.AppSeed?.Options">
                   <mat-card class="spread">
                     <img mat-card-image [src]="CleanImage(appSeed.ImageSource)" alt="Low Code Unit" />
 
                     <mat-card-content class="spread">
-                      <h3 class="mat-headline title title">{{ appSeed.Name }}</h3>
+                      <h3 class="mat-headline title" style="text-align: center; padding: 0px; margin: 0px">{{ appSeed.Name }}</h3>
 
-                      <p matLine class="mat-body-2 plain-text">
+                      <p matLine class="mat-body-2 plain-text" style="text-align: center">
                         {{ appSeed.Description }}
                       </p>
 
                       <div class="spread">
                         <a mat-raised-button class="mat-full-width" color="accent" (click)="SetupApplicationSeed(appSeed.Lookup)">
-                          Setup {{ appSeed.Name }}
+                          Create
                         </a>
                       </div>
                     </mat-card-content>
@@ -645,7 +645,7 @@
                         (click)="CreateAppFromSeed()"
                         [disabled]="!DataAppSetupFormGroup.valid"
                       >
-                        Create {{ CurrentAppSeed.Name }}
+                        Create
                       </a>
 
                       <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">
