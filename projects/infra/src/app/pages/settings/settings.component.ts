@@ -108,8 +108,7 @@ export class SettingsComponent implements OnInit {
 
     this.infraState.Context.subscribe(state => {
       if (state.AppSeed && state.AppSeed.Step) {
-        this.State = state;
-        // this.router.navigate(['complete']);
+        this.router.navigate(['complete']);
       } else if (state.GitHub && state.GitHub.OAuthConfigured && !state.SourceControlConfigured) {
         window.open(this.GitHubOAuthURL, '_parent');
       } else if (state.DevOps && state.DevOps.OAuthConfigured && !state.DevOps.Configured) {
@@ -273,6 +272,7 @@ export class SettingsComponent implements OnInit {
 
     this.Stepper.linear = true;
   }
+
   public NextStep(): void {
     this.Stepper.linear = false;
       this.Stepper.next();
