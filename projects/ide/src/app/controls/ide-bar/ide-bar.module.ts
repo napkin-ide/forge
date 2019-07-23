@@ -1,7 +1,7 @@
+import { MaterialModule } from '@lcu-ide/common';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IdeBarComponent } from './ide-bar.component';
-import { MatToolbarModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -9,8 +9,7 @@ import { MatToolbarModule, MatButtonModule } from '@angular/material';
   ],
   imports: [
     CommonModule,
-    MatButtonModule,
-    MatToolbarModule,
+    MaterialModule
   ],
   exports: [
     IdeBarComponent

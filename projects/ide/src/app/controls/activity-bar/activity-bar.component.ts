@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from 'rxjs/operators';
 import { IdeActivity, ExternalDialogComponent, IdeStateStateManagerContext } from '@napkin-ide/common';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'nide-activity-bar',
