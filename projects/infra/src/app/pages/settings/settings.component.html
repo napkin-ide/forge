@@ -301,7 +301,7 @@
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="DevOpsSetupFormGroup">
-      <ng-template matStepLabel>Setup DevOps</ng-template>
+      <ng-template matStepLabel>Set Up DevOps</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
@@ -502,7 +502,7 @@
                 color="accent"
                 (click)="ConfigureDevOps()"
                 [disabled]="!DevOpsSetupFormGroup.valid"
-                >Setup Azure DevOps</a
+                >Set up Azure DevOps</a
               >
             </div>
           </div>
@@ -511,7 +511,7 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="InfraSetupFormGroup">
+  <!-- <mat-step [stepControl]="InfraSetupFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="InfraSetupFormGroup">
@@ -527,7 +527,7 @@
 
                 <mat-form-field class="mat-full-width">
                   <mat-select
-                    placeholder="Choose a template that best suits your needs"
+                    placeholder="Choose a template that best suits your needs"npm
                     (selectionChange)="SetInfraTemplate($event)"
                     formControlName="infraTemplate"
                     required
@@ -549,13 +549,13 @@
         </div>
       </div>
     </form>
-  </mat-step>
+  </mat-step> -->
 
   <mat-step [stepControl]="DataAppSetupFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="DataAppSetupFormGroup">
-      <ng-template matStepLabel>Setup Application</ng-template>
+      <ng-template matStepLabel>Set Up Application</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps?.Setup && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
@@ -589,6 +589,38 @@
               <p style="margin-top: 1.5em; text-align: center">Now let's build something beautiful together...</p>
             </div>
           </mat-card>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.InfrastructureConfigured && !State.Loading">
+          <div fxFlex="60%" fxFlex.lt-sm="95%">
+            <mat-card class="spread">
+              <ng-container>
+                <div class="spread">
+                  <h2 class="mat-headline title" style="text-align: center">Template Settings</h2>
+                  <p style="text-align: center">Customize your infrastructure template</p>
+  
+                  <mat-form-field class="mat-full-width">
+                    <mat-select
+                      placeholder="Choose a template that best suits your needs"npm
+                      (selectionChange)="SetInfraTemplate($event)"
+                      formControlName="infraTemplate"
+                      required
+                    >
+                      <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
+                    </mat-select>
+  
+                    <mat-hint>Commit your Habistack Production Infrastructure</mat-hint>
+                  </mat-form-field>
+                </div>
+              </ng-container>
+            </mat-card>
+  
+            <div class="spread" *ngIf="State.SourceControlConfigured">
+              <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()" [disabled]="!InfraSetupFormGroup.valid">
+                Commit {{ State.Environment.Name }} Infrastructure
+              </a>
+            </div>
+          </div>
         </div>
 
         <div fxFlex="60%" fxFlex.lt-sm="95%">
