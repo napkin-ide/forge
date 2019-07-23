@@ -1,15 +1,7 @@
+import { MaterialModule } from '@lcu-ide/common';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { 
-  MatButtonModule,
-  MatProgressSpinnerModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatCardModule,
-  MatIconModule,
-  MatSelectModule } from '@angular/material';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { OrgComponent } from './org/org.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -22,15 +14,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ReactiveFormsModule,
     PagesRoutingModule,
     FlexLayoutModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatTooltipModule
-  ],
+    MaterialModule
+ ],
   exports: [OrgComponent]
 })
 export class PagesModule {}

@@ -24,17 +24,8 @@ export class OrgRegStateManagerContext extends StateManagerContext<OrgRegState> 
     });
   }
 
-  public SetHost(host: string) {
-    return this.Execute({
-      Arguments: {
-        Host: host
-      },
-      Type: 'set-host'
-    });
-  }
-
   public SecureHost(host: string) {
-    this.Execute({
+    return this.Execute({
       Arguments: {
         Host: host
       },

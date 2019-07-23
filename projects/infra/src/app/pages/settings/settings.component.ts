@@ -55,7 +55,14 @@ export class SettingsComponent implements OnInit {
 
   public State: ForgeInfrastructureState;
 
-  @ViewChild(MatStepper)
+  /**
+   * { static: true } option was introduced to support creating embedded
+   * views on the fly. When you are creating a view dynamically and want to
+   * acces the TemplateRef, you won't be able to do so in ngAfterViewInit as
+   * it will cause a ExpressionHasChangedAfterChecked error. Setting the static
+   * flag to true will create your view in ngOnInit.
+   */
+  @ViewChild(MatStepper, {static: true})
   public Stepper: MatStepper;
 
   public UseDefaultSettings: boolean;
@@ -166,7 +173,7 @@ export class SettingsComponent implements OnInit {
 
   public GetCurrentStepIndex(): number {
     if (this.State.ProductionConfigured) {
-      return 4;
+      return 3;
     } else if (this.State.DevOps && this.State.DevOps.Setup) {
       return 3;
     } else if (this.State.InfrastructureConfigured) {
@@ -265,15 +272,20 @@ export class SettingsComponent implements OnInit {
 
     this.Stepper.linear = true;
   }
+
   public NextStep(): void {
     this.Stepper.linear = false;
       this.Stepper.next();
       this.Stepper.linear = true;
   }
- 
+
   public PreviousStep(): void {
     this.Stepper.linear = false;
     this.Stepper.previous();
     this.Stepper.linear = true;
+  }
+
+  public complete(): void {
+    this.router.navigate(['complete']);
   }
 }

@@ -301,7 +301,7 @@
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="DevOpsSetupFormGroup">
-      <ng-template matStepLabel>Setup DevOps</ng-template>
+      <ng-template matStepLabel>Set Up DevOps</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
@@ -458,8 +458,8 @@
 
                       <p matLine class="mat-body-2" style="word-wrap: break-word !important; white-space: pre-wrap !important">
                           Fathym creates a new Azure DevOps project, LCU OS, that contains your boards, repositories, pipelines, planning, tracking, and more.
-                      </p> 
-                      
+                      </p>
+
                     </mat-list-item>
 
                     <mat-list-item>
@@ -502,7 +502,7 @@
                 color="accent"
                 (click)="ConfigureDevOps()"
                 [disabled]="!DevOpsSetupFormGroup.valid"
-                >Setup Azure DevOps</a
+                >Set up Azure DevOps</a
               >
             </div>
           </div>
@@ -511,7 +511,7 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="InfraSetupFormGroup">
+  <!-- <mat-step [stepControl]="InfraSetupFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="InfraSetupFormGroup">
@@ -527,7 +527,7 @@
 
                 <mat-form-field class="mat-full-width">
                   <mat-select
-                    placeholder="Choose a template that best suits your needs"
+                    placeholder="Choose a template that best suits your needs"npm
                     (selectionChange)="SetInfraTemplate($event)"
                     formControlName="infraTemplate"
                     required
@@ -549,13 +549,13 @@
         </div>
       </div>
     </form>
-  </mat-step>
+  </mat-step> -->
 
   <mat-step [stepControl]="DataAppSetupFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="DataAppSetupFormGroup">
-      <ng-template matStepLabel>Setup Application</ng-template>
+      <ng-template matStepLabel>Set Up Application</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps?.Setup && !State.Loading">
         <div fxFlex="60%" fxFlex.lt-sm="95%">
@@ -591,6 +591,38 @@
           </mat-card>
         </div>
 
+        <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.InfrastructureConfigured && !State.Loading">
+          <div fxFlex="60%" fxFlex.lt-sm="95%">
+            <mat-card class="spread">
+              <ng-container>
+                <div class="spread">
+                  <h2 class="mat-headline title" style="text-align: center">Template Settings</h2>
+                  <p style="text-align: center">Customize your infrastructure template</p>
+  
+                  <mat-form-field class="mat-full-width">
+                    <mat-select
+                      placeholder="Choose a template that best suits your needs"npm
+                      (selectionChange)="SetInfraTemplate($event)"
+                      formControlName="infraTemplate"
+                      required
+                    >
+                      <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
+                    </mat-select>
+  
+                    <mat-hint>Commit your Habistack Production Infrastructure</mat-hint>
+                  </mat-form-field>
+                </div>
+              </ng-container>
+            </mat-card>
+  
+            <div class="spread" *ngIf="State.SourceControlConfigured">
+              <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()" [disabled]="!InfraSetupFormGroup.valid">
+                Commit {{ State.Environment.Name }} Infrastructure
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div fxFlex="60%" fxFlex.lt-sm="95%">
           <mat-card class="spread">
             <div class="spread">
@@ -605,22 +637,22 @@
 
         <div fxFlex="90%" fxFlex.lt-sm="95%">
           <div class="spread">
-            <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps.Setup && !State.Loading">
+            <div fxLayout="row wrap" fxLayoutAlign="center start" *ngIf="State.DevOps.Setup && !State.Loading">
               <ng-container *ngIf="!CurrentAppSeed">
                 <div fxFlex="30%" fxFlex.lt-sm="95%" *ngFor="let appSeed of State.AppSeed?.Options">
                   <mat-card class="spread">
                     <img mat-card-image [src]="CleanImage(appSeed.ImageSource)" alt="Low Code Unit" />
 
                     <mat-card-content class="spread">
-                      <h3 class="mat-headline title title">{{ appSeed.Name }}</h3>
+                      <h3 class="mat-headline title" style="text-align: center; padding: 0px; margin: 0px">{{ appSeed.Name }}</h3>
 
-                      <p matLine class="mat-body-2 plain-text">
+                      <p matLine class="mat-body-2 plain-text" style="text-align: center">
                         {{ appSeed.Description }}
                       </p>
 
                       <div class="spread">
                         <a mat-raised-button class="mat-full-width" color="accent" (click)="SetupApplicationSeed(appSeed.Lookup)">
-                          Setup {{ appSeed.Name }}
+                          Create
                         </a>
                       </div>
                     </mat-card-content>
@@ -645,7 +677,7 @@
                         (click)="CreateAppFromSeed()"
                         [disabled]="!DataAppSetupFormGroup.valid"
                       >
-                        Create {{ CurrentAppSeed.Name }}
+                        Create
                       </a>
 
                       <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">
