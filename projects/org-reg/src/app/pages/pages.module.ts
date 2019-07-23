@@ -15,7 +15,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     PagesRoutingModule,
     FlexLayoutModule,
     MaterialModule
-  ],
+ ],
   exports: [OrgComponent]
 })
 export class PagesModule {}
