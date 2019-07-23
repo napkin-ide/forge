@@ -167,7 +167,7 @@ export class SettingsComponent implements OnInit {
 
   public GetCurrentStepIndex(): number {
     if (this.State.ProductionConfigured) {
-      return 4;
+      return 3;
     } else if (this.State.DevOps && this.State.DevOps.Setup) {
       return 3;
     } else if (this.State.InfrastructureConfigured) {
