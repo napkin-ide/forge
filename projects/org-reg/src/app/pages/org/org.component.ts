@@ -48,7 +48,7 @@ export class OrgComponent implements OnInit {
       if (this.State.Step === 'Provisioning') {
         setTimeout(() => {
           location.href = `https://${this.State.Host}/forge`;
-        }, 5000);
+        }, 10000);
       }
     });
   }

@@ -103,15 +103,16 @@
       <ng-template matStepLabel>Configure Infrastructure</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
-        <div fxFlex="60%" fxFlex.lt-md="95%">
+        <div fxFlex="90%" fxFlex.lt-md="95%">
           <div>
             <mat-card class="spread">
               <div class="spread">
                 <p class="mat-body-3 plain-text">
-                  Establishing a quality, recurring way to provision and manage architecture is key to delivering quality products. In the
-                  following sections we will setup and establish your enterprise source control through GitHub in order to enable a seamless
-                  Dev/Ops process for deploying infrastructure and applications. These assets belong to you and your organization, we are
-                  here to guide you in setting up and orchestrating the vast array of technolgies needed to deliver quality solutions.
+                  Establishing a quality, recurring way to provision and manage architecture is central to delivering quality products.
+
+                  Fathym uses this setup process to create your enterprise source control through GitHub to enable a seamless DevOps process for deploying infrastructure and applications.
+
+                  These assets belong to your organization - Fathym guides you in setting up and orchestrating the vast array of technologies needed for you to deliver quality solutions.
                 </p>
               </div>
             </mat-card>
@@ -199,7 +200,7 @@
                     </div>
                   </ng-container>
 
-                  <p style="text-align:center; font-style: italic">
+                  <p style="text-align:center; font-style: italic; margin-bottom: 1em">
                     Fathym strongly recommends you create a new GitHub organization that contains your LCU automation.
                   </p>
 
@@ -226,9 +227,9 @@
                       <a
                         mat-stroked-button
                         color="primary"
-                        style="margin-top: 1em; margin-bottom: 2em"
-                        target="_blank"
                         class="mat-full-width spread"
+                        style="margin-top: 1em; margin-bottom: 2em; width: 90%; margin-left: 5%"
+                        target="_blank"
                         href="https://azure.microsoft.com/free/"
                       >
                         Create a Free Azure Account
@@ -241,7 +242,7 @@
                       <a
                         mat-stroked-button
                         color="primary"
-                        style="margin-top: 1em; margin-bottom: 2em"
+                        style="margin-top: 1em; margin-bottom: 2em; width: 90%; margin-left: 5%"
                         target="_blank"
                         class="mat-full-width spread"
                         href="https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal"
@@ -301,16 +302,15 @@
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="DevOpsSetupFormGroup">
-      <ng-template matStepLabel>Setup DevOps</ng-template>
+      <ng-template matStepLabel>Set Up DevOps</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.SetupStep == SetupStepTypes.Azure && !State.Loading">
-        <div fxFlex="60%" fxFlex.lt-sm="95%">
+        <div fxFlex="90%" fxFlex.lt-sm="95%">
           <div>
             <mat-card class="spread">
               <div class="spread">
                 <p class="mat-body-3 plain-text">
-                  A repeatable way to manage the build and release of your solutions is important to the quality of your product. We'll help
-                  you setup and establish an end-to-end workflow for the release and deployment of your solutions on your architecture.
+                  Fathym helps you set up an end-to-end workflow for the release and deployment of your solutions on your architecture.
                 </p>
               </div>
             </mat-card>
@@ -502,7 +502,7 @@
                 color="accent"
                 (click)="ConfigureDevOps()"
                 [disabled]="!DevOpsSetupFormGroup.valid"
-                >Setup Azure DevOps</a
+                >Set up Azure DevOps</a
               >
             </div>
           </div>
@@ -511,14 +511,14 @@
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="InfraSetupFormGroup">
+  <!-- <mat-step [stepControl]="InfraSetupFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="InfraSetupFormGroup">
       <ng-template matStepLabel>Setup Infrastructure</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.InfrastructureConfigured && !State.Loading">
-        <div fxFlex="60%" fxFlex.lt-sm="95%">
+        <div fxFlex="75%" fxFlex.lt-sm="95%">
           <mat-card class="spread">
             <ng-container>
               <div class="spread">
@@ -527,7 +527,7 @@
 
                 <mat-form-field class="mat-full-width">
                   <mat-select
-                    placeholder="Choose a template that best suits your needs"
+                    placeholder="Choose a template that best suits your needs"npm
                     (selectionChange)="SetInfraTemplate($event)"
                     formControlName="infraTemplate"
                     required
@@ -549,16 +549,16 @@
         </div>
       </div>
     </form>
-  </mat-step>
+  </mat-step> -->
 
   <mat-step [stepControl]="DataAppSetupFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
     <form [formGroup]="DataAppSetupFormGroup">
-      <ng-template matStepLabel>Setup Application</ng-template>
+      <ng-template matStepLabel>Set Up Application</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps?.Setup && !State.Loading">
-        <div fxFlex="60%" fxFlex.lt-sm="95%">
+        <div fxFlex="90%" fxFlex.lt-sm="95%">
           <mat-card class="spread">
             <div class="spread">
               <h2 class="mat-headline title" style="text-align: center">Nearly Finished!</h2>
@@ -591,7 +591,42 @@
           </mat-card>
         </div>
 
-        <div fxFlex="60%" fxFlex.lt-sm="95%">
+
+        <div fxLayout="row wrap" fxLayoutAlign="center start" *ngIf="State.InfrastructureConfigured && !State.Loading">
+          <div fxFlex="100%" fxFlex.lt-sm="95%">
+            <mat-card class="spread">
+              <ng-container>
+                <div class="spread">
+                  <h2 class="mat-headline title" style="text-align: center">Template Settings</h2>
+                  <p style="text-align: center">Customize your infrastructure template</p>
+  
+                  <mat-form-field class="mat-full-width">
+                    <mat-select
+                      placeholder="Choose a template that best suits your needs"npm
+                      (selectionChange)="SetInfraTemplate($event)"
+                      formControlName="infraTemplate"
+                      required
+                    >
+                      <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
+                    </mat-select>
+  
+                    <mat-hint>Commit your Habistack Production Infrastructure</mat-hint>
+                  </mat-form-field>
+
+                  <div class="spread" *ngIf="State.SourceControlConfigured">
+                    <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()" [disabled]="!InfraSetupFormGroup.valid">
+                      Commit {{ State.Environment.Name }} Infrastructure
+                    </a>
+                  </div>
+                </div>
+              </ng-container>
+            </mat-card>
+  
+            
+          </div>
+        </div>
+
+        <div fxFlex="90%" fxFlex.lt-sm="95%">
           <mat-card class="spread">
             <div class="spread">
               <h2 class="mat-headline title" style="text-align: center">Low Code Unit Application Architectures</h2>
@@ -599,64 +634,61 @@
               <p matLine class="mat-body-3 plain-text" style="text-align: center">
                 Before you start building LCU applications, you need to create and seed a repository.
               </p>
-            </div>
-          </mat-card>
-        </div>
 
-        <div fxFlex="90%" fxFlex.lt-sm="95%">
-          <div class="spread">
-            <div fxLayout="row wrap" fxLayoutAlign="center start" *ngIf="State.DevOps.Setup && !State.Loading">
-              <ng-container *ngIf="!CurrentAppSeed">
-                <div fxFlex="30%" fxFlex.lt-sm="95%" *ngFor="let appSeed of State.AppSeed?.Options">
-                  <mat-card class="spread">
-                    <img mat-card-image [src]="CleanImage(appSeed.ImageSource)" alt="Low Code Unit" />
-
-                    <mat-card-content class="spread">
-                      <h3 class="mat-headline title" style="text-align: center; padding: 0px; margin: 0px">{{ appSeed.Name }}</h3>
-
-                      <p matLine class="mat-body-2 plain-text" style="text-align: center">
-                        {{ appSeed.Description }}
-                      </p>
-
+              <div fxLayout="row wrap" fxLayoutAlign="center start" *ngIf="State.DevOps.Setup && !State.Loading">
+                <ng-container *ngIf="!CurrentAppSeed">
+                  <div fxFlex="33%" fxFlex.lt-sm="95%" fxLayoutGap="0px" *ngFor="let appSeed of State.AppSeed?.Options">
+                    <mat-card class="spread">
+                      <img mat-card-image [src]="CleanImage(appSeed.ImageSource)" alt="Low Code Unit" />
+  
+                      <mat-card-content class="spread">
+                        <h3 class="mat-headline title" style="text-align: center">{{ appSeed.Name }}</h3>
+  
+                        <p matLine class="mat-body-2 plain-text" style="text-align: center">
+                          {{ appSeed.Description }}
+                        </p>
+  
+                        <div class="spread">
+                          <a mat-raised-button class="mat-full-width" color="accent" (click)="SetupApplicationSeed(appSeed.Lookup)">
+                            Create
+                          </a>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                </ng-container>
+  
+                <ng-container *ngIf="CurrentAppSeed">
+                  <div fxFlex="60%" fxFlex.lt-sm="95%">
+                    <mat-card class="spread">
+                      <mat-form-field class="mat-full-width">
+                        <input matInput placeholder="New {{ CurrentAppSeed.Name }} Name" formControlName="appName" required />
+  
+                        <mat-hint>....</mat-hint>
+                      </mat-form-field>
+  
                       <div class="spread">
-                        <a mat-raised-button class="mat-full-width" color="accent" (click)="SetupApplicationSeed(appSeed.Lookup)">
+                        <a
+                          mat-raised-button
+                          class="mat-full-width"
+                          color="accent"
+                          (click)="CreateAppFromSeed()"
+                          [disabled]="!DataAppSetupFormGroup.valid"
+                        >
                           Create
                         </a>
+  
+                        <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">
+                          Back to App Seed Select
+                        </a>
                       </div>
-                    </mat-card-content>
-                  </mat-card>
-                </div>
-              </ng-container>
+                    </mat-card>
+                  </div>
+                </ng-container>
+              </div> 
 
-              <ng-container *ngIf="CurrentAppSeed">
-                <div fxFlex="60%" fxFlex.lt-sm="95%">
-                  <mat-card class="spread">
-                    <mat-form-field class="mat-full-width">
-                      <input matInput placeholder="New {{ CurrentAppSeed.Name }} Name" formControlName="appName" required />
-
-                      <mat-hint>....</mat-hint>
-                    </mat-form-field>
-
-                    <div class="spread">
-                      <a
-                        mat-raised-button
-                        class="mat-full-width"
-                        color="accent"
-                        (click)="CreateAppFromSeed()"
-                        [disabled]="!DataAppSetupFormGroup.valid"
-                      >
-                        Create
-                      </a>
-
-                      <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">
-                        Back to App Seed Select
-                      </a>
-                    </div>
-                  </mat-card>
-                </div>
-              </ng-container>
             </div>
-          </div>
+          </mat-card>
         </div>
       </div>
     </form>

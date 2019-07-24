@@ -8,7 +8,7 @@
       </div>
 
       <div *ngIf="State.Step == 'Host'">
-        <h1 class="mat-display-1">Create Organization Host</h1>
+      <h1 class="mat-display-1">Create Organization Host</h1>
 
         <ng-container *ngIf="State.HostFlow == null">
           <h2 class="mat-headline title title">If you have your own organization domain, follow that flow to validate domain ownership.</h2>
@@ -55,18 +55,22 @@
             <h1 class="mat-display-3">Create New Organization</h1>
 
             <mat-form-field class="mat-full-width">
-              <input matInput placeholder="Organization Name" formControlName="name" required />
-            </mat-form-field>
-
-            <mat-form-field class="mat-full-width">
-              <textarea matInput placeholder="Description" formControlName="desc" required></textarea>
-            </mat-form-field>
-
+                <input matInput placeholder="OrganizationOrganization Name" formControlName="name" required />
+                <mat-icon matTooltip="Enter a unique name for your new organization">live_help</mat-icon>
+              </mat-form-field>
+  
+              <mat-form-field class="mat-full-width">
+                <textarea matInput placeholder="Description" formControlName="desc" required></textarea>
+                <mat-icon matTooltip="Enter a useful description for your new organization">live_help</mat-icon>
+              </mat-form-field>
+              
             <button mat-raised-button color="primary" class="mat-button-lg" [disabled]="!NewForm.valid">Create Organization</button>
           </form>
 
           <form *ngIf="State.Step == 'Host'" [formGroup]="HostForm" (ngSubmit)="SecureHost()">
             <h1 class="mat-display-3">Establish {{ State.OrganizationName }} Host</h1>
+            <mat-icon matTooltip="Select a domain. You can choose your own domain or one of Fathym’s domains. Fathym’s domains allow you to use a sub-domain, for example, yourcompany.lowcodeunit.com.">live_help</mat-icon>
+
 
             <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="!State.HostFlow">
               <div fxFlex="50%" fxFlex.lt-md="100%">
@@ -143,6 +147,7 @@
         </div>
 
         <div *ngIf="State.Loading || State.Step == 'Provisioning'">
+          <p class="Organization Details box">
           <mat-spinner></mat-spinner>
         </div>
       </div>

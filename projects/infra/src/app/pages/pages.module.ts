@@ -10,7 +10,7 @@ import { CompleteComponent } from './complete/complete.component';
 @NgModule({
   declarations: [CompleteComponent, SettingsComponent],
   imports: [FathymSharedModule, FormsModule, ReactiveFormsModule, PagesRoutingModule, FlexLayoutModule, MaterialModule],
-  exports: [CompleteComponent, SettingsComponent]
+  exports: [CompleteComponent, SettingsComponent],
 })
 export class PagesModule {
 
