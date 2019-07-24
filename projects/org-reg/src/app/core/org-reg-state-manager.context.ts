@@ -25,7 +25,7 @@ export class OrgRegStateManagerContext extends StateManagerContext<OrgRegState> 
   }
 
   public SecureHost(host: string) {
-    this.Execute({
+    return this.Execute({
       Arguments: {
         Host: host
       },

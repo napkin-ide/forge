@@ -46,14 +46,23 @@ export class SettingsComponent implements OnInit {
   }
 
   public get RootURL(): string {
-    return `${location.protocol}//${location.hostname}:${location.port}`;
+    const port = location.port ? `:${location.port}` : '';
+
+    return `${location.protocol}//${location.hostname}${port}`;
   }
 
   public SetupStepTypes = ForgeInfrastructureSetupStepTypes;
 
   public State: ForgeInfrastructureState;
 
-  @ViewChild(MatStepper)
+  /**
+   * { static: true } option was introduced to support creating embedded
+   * views on the fly. When you are creating a view dynamically and want to
+   * acces the TemplateRef, you won't be able to do so in ngAfterViewInit as
+   * it will cause a ExpressionHasChangedAfterChecked error. Setting the static
+   * flag to true will create your view in ngOnInit.
+   */
+  @ViewChild(MatStepper, {static: true})
   public Stepper: MatStepper;
 
   public UseDefaultSettings: boolean;
@@ -98,12 +107,20 @@ export class SettingsComponent implements OnInit {
     });
 
     this.infraState.Context.subscribe(state => {
-      this.State = state;
+      if (state.AppSeed && state.AppSeed.Step) {
+        this.router.navigate(['complete']);
+      } else if (state.GitHub && state.GitHub.OAuthConfigured && !state.SourceControlConfigured) {
+        window.open(this.GitHubOAuthURL, '_parent');
+      } else if (state.DevOps && state.DevOps.OAuthConfigured && !state.DevOps.Configured) {
+        window.open(this.AzureDevOpsOAuthURL, '_parent');
+      } else {
+        this.State = state;
 
-      this.stateChanged();
+        this.stateChanged();
 
-      // For Debug
-      console.log(this.State);
+        // For Debug
+        console.log(this.State);
+      }
     });
   }
 
@@ -156,7 +173,7 @@ export class SettingsComponent implements OnInit {
 
   public GetCurrentStepIndex(): number {
     if (this.State.ProductionConfigured) {
-      return 4;
+      return 3;
     } else if (this.State.DevOps && this.State.DevOps.Setup) {
       return 3;
     } else if (this.State.InfrastructureConfigured) {
@@ -217,18 +234,6 @@ export class SettingsComponent implements OnInit {
 
   //  Helpers
   protected stateChanged() {
-    if (this.State.AppSeed && this.State.AppSeed.Step) {
-      // this.router.navigate(['complete']);
-    }
-
-    if (this.State.GitHub && this.State.GitHub.OAuthConfigured && !this.State.SourceControlConfigured) {
-      window.open(this.GitHubOAuthURL, '_parent');
-    }
-
-    if (this.State.DevOps && this.State.DevOps.OAuthConfigured && !this.State.DevOps.Configured) {
-      window.open(this.AzureDevOpsOAuthURL, '_parent');
-    }
-
     if (!this.State.EnvSettings) {
       this.State.EnvSettings = {};
     }
@@ -266,5 +271,21 @@ export class SettingsComponent implements OnInit {
     }
 
     this.Stepper.linear = true;
+  }
+
+  public NextStep(): void {
+    this.Stepper.linear = false;
+      this.Stepper.next();
+      this.Stepper.linear = true;
+  }
+
+  public PreviousStep(): void {
+    this.Stepper.linear = false;
+    this.Stepper.previous();
+    this.Stepper.linear = true;
+  }
+
+  public complete(): void {
+    this.router.navigate(['complete']);
   }
 }

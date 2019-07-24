@@ -6,7 +6,6 @@ import {
   ForgeInfrastructureApplicationSeedStepTypes
 } from '../../state/infra.state';
 import { ForgeInfrastructureStateManagerContext } from '../../state/infra-state-manager.context';
-import { MatSelectChange, MatStepper } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { InfrastructureApplicationSeedOption } from '../../state/infra.state';
 import { Router } from '@angular/router';
@@ -55,7 +54,7 @@ export class CompleteComponent implements OnInit {
   //  Helpers
   protected stateChanged() {
     if (this.State.AppSeed && !this.State.AppSeed.Step) {
-      this.router.navigate(['../']);
+      // this.router.navigate(['../']);
     }
 
     if (this.State.AppSeed && this.State.AppSeed.Step === ForgeInfrastructureApplicationSeedStepTypes.Creating) {

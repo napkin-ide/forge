@@ -72,7 +72,6 @@ export class OrgComponent implements OnInit {
     this.StateLoading = false;
   }
 
-
   //  API methods
   public CreateOrg() {
     this.State.Loading = true;
@@ -84,11 +83,15 @@ export class OrgComponent implements OnInit {
     this.State.Loading = true;
     this.StateLoading = true;
 
+    let host = '';
+
     if (this.State.HostFlow === 'private') {
-      this.orgRegState.SecureHost(this.HostForm.controls['host'].value);
+      host = this.HostForm.controls['host'].value;
     } else if (this.State.HostFlow === 'shared') {
-      this.orgRegState.SecureHost(`${this.HostForm.controls['host'].value}.${this.HostForm.controls['root'].value}`);
+      host = `${this.HostForm.controls['host'].value}.${this.HostForm.controls['root'].value}`;
     }
+
+    this.orgRegState.SecureHost(host);
   }
 
   public SetHostFlow(flow: string) {
