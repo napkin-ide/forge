@@ -54,7 +54,7 @@ export class CompleteComponent implements OnInit {
   //  Helpers
   protected stateChanged() {
     if (this.State.AppSeed && !this.State.AppSeed.Step) {
-      this.router.navigate(['../']);
+      // this.router.navigate(['../']);
     }
 
     if (this.State.AppSeed && this.State.AppSeed.Step === ForgeInfrastructureApplicationSeedStepTypes.Creating) {
