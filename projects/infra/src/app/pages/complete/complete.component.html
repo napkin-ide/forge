@@ -3,11 +3,11 @@
     <div fxFlex="90%">
       <mat-card class="spread">
         <div class="spread">
-          <h2 class="mat-display-2">Finalizing Your Application Setup</h2>
+          <h2 class="mat-headline title">Finalizing Your Application Setup</h2>
 
-          <p class="mat-body-3 plain-text">
-            Let's take a look at what we have set up so far, get you reading on next steps, and we'll let you know when everything is setup
-            and ready to go...
+          <p class="mat-body-3 plain-text"> 
+            Below is a summary of what Fathym has set up so far and some recommended reading on your next steps. 
+            Fathym will notify you when setup is complete. 
           </p>
         </div>
       </mat-card>
@@ -18,13 +18,12 @@
         <mat-card-header>
           <mat-icon mat-card-avatar>lock</mat-icon>
 
-          <mat-card-title>LCU Orchestration</mat-card-title>
+          <mat-card-title>LCU Management</mat-card-title>
         </mat-card-header>
 
         <div>
           <p class="mat-body-2 plain-text spread">
-            In order to help orchestrate the various aspects of the LowCodeUnit community into the solutions your building, we had to create
-            and get hooked into a few of your systems.
+            Fathym created and accessed several of your systems:
           </p>
 
           <mat-nav-list>
@@ -86,7 +85,7 @@
 
         <div>
           <p class="mat-body-2 plain-text spread">
-            For next steps on starting development against your new repositories, look below.
+            For your next steps on starting development in your repositories, read the following: 
           </p>
 
           <mat-nav-list>
@@ -145,12 +144,12 @@
         <mat-card-header>
           <mat-icon mat-card-avatar>cloud</mat-icon>
 
-          <mat-card-title>Azure Dev/Ops</mat-card-title>
+          <mat-card-title>Azure DevOps</mat-card-title>
         </mat-card-header>
 
         <div>
           <p class="mat-body-2 plain-text spread">
-            In order to simplify and streamline your development process, we've setup a Dev/Ops process for you.
+            Fathym set up a streamlined DevOps process for you:
           </p>
 
           <mat-nav-list>
@@ -170,7 +169,7 @@
             <mat-list-item>
               <mat-icon matListIcon>{{ State.AppSeed.HasBuild ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
 
-              <div matLine>Established a new Azure Dev Ops Project ({{ State.DevOps.ProjectName }}) with automated builds and releases</div>
+              <div matLine>Established a new Azure DevOps project ({{ State.DevOps.ProjectName }}) with automated builds and releases</div>
 
               <a mat-icon-button target="_blank" href="https://fathym.visualstudio.com/{{ State.DevOps.ProjectName }}/_build" [disabled]="!State.AppSeed.HasBuild">
                 <mat-icon>launch</mat-icon>
@@ -195,8 +194,7 @@
 
         <div>
           <p class="mat-body-2 plain-text spread">
-            Utilizing all your created assets, we have setup a default application for you and hosted it in the Dynamic Application
-            Framework.
+            Fathym set up a default application for you in the dynamic application framework: 
           </p>
 
           <mat-nav-list>
@@ -204,7 +202,7 @@
               <mat-icon matListIcon>{{ State.AppSeed.AppSeeded ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
 
               <div matLine>
-                Seeded your application repository with <strong>{{ State.AppSeed.SelectedSeed }}</strong> template.
+                Seeded your application repository with a <strong>{{ State.AppSeed.SelectedSeed }}</strong> template
               </div>
             </mat-list-item>
 
@@ -243,7 +241,7 @@
         <mat-card-header>
           <mat-icon mat-card-avatar>search</mat-icon>
 
-          <mat-card-title>Getting Started & Next Steps</mat-card-title>
+          <mat-card-title>Get Started & Next Steps</mat-card-title>
         </mat-card-header>
       </mat-card>
     </div>
