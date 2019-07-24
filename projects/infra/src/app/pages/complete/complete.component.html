@@ -1,5 +1,5 @@
 <div class="spread" *ngIf="!State.Loading">
-  <div fxLayout="row wrap" fxLayoutAlign="center center">
+  <div fxLayout="row wrap" fxLayoutAlign="center start">
     <div fxFlex="90%">
       <mat-card class="spread">
         <div class="spread">
@@ -13,16 +13,16 @@
       </mat-card>
     </div>
 
-    <div fxFlex="50%" fxFlex.lt-md="90%">
+    <div fxFlex="45%" fxFlex.lt-md="90%">
       <mat-card class="spread">
         <mat-card-header>
           <mat-icon mat-card-avatar>lock</mat-icon>
 
-          <mat-card-title>LCU Management</mat-card-title>
+          <mat-card-title class="mat-headline title">LCU Management</mat-card-title>
         </mat-card-header>
 
         <div>
-          <p class="mat-body-2 plain-text spread">
+          <p class="mat-body-3 plain-text" style="text-align: left; margin-bottom: 1em; margin-left: 1.6em">
             Fathym created and accessed several of your systems:
           </p>
 
@@ -54,7 +54,7 @@
             <mat-list-item>
               <mat-icon matListIcon>check_box</mat-icon>
 
-              <div matLine>Secure Connection to Azure Dev Ops</div>
+              <div matLine>Secure Connection to Azure DevOps</div>
 
               <a mat-icon-button target="_blank" href="https://aex.dev.azure.com/me?mkt=en-US&campaign=o~msft~vsts~usercard">
                 <mat-icon>settings</mat-icon>
@@ -75,16 +75,16 @@
       </mat-card>
     </div>
 
-    <div fxFlex="50%" fxFlex.lt-md="90%">
+    <div fxFlex="45%" fxFlex.lt-md="90%">
       <mat-card class="spread">
         <mat-card-header>
           <mat-icon mat-card-avatar>code</mat-icon>
 
-          <mat-card-title>Source Control Configuration</mat-card-title>
+          <mat-card-title class="mat-headline title">Source Control Configuration</mat-card-title>
         </mat-card-header>
 
         <div>
-          <p class="mat-body-2 plain-text spread">
+          <p class="mat-body-3 plain-text" style="text-align: left; margin-bottom: 1em; margin-left: 1.6em">
             For your next steps on starting development in your repositories, read the following: 
           </p>
 
@@ -139,16 +139,16 @@
       </mat-card>
     </div>
 
-    <div fxFlex="50%" fxFlex.lt-md="90%">
+    <div fxFlex="45%" fxFlex.lt-md="90%">
       <mat-card class="spread">
         <mat-card-header>
           <mat-icon mat-card-avatar>cloud</mat-icon>
 
-          <mat-card-title>Azure DevOps</mat-card-title>
+          <mat-card-title class="mat-headline title">Azure DevOps</mat-card-title>
         </mat-card-header>
 
         <div>
-          <p class="mat-body-2 plain-text spread">
+          <p class="mat-body-3 plain-text" style="text-align: left; margin-bottom: 1em; margin-left: 1.6em">
             Fathym set up a streamlined DevOps process for you:
           </p>
 
@@ -157,7 +157,7 @@
               <mat-icon matListIcon>{{ State.AppSeed.InfraBuilt ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
 
               <div matLine>
-                Deployed your first version of <strong>{{ State.InfraTemplate.SelectedTemplate }}</strong> Infrastructure to
+              Deployed your first version of <strong>{{ State.InfraTemplate.SelectedTemplate }}</strong> Infrastructure to
                 <strong>{{ State.Environment.Lookup }}</strong>
               </div>
 
@@ -184,16 +184,16 @@
       </mat-card>
     </div>
 
-    <div fxFlex="50%" fxFlex.lt-md="90%">
+    <div fxFlex="45%" fxFlex.lt-md="90%">
       <mat-card class="spread">
         <mat-card-header>
           <mat-icon mat-card-avatar>dashboard</mat-icon>
 
-          <mat-card-title>Application Seed</mat-card-title>
+          <mat-card-title class="mat-headline title">Application Seed</mat-card-title>
         </mat-card-header>
 
         <div>
-          <p class="mat-body-2 plain-text spread">
+          <p class="mat-body-3 plain-text" style="text-align: left; margin-bottom: 1em; margin-left: 1.6em">
             Fathym set up a default application for you in the dynamic application framework: 
           </p>
 
