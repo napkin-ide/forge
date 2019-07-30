@@ -27,6 +27,12 @@ export class SettingsComponent implements OnInit {
       : null;
   }
 
+  public get CurrentAppSeedOptions(): InfrastructureApplicationSeedOption[] {
+    return this.State.AppSeed && this.State.AppSeed.Options
+      ? this.State.AppSeed.Options.filter(o => o.Lookup.startsWith(this.State.InfraTemplate.SelectedTemplate))
+      : [];
+  }
+
   public DataAppSetupFormGroup: FormGroup;
 
   public DevOpsSetupFormGroup: FormGroup;
@@ -38,8 +44,6 @@ export class SettingsComponent implements OnInit {
   }
 
   public InfraConfigFormGroup: FormGroup;
-
-  public InfraSetupFormGroup: FormGroup;
 
   public get OAuthRedirectURL(): string {
     return `${this.RootURL}/forge`;
@@ -80,7 +84,8 @@ export class SettingsComponent implements OnInit {
   //  Life Cycle
   public ngOnInit() {
     this.DataAppSetupFormGroup = this.formBldr.group({
-      appName: ['', Validators.required]
+      appName: ['', Validators.required],
+      infraTemplate: ['', Validators.required],
     });
 
     this.DevOpsSetupFormGroup = this.formBldr.group({
@@ -100,10 +105,6 @@ export class SettingsComponent implements OnInit {
       azureAppAuthKey: ['', Validators.required],
       gitHubClientId: [''],
       gitHubClientSecret: ['']
-    });
-
-    this.InfraSetupFormGroup = this.formBldr.group({
-      infraTemplate: ['', Validators.required]
     });
 
     this.infraState.Context.subscribe(state => {
@@ -135,10 +136,10 @@ export class SettingsComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(source);
   }
 
-  public CommitInfra() {
+  public CommitInfra(event: MatSelectChange) {
     this.State.Loading = true;
 
-    this.infraState.CommitInfrastructure();
+    this.infraState.CommitInfrastructure(event.value);
   }
 
   public Configure() {
@@ -195,12 +196,6 @@ export class SettingsComponent implements OnInit {
     this.infraState.SetSetupStep(this.SetupStepTypes.Azure);
   }
 
-  public SetInfraTemplate(event: MatSelectChange) {
-    this.State.Loading = true;
-
-    this.infraState.SetSelectedInfraTemplate(event.value);
-  }
-
   public SetOrg(event: MatSelectChange) {
     this.State.Loading = true;
 
@@ -238,6 +233,12 @@ export class SettingsComponent implements OnInit {
       this.State.EnvSettings = {};
     }
 
+    if (this.State.InfraTemplate) {
+      this.DataAppSetupFormGroup.patchValue({
+        infraTemplate: this.State.InfraTemplate.SelectedTemplate
+      });
+    }
+
     if (this.State.DevOps) {
       this.DevOpsSetupFormGroup.patchValue({
         npmRegistry: this.State.DevOps.NPMRegistry,
@@ -251,12 +252,6 @@ export class SettingsComponent implements OnInit {
         azureSubId: this.State.EnvSettings.AzureSubID,
         azureAppId: this.State.EnvSettings.AzureAppID,
         azureAppAuthKey: this.State.EnvSettings.AzureAppAuthKey
-      });
-    }
-
-    if (this.State.InfraTemplate) {
-      this.InfraSetupFormGroup.patchValue({
-        infraTemplate: this.State.InfraTemplate.SelectedTemplate
       });
     }
 

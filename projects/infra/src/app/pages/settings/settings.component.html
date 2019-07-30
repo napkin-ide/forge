@@ -109,10 +109,9 @@
               <div class="spread">
                 <p class="mat-body-3 plain-text">
                   Establishing a quality, recurring way to provision and manage architecture is central to delivering quality products.
-
-                  Fathym uses this setup process to create your enterprise source control through GitHub to enable a seamless DevOps process for deploying infrastructure and applications.
-
-                  These assets belong to your organization - Fathym guides you in setting up and orchestrating the vast array of technologies needed for you to deliver quality solutions.
+                  Fathym uses this setup process to create your enterprise source control through GitHub to enable a seamless DevOps process
+                  for deploying infrastructure and applications. These assets belong to your organization - Fathym guides you in setting up
+                  and orchestrating the vast array of technologies needed for you to deliver quality solutions.
                 </p>
               </div>
             </mat-card>
@@ -457,9 +456,9 @@
                       <h3 matLine class="mat-headline">DevOps Project Setup</h3>
 
                       <p matLine class="mat-body-2" style="word-wrap: break-word !important; white-space: pre-wrap !important">
-                          Fathym creates a new Azure DevOps project, LCU OS, that contains your boards, repositories, pipelines, planning, tracking, and more.
+                        Fathym creates a new Azure DevOps project, LCU OS, that contains your boards, repositories, pipelines, planning,
+                        tracking, and more.
                       </p>
-
                     </mat-list-item>
 
                     <mat-list-item>
@@ -468,7 +467,8 @@
                       <h3 matLine class="mat-headline">Build & Release</h3>
 
                       <p matLine class="mat-body-2" style="word-wrap: break-word !important; white-space: pre-wrap !important">
-                        Fathym sets up an automated build and release process using continuous integration (CI) and continuous delivery (CD) for consistent results.
+                        Fathym sets up an automated build and release process using continuous integration (CI) and continuous delivery (CD)
+                        for consistent results.
                       </p>
                     </mat-list-item>
                   </mat-list>
@@ -479,7 +479,10 @@
             <mat-card class="spread" *ngIf="State.DevOps.Configured">
               <div class="spread">
                 <h2 class="mat-headline title" style="text-align: center">Node Package Manager</h2>
-                <p style="margin-top: 1em; text-align: center">Create authentication tokens for CLI with NPM. <a href="https://docs.npmjs.com/about-npm/" target="_blank">Learn More</a> about NPM.</p>
+                <p style="margin-top: 1em; text-align: center">
+                  Create authentication tokens for CLI with NPM.
+                  <a href="https://docs.npmjs.com/about-npm/" target="_blank">Learn More</a> about NPM.
+                </p>
 
                 <mat-form-field class="mat-full-width">
                   <input matInput placeholder="NPM Registry URL" formControlName="npmRegistry" required />
@@ -511,46 +514,6 @@
     </form>
   </mat-step>
 
-  <!-- <mat-step [stepControl]="InfraSetupFormGroup">
-    <mat-spinner *ngIf="State.Loading"></mat-spinner>
-
-    <form [formGroup]="InfraSetupFormGroup">
-      <ng-template matStepLabel>Setup Infrastructure</ng-template>
-
-      <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.InfrastructureConfigured && !State.Loading">
-        <div fxFlex="75%" fxFlex.lt-sm="95%">
-          <mat-card class="spread">
-            <ng-container>
-              <div class="spread">
-                <h2 class="mat-headline title" style="text-align: center">Template Settings</h2>
-                <p style="text-align: center">Customize your infrastructure template</p>
-
-                <mat-form-field class="mat-full-width">
-                  <mat-select
-                    placeholder="Choose a template that best suits your needs"npm
-                    (selectionChange)="SetInfraTemplate($event)"
-                    formControlName="infraTemplate"
-                    required
-                  >
-                    <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
-                  </mat-select>
-
-                  <mat-hint>Commit your Habistack Production Infrastructure</mat-hint>
-                </mat-form-field>
-              </div>
-            </ng-container>
-          </mat-card>
-
-          <div class="spread" *ngIf="State.SourceControlConfigured">
-            <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()" [disabled]="!InfraSetupFormGroup.valid">
-              Commit {{ State.Environment.Name }} Infrastructure
-            </a>
-          </div>
-        </div>
-      </div>
-    </form>
-  </mat-step> -->
-
   <mat-step [stepControl]="DataAppSetupFormGroup">
     <mat-spinner *ngIf="State.Loading"></mat-spinner>
 
@@ -558,7 +521,7 @@
       <ng-template matStepLabel>Set Up Application</ng-template>
 
       <div fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="State.DevOps?.Setup && !State.Loading">
-        <div fxFlex="90%" fxFlex.lt-sm="95%">
+        <div fxFlex="45%" fxFlex.lt-sm="90%">
           <mat-card class="spread">
             <div class="spread">
               <h2 class="mat-headline title" style="text-align: center">Nearly Finished!</h2>
@@ -591,42 +554,48 @@
           </mat-card>
         </div>
 
+        <div fxFlex="45%" fxFlex.lt-sm="90%" *ngIf="State.InfrastructureConfigured && !State.Loading">
+          <mat-card class="spread">
+            <ng-container>
+              <div class="spread">
+                <h2 class="mat-headline title" style="text-align: center">Template Settings</h2>
+                <p style="text-align: center">Customize your infrastructure template</p>
 
-        <div fxLayout="row wrap" fxLayoutAlign="center start" *ngIf="State.InfrastructureConfigured && !State.Loading">
-          <div fxFlex="100%" fxFlex.lt-sm="95%">
-            <mat-card class="spread">
-              <ng-container>
-                <div class="spread">
-                  <h2 class="mat-headline title" style="text-align: center">Template Settings</h2>
-                  <p style="text-align: center">Customize your infrastructure template</p>
-  
-                  <mat-form-field class="mat-full-width">
-                    <mat-select
-                      placeholder="Choose a template that best suits your needs"npm
-                      (selectionChange)="SetInfraTemplate($event)"
-                      formControlName="infraTemplate"
-                      required
-                    >
-                      <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
-                    </mat-select>
-  
-                    <mat-hint>Commit your Habistack Production Infrastructure</mat-hint>
-                  </mat-form-field>
+                <mat-form-field class="mat-full-width">
+                  <mat-select
+                    placeholder="Choose a template that best suits your needs"
+                    npm
+                    (selectionChange)="CommitInfra($event)"
+                    formControlName="infraTemplate"
+                    required
+                  >
+                    <mat-option *ngFor="let opt of State.InfraTemplate.Options" [value]="opt">{{ opt }}</mat-option>
+                  </mat-select>
 
-                  <div class="spread" *ngIf="State.SourceControlConfigured">
-                    <a mat-raised-button class="mat-full-width" color="accent" (click)="CommitInfra()" [disabled]="!InfraSetupFormGroup.valid">
-                      Commit {{ State.Environment.Name }} Infrastructure
-                    </a>
-                  </div>
-                </div>
-              </ng-container>
-            </mat-card>
-  
-            
-          </div>
+                  <mat-hint>Commit your Production Infrastructure</mat-hint>
+                </mat-form-field>
+              </div>
+            </ng-container>
+          </mat-card>
         </div>
 
-        <div fxFlex="90%" fxFlex.lt-sm="95%">
+        <div fxFlex="90%" fxFlex.lt-sm="95%" *ngIf="!State.InfraTemplate.SelectedTemplate">
+          <mat-card class="spread">
+            <div class="spread">
+              <h2 class="mat-headline title" style="text-align: center">Select an Infrastructure Architecture to Continue</h2>
+            </div>
+          </mat-card>
+        </div>
+
+        <div fxFlex="90%" fxFlex.lt-sm="95%" *ngIf="State.InfraTemplate.SelectedTemplate && CurrentAppSeedOptions.length <= 0">
+          <mat-card class="spread">
+            <div class="spread">
+              <h2 class="mat-headline title" style="text-align: center">Select an Infrastructure Architecture with Application Seed Options</h2>
+            </div>
+          </mat-card>
+        </div>
+
+        <div fxFlex="90%" fxFlex.lt-sm="95%" *ngIf="State.InfraTemplate.SelectedTemplate && CurrentAppSeedOptions.length > 0">
           <mat-card class="spread">
             <div class="spread">
               <h2 class="mat-headline title" style="text-align: center">Low Code Unit Application Architectures</h2>
@@ -637,17 +606,17 @@
 
               <div fxLayout="row wrap" fxLayoutAlign="center start" *ngIf="State.DevOps.Setup && !State.Loading">
                 <ng-container *ngIf="!CurrentAppSeed">
-                  <div fxFlex="33%" fxFlex.lt-sm="95%" fxLayoutGap="0px" *ngFor="let appSeed of State.AppSeed?.Options">
+                  <div fxFlex="33%" fxFlex.lt-sm="95%" fxLayoutGap="0px" *ngFor="let appSeed of CurrentAppSeedOptions">
                     <mat-card class="spread">
                       <img mat-card-image [src]="CleanImage(appSeed.ImageSource)" alt="Low Code Unit" />
-  
+
                       <mat-card-content class="spread">
                         <h3 class="mat-headline title" style="text-align: center">{{ appSeed.Name }}</h3>
-  
+
                         <p matLine class="mat-body-2 plain-text" style="text-align: center">
                           {{ appSeed.Description }}
                         </p>
-  
+
                         <div class="spread">
                           <a mat-raised-button class="mat-full-width" color="accent" (click)="SetupApplicationSeed(appSeed.Lookup)">
                             Create
@@ -657,16 +626,16 @@
                     </mat-card>
                   </div>
                 </ng-container>
-  
+
                 <ng-container *ngIf="CurrentAppSeed">
                   <div fxFlex="60%" fxFlex.lt-sm="95%">
                     <mat-card class="spread">
                       <mat-form-field class="mat-full-width">
                         <input matInput placeholder="New {{ CurrentAppSeed.Name }} Name" formControlName="appName" required />
-  
+
                         <mat-hint>....</mat-hint>
                       </mat-form-field>
-  
+
                       <div class="spread">
                         <a
                           mat-raised-button
@@ -677,7 +646,7 @@
                         >
                           Create
                         </a>
-  
+
                         <a mat-button class="mat-full-width" color="warn" (click)="SetupApplicationSeed(null)">
                           Back to App Seed Select
                         </a>
@@ -685,8 +654,7 @@
                     </mat-card>
                   </div>
                 </ng-container>
-              </div> 
-
+              </div>
             </div>
           </mat-card>
         </div>

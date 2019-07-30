@@ -21,9 +21,11 @@ export class ForgeInfrastructureStateManagerContext extends StateManagerContext<
     });
   }
 
-  public CommitInfrastructure() {
+  public CommitInfrastructure(template: string) {
     this.Execute({
-      Arguments: {},
+      Arguments: {
+        Template: template
+      },
       Type: 'commit-infrastructure'
     });
   }
@@ -55,15 +57,6 @@ export class ForgeInfrastructureStateManagerContext extends StateManagerContext<
         Name: name
       },
       Type: 'create-app-from-seed'
-    });
-  }
-
-  public SetSelectedInfraTemplate(template: string) {
-    this.Execute({
-      Arguments: {
-        Template: template
-      },
-      Type: 'set-selected-infrastructure-template'
     });
   }
 
