@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'lib-root',
@@ -6,11 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor() {
-
-  }
+  constructor() {}
 
   public ngOnInit(): void {
-    location.href = 'http://fathym.com';
+    if (environment.production) {
+      location.href = 'http://fathym.com';
+    }
   }
 }
