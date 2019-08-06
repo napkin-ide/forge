@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ForgePublicStateManagerContext } from './core/forge-public-state-manager.context';
-import { ForgePublicState } from './core/forge-public.state';
 
 @Component({
   selector: 'lib-root',
@@ -13,5 +11,6 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    location.href = 'http://fathym.com';
   }
 }

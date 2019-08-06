@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { environment } from '../environments/environment';
 import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu-ide/common';
-import { ForgePublicStateManagerContext } from './core/forge-public-state-manager.context';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,8 +23,7 @@ import { ForgePublicStateManagerContext } from './core/forge-public-state-manage
     {
       provide: LCUServiceSettings,
       useValue: FathymSharedModule.DefaultServiceSettings(environment)
-    },
-    ForgePublicStateManagerContext
+    }
   ],
   bootstrap: [AppComponent]
 })
