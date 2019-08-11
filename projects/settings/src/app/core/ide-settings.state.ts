@@ -1,4 +1,4 @@
-import { IdeActivity } from '@napkin-ide/common';
+import { IdeActivity, IdeSideBarAction } from '@napkin-ide/common';
 
 
 export class IdeSettingsState {
@@ -24,7 +24,7 @@ export class IdeSettingsState {
 
   public Loading?: boolean;
 
-  public SectionActions: IdeSettingsSectionAction[];
+  public SectionActions: IdeSideBarAction[];
 
   public SideBarEditActivity: string;
 
@@ -34,7 +34,7 @@ export class IdeSettingsState {
 export class IdeSettingsArchitechture {
   public EditLCU: string;
 
-  public LCUs: LowCodeUnitConfig[];
+  public LCUs: LowCodeUnitSetupConfig[];
 }
 
 export class IdeSettingsConfig {
@@ -55,15 +55,7 @@ export class IdeSettingsConfigSolution {
   public Name: string;
 }
 
-export class IdeSettingsSectionAction {
-  public Action: string;
-
-  public Group: string;
-
-  public Name: string;
-}
-
-export class LowCodeUnitConfig {
+export class LowCodeUnitSetupConfig {
   public Lookup: string;
 
   public NPMPackage: string;

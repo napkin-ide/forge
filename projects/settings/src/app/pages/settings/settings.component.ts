@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IdeSettingsState, LowCodeUnitConfig, IdeSettingsSectionAction } from '../../core/ide-settings.state';
+import { IdeSettingsState, LowCodeUnitSetupConfig } from '../../core/ide-settings.state';
 import { IdeSettingsStateManagerContext } from '../../core/ide-settings-state-manager.context';
-import { IdeActivity } from '@napkin-ide/common';
+import { IdeActivity, IdeSideBarAction } from '@napkin-ide/common';
 import { MatSelectChange, MatListOption } from '@angular/material';
 
 @Component({
@@ -60,7 +60,7 @@ export class SettingsComponent implements OnInit {
     });
 
     this.NewSectionActionForm = this.formBldr.group({
-      name: ['', Validators.required],
+      title: ['', Validators.required],
       action: ['', Validators.required],
       group: ['', Validators.required]
     });
@@ -97,7 +97,8 @@ export class SettingsComponent implements OnInit {
   //  API methods
   public AddNewSectionAction() {
     this.SaveSectionAction({
-      Name: this.NewSectionActionForm.controls.name.value,
+      Title: this.NewSectionActionForm.controls.title.value,
+      Section: this.State.EditSection,
       Action: this.NewSectionActionForm.controls.action.value,
       Group: this.NewSectionActionForm.controls.group.value
     });
@@ -117,7 +118,7 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  public DeleteLCU(lcu: LowCodeUnitConfig) {
+  public DeleteLCU(lcu: LowCodeUnitSetupConfig) {
     if (confirm(`Are you sure you want to delete ${lcu.Lookup}?`)) {
       this.State.Loading = true;
 
@@ -125,7 +126,7 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  public DeleteSectionAction(action: IdeSettingsSectionAction) {
+  public DeleteSectionAction(action: IdeSideBarAction) {
     if (confirm(`Are you sure you want to delete ${action.Action}?`)) {
       this.State.Loading = true;
 
@@ -151,7 +152,7 @@ export class SettingsComponent implements OnInit {
     this.ideSettingsState.SaveActivity(activity);
   }
 
-  public SaveLCU(lcu: LowCodeUnitConfig) {
+  public SaveLCU(lcu: LowCodeUnitSetupConfig) {
     this.State.Loading = true;
 
     this.ideSettingsState.SaveLCU(lcu);
@@ -167,7 +168,7 @@ export class SettingsComponent implements OnInit {
     );
   }
 
-  public SaveSectionAction(action: IdeSettingsSectionAction) {
+  public SaveSectionAction(action: IdeSideBarAction) {
     this.State.Loading = true;
 
     this.ideSettingsState.SaveSectionAction(action);
@@ -185,7 +186,7 @@ export class SettingsComponent implements OnInit {
     this.ideSettingsState.SetEditActivity(activity ? activity.Lookup : null);
   }
 
-  public SetEditLCU(lcu: LowCodeUnitConfig) {
+  public SetEditLCU(lcu: LowCodeUnitSetupConfig) {
     this.State.Loading = true;
 
     this.ideSettingsState.SetEditLCU(lcu ? lcu.Lookup : null);
@@ -197,7 +198,7 @@ export class SettingsComponent implements OnInit {
     this.ideSettingsState.SetEditSection(section);
   }
 
-  public SetEditSectionAction(action: IdeSettingsSectionAction) {
+  public SetEditSectionAction(action: IdeSideBarAction) {
     this.State.Loading = true;
 
     this.ideSettingsState.SetEditSectionAction(action ? action.Action : null);
@@ -227,7 +228,7 @@ export class SettingsComponent implements OnInit {
     this.ideSettingsState.ToggleAddNewSectionAction();
   }
 
-  public UpdateLCU(lcu: LowCodeUnitConfig) {
+  public UpdateLCU(lcu: LowCodeUnitSetupConfig) {
     if (confirm(`Are you sure you want to update ${lcu.Lookup} version ${lcu.PackageVersion} to latest?`)) {
       this.State.Loading = true;
 
