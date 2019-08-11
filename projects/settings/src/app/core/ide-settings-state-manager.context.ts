@@ -82,9 +82,11 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
   public SaveLCUCapabilities(lcuLookup: string, files: string[], solutions: IdeSettingsConfigSolution[]) {
     this.Execute({
       Arguments: {
-        Files: files,
-        LCU: lcuLookup,
-        Solutions: solutions
+        LCUConfig: {
+          Files: files,
+          Solutions: solutions
+        },
+        LCULookup: lcuLookup
       },
       Type: 'save-lcu-capabilities'
     });
