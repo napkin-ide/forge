@@ -143,7 +143,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public HasCapability(name: string) {
-    return this.State.Config.LCUSolutions && !!this.State.Config.LCUSolutions.find(s => s.Name === name);
+    return this.State.Config.ActiveSolutions && !!this.State.Config.ActiveSolutions.find(s => s.Name === name);
   }
 
   public SaveActivity(activity: IdeActivity) {
@@ -163,8 +163,8 @@ export class SettingsComponent implements OnInit {
 
     this.ideSettingsState.SaveLCUCapabilities(
       lcuLookup,
-      this.State.Config.Files,
-      capabilities.map(c => this.State.Config.Solutions.find(s => s.Name === c.value))
+      this.State.Config.ActiveFiles,
+      capabilities.map(c => this.State.Config.LCUConfig.Solutions.find(s => s.Name === c.value))
     );
   }
 
