@@ -186,7 +186,7 @@
                         <mat-list-item *ngIf="State.EditSectionAction == sectionAction.Action">
                           <div matLine>
                             <mat-form-field>
-                              <input matInput placeholder="Name" [(ngModel)]="sectionAction.Title" />
+                              <input matInput placeholder="Title" [(ngModel)]="sectionAction.Title" />
                             </mat-form-field>
 
                             <mat-form-field>
@@ -230,7 +230,7 @@
                         <mat-list-item *ngIf="State.AddNew?.SectionAction">
                           <div matLine>
                             <mat-form-field>
-                              <input matInput placeholder="Name" formControlName="name" required />
+                              <input matInput placeholder="Title" formControlName="title" required />
                             </mat-form-field>
 
                             <mat-form-field>
