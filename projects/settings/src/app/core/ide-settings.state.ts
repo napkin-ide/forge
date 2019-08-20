@@ -1,10 +1,10 @@
-import { IdeActivity } from '@napkin-ide/common';
+import { IdeActivity, IdeSideBarAction } from '@napkin-ide/common';
 
 
 export class IdeSettingsState {
   public Activities: IdeActivity[];
 
-  public Arch: IdeSettingsArchitechture;
+  public Arch: IdeSettingsArchitechtureState;
 
   public AddNew: {
     Activity: boolean;
@@ -12,7 +12,7 @@ export class IdeSettingsState {
     SectionAction: boolean;
   };
 
-  public Config: IdeSettingsConfig;
+  public Config: IdeSettingsConfigState;
 
   public EditActivity: string;
 
@@ -24,29 +24,27 @@ export class IdeSettingsState {
 
   public Loading?: boolean;
 
-  public SectionActions: IdeSettingsSectionAction[];
+  public SectionActions: IdeSideBarAction[];
 
   public SideBarEditActivity: string;
 
   public SideBarSections: string[];
 }
 
-export class IdeSettingsArchitechture {
+export class IdeSettingsArchitechtureState {
   public EditLCU: string;
 
-  public LCUs: LowCodeUnitConfig[];
+  public LCUs: LowCodeUnitSetupConfig[];
 }
 
-export class IdeSettingsConfig {
-  public ConfigLCU: string;
+export class IdeSettingsConfigState {
+  public ActiveFiles: string[];
 
-  public Files: string[];
+  public ActiveSolutions: IdeSettingsConfigSolution[];
 
-  public LCUFiles: string[];
+  public CurrentLCUConfig: string;
 
-  public LCUSolutions: IdeSettingsConfigSolution[];
-
-  public Solutions: IdeSettingsConfigSolution[];
+  public LCUConfig: LowCodeUnitConfiguration;
 }
 
 export class IdeSettingsConfigSolution {
@@ -55,18 +53,16 @@ export class IdeSettingsConfigSolution {
   public Name: string;
 }
 
-export class IdeSettingsSectionAction {
-  public Action: string;
-
-  public Group: string;
-
-  public Name: string;
-}
-
-export class LowCodeUnitConfig {
+export class LowCodeUnitSetupConfig {
   public Lookup: string;
 
   public NPMPackage: string;
 
   public PackageVersion: string;
+}
+
+export class LowCodeUnitConfiguration {
+  public Files: string[];
+
+  public Solutions: IdeSettingsConfigSolution[];
 }

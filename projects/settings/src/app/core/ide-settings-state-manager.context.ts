@@ -1,7 +1,7 @@
-import { IdeSettingsState, LowCodeUnitConfig, IdeSettingsConfigSolution, IdeSettingsSectionAction } from './ide-settings.state';
+import { IdeSettingsState, LowCodeUnitSetupConfig, IdeSettingsConfigSolution } from './ide-settings.state';
 import { StateManagerContext } from '@lcu-ide/common';
 import { Injectable, Injector } from '@angular/core';
-import { IdeActivity } from '@napkin-ide/common';
+import { IdeActivity, IdeSideBarAction } from '@napkin-ide/common';
 
 @Injectable({
   providedIn: 'root'
@@ -70,7 +70,7 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
     });
   }
 
-  public SaveLCU(lcu: LowCodeUnitConfig) {
+  public SaveLCU(lcu: LowCodeUnitSetupConfig) {
     this.Execute({
       Arguments: {
         LCU: lcu
@@ -82,15 +82,17 @@ export class IdeSettingsStateManagerContext extends StateManagerContext<IdeSetti
   public SaveLCUCapabilities(lcuLookup: string, files: string[], solutions: IdeSettingsConfigSolution[]) {
     this.Execute({
       Arguments: {
-        Files: files,
-        LCU: lcuLookup,
-        Solutions: solutions
+        LCUConfig: {
+          Files: files,
+          Solutions: solutions
+        },
+        LCULookup: lcuLookup
       },
       Type: 'save-lcu-capabilities'
     });
   }
 
-  public SaveSectionAction(action: IdeSettingsSectionAction) {
+  public SaveSectionAction(action: IdeSideBarAction) {
     this.Execute({
       Arguments: {
         Action: action

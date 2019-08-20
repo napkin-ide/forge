@@ -172,7 +172,7 @@
                     <mat-nav-list *ngIf="!State.Loading">
                       <ng-container *ngFor="let sectionAction of State.SectionActions">
                         <mat-list-item *ngIf="State.EditSectionAction != sectionAction.Action">
-                          <a matLine (click)="SetEditSectionAction(sectionAction)"> {{ sectionAction.Name }} </a>
+                          <a matLine (click)="SetEditSectionAction(sectionAction)"> {{ sectionAction.Title }} </a>
 
                           <button mat-icon-button color="primary" (click)="SetEditSectionAction(sectionAction)">
                             <mat-icon>edit</mat-icon>
@@ -186,7 +186,7 @@
                         <mat-list-item *ngIf="State.EditSectionAction == sectionAction.Action">
                           <div matLine>
                             <mat-form-field>
-                              <input matInput placeholder="Name" [(ngModel)]="sectionAction.Name" />
+                              <input matInput placeholder="Title" [(ngModel)]="sectionAction.Title" />
                             </mat-form-field>
 
                             <mat-form-field>
@@ -230,7 +230,7 @@
                         <mat-list-item *ngIf="State.AddNew?.SectionAction">
                           <div matLine>
                             <mat-form-field>
-                              <input matInput placeholder="Name" formControlName="name" required />
+                              <input matInput placeholder="Title" formControlName="title" required />
                             </mat-form-field>
 
                             <mat-form-field>
@@ -291,7 +291,7 @@
               Manage
 
               <mat-form-field>
-                <mat-select placeholder="Low Code Unit" [value]="State.Config.ConfigLCU" (selectionChange)="SetConfigLCU($event)">
+                <mat-select placeholder="Low Code Unit" [value]="State.Config.CurrentLCUConfig" (selectionChange)="SetConfigLCU($event)">
                   <ng-container *ngFor="let lcu of State.Arch?.LCUs">
                     <mat-option [value]="lcu.Lookup">
                       {{ lcu.Lookup }} <small>({{ lcu.NPMPackage }}@{{ lcu.PackageVersion }})</small>
@@ -306,14 +306,14 @@
 
           <mat-progress-bar mode="indeterminate" *ngIf="State.Loading"></mat-progress-bar>
 
-          <div *ngIf="State.Config.ConfigLCU && !State.Loading">
+          <div *ngIf="State.Config.CurrentLCUConfig && !State.Loading">
             <mat-selection-list #capabilities>
               <h4 mat-subheader>Solutions</h4>
 
               <mat-list-option
                 [value]="solution.Name"
                 [selected]="HasCapability(solution.Name)"
-                *ngFor="let solution of State.Config?.Solutions"
+                *ngFor="let solution of State.Config.LCUConfig.Solutions"
               >
                 {{ solution.Name }}
               </mat-list-option>
@@ -327,7 +327,7 @@
               <a
                 mat-raised-button
                 color="primary"
-                (click)="SaveLCUCapabilities(State.Config.ConfigLCU, capabilities.selectedOptions.selected)"
+                (click)="SaveLCUCapabilities(State.Config.CurrentLCUConfig, capabilities.selectedOptions.selected)"
               >
                 Save Capabilities
               </a>
